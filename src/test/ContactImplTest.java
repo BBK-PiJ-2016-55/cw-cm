@@ -1,14 +1,13 @@
 package test;
 
 import impl.ContactImpl;
-import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by essvee on 17/02/2017.
+ * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public class ContactImplTest {
 
@@ -55,7 +54,26 @@ public class ContactImplTest {
     }
 
     @Test
-    public void testSetNotes() {
+    public void testSetNotesFullConstructor() {
+        Contact carl = new ContactImpl(65, "Carl", "Inherently unstable person");
+        carl.addNotes("High Horse");
+        String result = carl.getNotes();
+        assertEquals("High Horse", result);
+    }
+
+    @Test
+    public void testSetNotesMultiple() {
+        Contact carl = new ContactImpl(65, "Carl", "Inherently unstable person. ");
+        carl.addNotes("Quite rich. ");
+        carl.addNotes("Treat with caution. ");
+        String result = carl.getNotes();
+        assertTrue(result.contains("Inherently unstable prson. "));
+        assertTrue(result.contains("Quite rich. "));
+        assertTrue(result.contains("Treat with caution. "));
+    }
+
+    @Test
+    public void testSetNotesBriefConstructor() {
         Contact viv = new ContactImpl(65, "Viv");
         viv.addNotes("Dark horse");
         String result = viv.getNotes();
