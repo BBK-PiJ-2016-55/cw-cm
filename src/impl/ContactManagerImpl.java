@@ -2,6 +2,7 @@ package impl;
 
 import spec.*;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +11,9 @@ import java.util.Set;
  * Created by essvee on 17/02/2017.
  */
 public class ContactManagerImpl implements ContactManager {
+    private ArrayList<Contact> contactList = new ArrayList<>();
+    private static int listSize = 1;
+
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         return 0;
@@ -57,7 +61,10 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addNewContact(String name, String notes) {
-        return 0;
+        int id = listSize;
+        Contact newContact = new ContactImpl(id, name, notes);
+        listSize++;
+        return id;
     }
 
     @Override

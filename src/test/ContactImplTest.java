@@ -96,4 +96,5 @@ public class ContactImplTest {
     public void testFullConstructorNullNotes() {
         Contact carl = new ContactImpl(6, "Carl", null);
     }
+
 }
