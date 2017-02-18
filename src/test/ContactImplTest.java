@@ -56,17 +56,22 @@ public class ContactImplTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testLongConstructorZeroNegativeId() {
+    public void testFullConstructorZeroNegativeId() {
         Contact carl = new ContactImpl(-7, "Carl", "Inherently unstable person");
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testBriefConstructorZeroNegativeId() {
+        Contact carl = new ContactImpl(-7, "Carl");
+    }
+
     @Test (expected = NullPointerException.class)
-    public void testLongConstructorNullName() {
+    public void testFullConstructorNullName() {
         Contact carl = new ContactImpl(6, null, "Inherently unstable person");
     }
 
     @Test (expected = NullPointerException.class)
-    public void testLongConstructorNullNotes() {
+    public void testFullConstructorNullNotes() {
         Contact carl = new ContactImpl(6, "Carl", null);
     }
 }
