@@ -18,7 +18,7 @@ public class ContactImpl implements Contact {
     /**
      * @param id the id of the contact
      * @param name the name of the contact
-     * @param notes notes relating ot the contact
+     * @param notes notes relating to the contact
      * @throws IllegalArgumentException if ID is 0 or below
      */
     public ContactImpl(int id, String name, String notes) throws IllegalArgumentException {

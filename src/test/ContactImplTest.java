@@ -59,4 +59,9 @@ public class ContactImplTest {
     public void testLongConstructorZeroNegativeId() {
         Contact carl = new ContactImpl(-7, "Carl", "Inherently unstable person");
     }
+
+    @Test (expected = NullPointerException.class)
+    public void testLongConstructorNullName() {
+        Contact carl = new ContactImpl(6, null, "Inherently unstable person");
+    }
 }
