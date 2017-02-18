@@ -20,7 +20,7 @@ public class ContactManagerImplTest {
    }
 
    @Test (expected = IllegalArgumentException.class)
-   public void testAddNewContactEmotyName() {
+   public void testAddNewContactEmptyName() {
        int conId = conManImp.addNewContact("Joey", "");
    }
 

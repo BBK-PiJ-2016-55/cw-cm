@@ -60,11 +60,15 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public int addNewContact(String name, String notes) {
-        int id = listSize;
-        Contact newContact = new ContactImpl(id, name, notes);
-        listSize++;
-        return id;
+    public int addNewContact(String name, String notes) throws IllegalArgumentException {
+        if (name.equals("") || notes.equals("")) {
+            throw new IllegalArgumentException("Name and/or notes cannot be empty");
+        } else {
+            int id = listSize;
+            Contact newContact = new ContactImpl(id, name, notes);
+            listSize++;
+            return id;
+        }
     }
 
     @Override
