@@ -15,10 +15,20 @@ public class ContactImpl implements Contact {
         this.name = name;
     }
 
-    public ContactImpl(int id, String name, String notes) {
-        this.id = id;
-        this.name = name;
-        this.notes = notes;
+    /**
+     * @param id the id of the contact
+     * @param name the name of the contact
+     * @param notes notes relating ot the contact
+     * @throws IllegalArgumentException if ID is 0 or below
+     */
+    public ContactImpl(int id, String name, String notes) throws IllegalArgumentException {
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID cannot be 0 or less");
+        } else {
+            this.id = id;
+            this.name = name;
+            this.notes = notes;
+        }
     }
 
     @Override

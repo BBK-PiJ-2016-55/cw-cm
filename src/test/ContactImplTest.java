@@ -56,7 +56,7 @@ public class ContactImplTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testLongConstructorNegativeId() {
+    public void testLongConstructorZeroNegativeId() {
         Contact carl = new ContactImpl(-7, "Carl", "Inherently unstable person");
     }
 }
