@@ -20,10 +20,13 @@ public class ContactImpl implements Contact {
      * @param name the name of the contact
      * @param notes notes relating to the contact
      * @throws IllegalArgumentException if ID is 0 or below
+     * @throws NullPointerException if name or notes are null
      */
-    public ContactImpl(int id, String name, String notes) throws IllegalArgumentException {
+    public ContactImpl(int id, String name, String notes) throws IllegalArgumentException, NullPointerException {
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be 0 or less");
+        } else if (name == null || notes == null) {
+            throw new NullPointerException("Name and Notes cannot be null");
         } else {
             this.id = id;
             this.name = name;

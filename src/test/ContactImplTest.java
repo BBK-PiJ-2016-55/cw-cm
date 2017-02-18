@@ -13,17 +13,31 @@ import static org.junit.Assert.*;
 public class ContactImplTest {
 
     @Test
-    public void testGetId() {
+    public void testFullConstructorGetId() {
         Contact carl = new ContactImpl(3, "Carl", "Inherently unstable person");
         int result = carl.getId();
         assertEquals(3, result);
     }
 
     @Test
-    public void testGetName() {
+    public void testBriefConstructorGetId() {
+        Contact viv = new ContactImpl(67, "Viv");
+        int result = viv.getId();
+        assertEquals(67, result);
+    }
+
+    @Test
+    public void testFullConstructorGetName() {
         Contact carl = new ContactImpl(3, "Carl", "Inherently unstable person");
         String result = carl.getName();
         assertEquals("Carl", result);
+    }
+
+    @Test
+    public void testBriefConstructorGetName() {
+        Contact viv = new ContactImpl(67, "Viv");
+        String result = viv.getName();
+        assertEquals("Viv", result);
     }
 
     @Test
@@ -31,20 +45,6 @@ public class ContactImplTest {
         Contact carl = new ContactImpl(3, "Carl", "Inherently unstable person");
         String result = carl.getNotes();
         assertEquals("Inherently unstable person", result);
-    }
-
-    @Test
-    public void testBriefConstructorId() {
-        Contact viv = new ContactImpl(67, "Viv");
-        int result = viv.getId();
-        assertEquals(67, result);
-    }
-
-    @Test
-    public void testBriefConstructorName() {
-        Contact viv = new ContactImpl(67, "Viv");
-        String result = viv.getName();
-        assertEquals("Viv", result);
     }
 
     @Test
@@ -63,5 +63,10 @@ public class ContactImplTest {
     @Test (expected = NullPointerException.class)
     public void testLongConstructorNullName() {
         Contact carl = new ContactImpl(6, null, "Inherently unstable person");
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testLongConstructorNullNotes() {
+        Contact carl = new ContactImpl(6, "Carl", null);
     }
 }
