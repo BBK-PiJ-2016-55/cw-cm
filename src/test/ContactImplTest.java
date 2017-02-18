@@ -54,20 +54,12 @@ public class ContactImplTest {
     }
 
     @Test
-    public void testSetNotesFullConstructor() {
-        Contact carl = new ContactImpl(65, "Carl", "Inherently unstable person");
-        carl.addNotes("High Horse");
-        String result = carl.getNotes();
-        assertEquals("High Horse", result);
-    }
-
-    @Test
     public void testSetNotesMultiple() {
         Contact carl = new ContactImpl(65, "Carl", "Inherently unstable person. ");
         carl.addNotes("Quite rich. ");
         carl.addNotes("Treat with caution. ");
         String result = carl.getNotes();
-        assertTrue(result.contains("Inherently unstable prson. "));
+        assertTrue(result.contains("Inherently unstable person. "));
         assertTrue(result.contains("Quite rich. "));
         assertTrue(result.contains("Treat with caution. "));
     }
