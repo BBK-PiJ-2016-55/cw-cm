@@ -11,27 +11,24 @@ import static org.junit.Assert.*;
  * Created by essvee on 17/02/2017.
  */
 public class ContactImplTest {
-    private Contact carl;
-
-    @Before
-    public void setUp() {
-        carl = new ContactImpl(3, "Carl", "Inherently unstable person");
-    }
 
     @Test
     public void testGetId() {
+        Contact carl = new ContactImpl(3, "Carl", "Inherently unstable person");
         int result = carl.getId();
         assertEquals(3, result);
     }
 
     @Test
     public void testGetName() {
+        Contact carl = new ContactImpl(3, "Carl", "Inherently unstable person");
         String result = carl.getName();
         assertEquals("Carl", result);
     }
 
     @Test
     public void testGetNotes() {
+        Contact carl = new ContactImpl(3, "Carl", "Inherently unstable person");
         String result = carl.getNotes();
         assertEquals("Inherently unstable person", result);
     }
@@ -56,5 +53,10 @@ public class ContactImplTest {
         viv.addNotes("Dark horse");
         String result = viv.getNotes();
         assertEquals("Dark horse", result);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testLongConstructorNegativeId() {
+        Contact carl = new ContactImpl(-7, "Carl", "Inherently unstable person");
     }
 }
