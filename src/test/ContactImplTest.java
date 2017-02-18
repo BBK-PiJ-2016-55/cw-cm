@@ -35,4 +35,26 @@ public class ContactImplTest {
         String result = carl.getNotes();
         assertEquals("Inherently unstable person", result);
     }
+
+    @Test
+    public void testBriefConstructorId() {
+        Contact viv = new ContactImpl(67, "Viv");
+        int result = viv.getId();
+        assertEquals(67, result);
+    }
+
+    @Test
+    public void testBriefConstructorName() {
+        Contact viv = new ContactImpl(67, "Viv");
+        String result = viv.getName();
+        assertEquals("Viv", result);
+    }
+
+    @Test
+    public void testSetNotes() {
+        Contact viv = new ContactImpl(65, "Viv");
+        viv.addNotes("Dark horse");
+        String result = viv.getNotes();
+        assertEquals("Dark Horse", result);
+    }
 }
