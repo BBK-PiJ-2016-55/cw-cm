@@ -11,17 +11,28 @@ import static org.junit.Assert.*;
  * Created by essvee on 17/02/2017.
  */
 public class ContactImplTest {
-    private Contact conImp;
+    private Contact carl;
 
     @Before
     public void setUp() {
-        conImp = new ContactImpl (5, "Bobbert", "");
+        carl = new ContactImpl(3, "Carl", "Inherently unstable person");
     }
 
     @Test
     public void testGetId() {
-        int result = conImp.getId();
-        assertEquals(5, result);
+        int result = carl.getId();
+        assertEquals(3, result);
     }
 
+    @Test
+    public void testGetName() {
+        String result = carl.getName();
+        assertEquals("Carl", result);
+    }
+
+    @Test
+    public void testGetNotes() {
+        String result = carl.getNotes();
+        assertEquals("Inherently unstable person", result);
+    }
 }
