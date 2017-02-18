@@ -41,10 +41,17 @@ public class ContactImplTest {
     }
 
     @Test
-    public void testGetNotes() {
+    public void testGetNotesPopulated() {
         Contact carl = new ContactImpl(3, "Carl", "Inherently unstable person");
         String result = carl.getNotes();
         assertEquals("Inherently unstable person", result);
+    }
+
+    @Test
+    public void testGetNotesUnpopulated() {
+        Contact viv = new ContactImpl(3, "Viv");
+        String result = viv.getNotes();
+        assertEquals("", result);
     }
 
     @Test
@@ -67,6 +74,11 @@ public class ContactImplTest {
 
     @Test (expected = NullPointerException.class)
     public void testFullConstructorNullName() {
+        Contact carl = new ContactImpl(6, null, "Inherently unstable person");
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testBriefConstructorNullName() {
         Contact carl = new ContactImpl(6, null, "Inherently unstable person");
     }
 

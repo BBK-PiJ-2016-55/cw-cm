@@ -10,9 +10,22 @@ public class ContactImpl implements Contact {
     private String name;
     private String notes;
 
-    public ContactImpl(int id, String name) {
-        this.id = id;
-        this.name = name;
+    /**
+     * @param id the id of the contact
+     * @param name the name of the contact
+     * @throws IllegalArgumentException if id is 0 or below
+     * @throws NullPointerException if name is null
+     */
+    public ContactImpl(int id, String name) throws IllegalArgumentException, NullPointerException {
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID cannot be 0 or less");
+        } else if (name == null) {
+            throw new NullPointerException("Name cannot be null");
+        } else {
+            this.id = id;
+            this.name = name;
+            this.notes = "";
+        }
     }
 
     /**
