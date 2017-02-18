@@ -55,6 +55,6 @@ public class ContactImplTest {
         Contact viv = new ContactImpl(65, "Viv");
         viv.addNotes("Dark horse");
         String result = viv.getNotes();
-        assertEquals("Dark Horse", result);
+        assertEquals("Dark horse", result);
     }
 }
