@@ -24,6 +24,21 @@ public class ContactManagerImplTest {
        int conId = conManImp.addNewContact("Joey", "");
    }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testAddNewContactEmptyNotes() {
+        int conId = conManImp.addNewContact("", "A beautiful idiot");
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testAddNewContactNullName() {
+        int conId = conManImp.addNewContact(null, "A beautiful idiot");
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testAddNewContactNullNotes() {
+        int conId = conManImp.addNewContact("Joey", null);
+    }
+
    @Test
    public void testAddNewContact() {
         int conId = conManImp.addNewContact("Joey", "A beautiful idiot. ");

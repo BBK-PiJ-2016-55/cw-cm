@@ -60,8 +60,10 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public int addNewContact(String name, String notes) throws IllegalArgumentException {
-        if (name.equals("") || notes.equals("")) {
+    public int addNewContact(String name, String notes) throws IllegalArgumentException, NullPointerException {
+        if (name == null || notes == null) {
+            throw new NullPointerException("Name and/or notes cannot be null");
+        } else if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
             int id = listSize;
