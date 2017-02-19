@@ -11,6 +11,7 @@ import java.util.Set;
  * Created by essvee on 17/02/2017.
  */
 public class ContactManagerImpl implements ContactManager {
+    // fields below temporarily set to public to enable testing
     public ArrayList<Contact> contactList = new ArrayList<>();
     public static int idCounter = 1;
 

@@ -3,7 +3,6 @@ package test;
 import impl.ContactManagerImpl;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -44,7 +43,7 @@ public class ContactManagerImplTest {
    @Test
    public void testAddNewContact() {
         int conId = conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        assertEquals(3, conId);
+        assertEquals(1, conId);
     }
 
     @Test
@@ -56,10 +55,10 @@ public class ContactManagerImplTest {
 
     @Test
     public void testAddNewContacttoContactArrayListMulti() {
-        int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         assertTrue(conManImp.contactList.size() == 1);
         assertEquals(2, conManImp.idCounter);
-        conId = conManImp.addNewContact("Joey", "A beautiful idiot. ");
+        conManImp.addNewContact("Joey", "A beautiful idiot. ");
         assertTrue(conManImp.contactList.size() == 2);
         assertEquals(3, conManImp.idCounter);
 
@@ -74,8 +73,8 @@ public class ContactManagerImplTest {
 
     @After
     public void tearDown() {
-        System.out.println("Clearing array" + conManImp.contactList.size());
         conManImp.contactList.clear();
+        conManImp.idCounter = 1;
     }
 
 }
