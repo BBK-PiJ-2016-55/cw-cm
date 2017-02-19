@@ -1,12 +1,14 @@
 package test;
 
 import impl.ContactManagerImpl;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by svince04 on 18/02/2017 for cw-cm.
@@ -46,11 +48,34 @@ public class ContactManagerImplTest {
     }
 
     @Test
+    public void testAddNewContacttoContactArrayList() {
+        int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        assertTrue(conManImp.contactList.size() == 1);
+        assertEquals(2, conManImp.idCounter);
+    }
+
+    @Test
+    public void testAddNewContacttoContactArrayListMulti() {
+        int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        assertTrue(conManImp.contactList.size() == 1);
+        assertEquals(2, conManImp.idCounter);
+        conId = conManImp.addNewContact("Joey", "A beautiful idiot. ");
+        assertTrue(conManImp.contactList.size() == 2);
+        assertEquals(3, conManImp.idCounter);
+
+    }
+
+    @Test
     public void testAddNewContactUniqueId() {
         int joeyId = conManImp.addNewContact("Joey", "A beautiful idiot. ");
         int kangaId = conManImp.addNewContact("Kanga", "A bigger version of Joey. ");
         assertFalse(joeyId == kangaId);
     }
 
+    @After
+    public void tearDown() {
+        System.out.println("Clearing array" + conManImp.contactList.size());
+        conManImp.contactList.clear();
+    }
 
 }

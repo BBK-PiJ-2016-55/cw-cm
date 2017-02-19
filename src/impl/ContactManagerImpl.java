@@ -11,8 +11,8 @@ import java.util.Set;
  * Created by essvee on 17/02/2017.
  */
 public class ContactManagerImpl implements ContactManager {
-    private ArrayList<Contact> contactList = new ArrayList<>();
-    private static int listSize = 1;
+    public ArrayList<Contact> contactList = new ArrayList<>();
+    public static int idCounter = 1;
 
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
@@ -66,9 +66,11 @@ public class ContactManagerImpl implements ContactManager {
         } else if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
-            int id = listSize;
+            // Use incrementing id to generate unique ids and assign Contact to corresponding index
+            int id = idCounter;
             Contact newContact = new ContactImpl(id, name, notes);
-            listSize++;
+            contactList.add(newContact);
+            idCounter++;
             return id;
         }
     }
