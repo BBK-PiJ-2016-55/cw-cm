@@ -8,9 +8,36 @@ import java.util.*;
  * Created by essvee on 17/02/2017.
  */
 public class ContactManagerImpl implements ContactManager {
-    // fields below temporarily set to public to enable testing
-    public ArrayList<Contact> contactList = new ArrayList<>();
-    public static int idCounter = 1;
+    private ArrayList<Contact> contactList = new ArrayList<>();
+    private static int idCounter = 1;
+
+
+    /**
+     * Resets value of ContactManagerImpl
+     * For testing purposes - comment out/remove in final sub
+     */
+    public void resetConManImpl() {
+        idCounter = 1;
+        contactList.clear();
+    }
+
+    /**
+     * @return current value of idCounter
+     * For testing purposes - comment out/remove in final sub
+     */
+    public int getIdCount() {
+        int returnCounter = idCounter;
+        return returnCounter;
+    }
+
+    /**
+     * @return current size of contactList
+     * For testing purposes - comment out/remove in final sub
+     */
+    public int getContactListSize() {
+        int returnListSize = contactList.size();
+        return returnListSize;
+    }
 
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {

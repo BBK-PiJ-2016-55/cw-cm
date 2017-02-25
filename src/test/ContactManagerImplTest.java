@@ -5,9 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
-import impl.ContactImpl;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -54,18 +52,18 @@ public class ContactManagerImplTest {
     @Test
     public void testAddNewContactToContactArrayList() {
         int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        assertTrue(conManImp.contactList.size() == 1);
-        assertEquals(2, conManImp.idCounter);
+        assertTrue(conManImp.getContactListSize() == 1);
+        assertEquals(2, conManImp.getIdCount());
     }
 
     @Test
     public void testAddNewContactToContactArrayListMulti() {
         conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        assertTrue(conManImp.contactList.size() == 1);
-        assertEquals(2, conManImp.idCounter);
+        assertTrue(conManImp.getContactListSize() == 1);
+        assertEquals(2, conManImp.getIdCount());
         conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        assertTrue(conManImp.contactList.size() == 2);
-        assertEquals(3, conManImp.idCounter);
+        assertTrue(conManImp.getContactListSize() == 2);
+        assertEquals(3, conManImp.getIdCount());
 
     }
 
@@ -131,7 +129,6 @@ public class ContactManagerImplTest {
             nameString = nameString + contact.getName();
         }
         assertTrue(nameString.equals("Beth"));
-
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -146,8 +143,7 @@ public class ContactManagerImplTest {
 
     @After
     public void tearDown() {
-        conManImp.contactList.clear();
-        conManImp.idCounter = 1;
+        conManImp.resetConManImpl();
     }
 
 }
