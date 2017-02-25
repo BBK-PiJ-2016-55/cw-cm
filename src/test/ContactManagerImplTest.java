@@ -128,6 +128,11 @@ public class ContactManagerImplTest {
         Set<Contact> idSet = conManImp.getContacts();
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetContactsIdsInvalidIds() {
+        Set<Contact> idSet = conManImp.getContacts(7, 9);
+    }
+
     @After
     public void tearDown() {
         conManImp.contactList.clear();
