@@ -59,10 +59,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addNewContact(String name, String notes) throws IllegalArgumentException, NullPointerException {
-        // Do I even need the NPException to be manually thrown here? Won't it happen neway?
-        if (name == null || notes == null) {
-            throw new NullPointerException("Name and/or notes cannot be null");
-        } else if (name.equals("") || notes.equals("")) {
+        if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
             // Use incrementing id to generate unique ids and assign Contact to corresponding index
