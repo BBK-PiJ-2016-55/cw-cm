@@ -76,9 +76,15 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public Set<Contact> getContacts(String name) {
         Set<Contact> nameSet = new HashSet<Contact>();
-        for (Contact contact: contactList) {
-            if (contact.getName().contains(name)) {
+        if (name.equals(" ")) {
+            for (Contact contact: contactList) {
                 nameSet.add(contact);
+            }
+        } else {
+            for (Contact contact : contactList) {
+                if (contact.getName().contains(name)) {
+                    nameSet.add(contact);
+                }
             }
         }
         return nameSet;
