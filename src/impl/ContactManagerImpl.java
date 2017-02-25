@@ -59,6 +59,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addNewContact(String name, String notes) throws IllegalArgumentException, NullPointerException {
+        // Do I even need the NPException to be manually thrown here? Won't it happen neway?
         if (name == null || notes == null) {
             throw new NullPointerException("Name and/or notes cannot be null");
         } else if (name.equals("") || notes.equals("")) {
@@ -92,9 +93,13 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public Set<Contact> getContacts(int... ids) {
+    public Set<Contact> getContacts(int... ids) throws IllegalArgumentException {
+        if (ids.length == 0) {
+            throw new IllegalArgumentException("No IDs have been entered");
+        }
         Set<Contact> idSet = new HashSet<>();
         for (int id : ids) {
+            // Is there a way to get rid of this magic '1' when using the id to get the index?
             idSet.add(contactList.get(id - 1));
         }
         return idSet;

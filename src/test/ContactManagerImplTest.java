@@ -125,8 +125,6 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsIdsNoIds() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        conManImp.addNewContact("Joey", "A beautiful idiot. ");
         Set<Contact> idSet = conManImp.getContacts();
     }
 
