@@ -92,6 +92,13 @@ public class ContactManagerImplTest {
         assertEquals(3, fullSet.size());
     }
 
+    @Test (expected = NullPointerException.class)
+    public void testGetContactsNullInput() {
+        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        String nullName = null;
+        Set<Contact> fullSet = conManImp.getContacts(nullName);
+    }
+
     @After
     public void tearDown() {
         conManImp.contactList.clear();

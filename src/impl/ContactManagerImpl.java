@@ -74,8 +74,9 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public Set<Contact> getContacts(String name) {
-        Set<Contact> nameSet = new HashSet<Contact>();
+    public Set<Contact> getContacts(String name) throws NullPointerException {
+        Set<Contact> nameSet = new HashSet<>();
+        // return full list if string is empty
         if (name.equals(" ")) {
             for (Contact contact: contactList) {
                 nameSet.add(contact);
