@@ -2,10 +2,7 @@ package impl;
 
 import spec.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by essvee on 17/02/2017.
@@ -78,7 +75,13 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public Set<Contact> getContacts(String name) {
-        return null;
+        Set<Contact> nameSet = new HashSet<Contact>();
+        for (Contact contact: contactList) {
+            if (contact.getName().contains(name)) {
+                nameSet.add(contact);
+            }
+        }
+        return nameSet;
     }
 
     @Override

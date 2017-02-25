@@ -77,6 +77,7 @@ public class ContactManagerImplTest {
     @Test
     public void testGetContactsNamePopulated() {
         conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        conManImp.addNewContact("Joey", "A beautiful idiot. ");
         conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
         Set<Contact> bethSet = conManImp.getContacts("Beth");
         assertEquals(2, bethSet.size());
