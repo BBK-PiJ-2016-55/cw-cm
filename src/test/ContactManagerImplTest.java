@@ -4,6 +4,9 @@ import impl.ContactManagerImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import spec.Contact;
+
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -69,6 +72,14 @@ public class ContactManagerImplTest {
         int joeyId = conManImp.addNewContact("Joey", "A beautiful idiot. ");
         int kangaId = conManImp.addNewContact("Kanga", "A bigger version of Joey. ");
         assertFalse(joeyId == kangaId);
+    }
+
+    @Test
+    public void testGetContactsNamePopulated() {
+        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
+        Set<Contact> bethSet = conManImp.getContacts("Beth");
+        assertEquals(2, bethSet.size());
     }
 
     @After
