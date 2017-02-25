@@ -62,7 +62,7 @@ public class ContactManagerImpl implements ContactManager {
         if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
-            // Use incrementing id to generate unique ids and assign Contact to corresponding index
+            // Use incrementing id to generate unique ids and assign Contact to corresponding index - 1
             int id = idCounter;
             Contact newContact = new ContactImpl(id, name, notes);
             contactList.add(newContact);
@@ -96,7 +96,10 @@ public class ContactManagerImpl implements ContactManager {
         }
         Set<Contact> idSet = new HashSet<>();
         for (int id : ids) {
-            // Is there a way to get rid of this magic '1' when using the id to get the index?
+            if (id >= idCounter++ || id < 1) {
+                throw new IllegalArgumentException("Invalid ID entered");
+            }
+            // id - 1 maps to the contact's index in contactList
             idSet.add(contactList.get(id - 1));
         }
         return idSet;

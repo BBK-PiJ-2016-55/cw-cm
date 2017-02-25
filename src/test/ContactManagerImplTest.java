@@ -130,7 +130,7 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsIdsInvalidIds() {
-        Set<Contact> idSet = conManImp.getContacts(7, 9);
+        Set<Contact> idSet = conManImp.getContacts(-1, 9);
     }
 
     @After
