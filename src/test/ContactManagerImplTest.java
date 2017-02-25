@@ -50,14 +50,14 @@ public class ContactManagerImplTest {
     }
 
     @Test
-    public void testAddNewContacttoContactArrayList() {
+    public void testAddNewContactToContactArrayList() {
         int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         assertTrue(conManImp.contactList.size() == 1);
         assertEquals(2, conManImp.idCounter);
     }
 
     @Test
-    public void testAddNewContacttoContactArrayListMulti() {
+    public void testAddNewContactToContactArrayListMulti() {
         conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         assertTrue(conManImp.contactList.size() == 1);
         assertEquals(2, conManImp.idCounter);
@@ -81,6 +81,15 @@ public class ContactManagerImplTest {
         conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
         Set<Contact> bethSet = conManImp.getContacts("Beth");
         assertEquals(2, bethSet.size());
+    }
+
+    @Test
+    public void testGetContactsEmptyString() {
+        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
+        conManImp.addNewContact("Joey", "A beautiful idiot. ");
+        Set<Contact> fullSet = conManImp.getContacts(" ");
+        assertEquals(3, fullSet.size());
     }
 
     @After
