@@ -5,7 +5,7 @@ import spec.*;
 import java.util.*;
 
 /**
- * Created by essvee on 17/02/2017.
+ * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public class ContactManagerImpl implements ContactManager {
     private ArrayList<Contact> contactList = new ArrayList<>();
@@ -87,10 +87,11 @@ public class ContactManagerImpl implements ContactManager {
         if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
-            // Use incrementing id to generate unique ids and assign Contact to corresponding index - 1
+            // Use incrementing id to generate UIDs and assign Contact to corresponding (index - 1)
             int id = idCounter;
             Contact newContact = new ContactImpl(id, name, notes);
             contactList.add(newContact);
+            // Iterate idCounter in prep for next addition
             idCounter++;
             return id;
         }
@@ -100,7 +101,7 @@ public class ContactManagerImpl implements ContactManager {
     public Set<Contact> getContacts(String name) throws NullPointerException {
         Set<Contact> nameSet = new HashSet<>();
         // return full list if string is empty
-        if (name.equals(" ")) {
+        if (name.equals("")) {
             for (Contact contact: contactList) {
                 nameSet.add(contact);
             }
@@ -121,10 +122,11 @@ public class ContactManagerImpl implements ContactManager {
         }
         Set<Contact> idSet = new HashSet<>();
         for (int id : ids) {
+            // Check for invalid IDs
             if (id >= idCounter++ || id < 1) {
                 throw new IllegalArgumentException("Invalid ID entered");
             }
-            // id - 1 maps to the contact's index in contactList
+            // (id - 1) maps to the contact's index in contactList
             idSet.add(contactList.get(id - 1));
         }
         return idSet;

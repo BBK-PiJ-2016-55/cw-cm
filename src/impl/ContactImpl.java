@@ -3,7 +3,7 @@ package impl;
 import spec.Contact;
 
 /**
- * Created by essvee on 17/02/2017.
+ * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public class ContactImpl implements Contact {
     private int id;

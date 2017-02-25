@@ -88,7 +88,7 @@ public class ContactManagerImplTest {
         conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
         conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        Set<Contact> fullSet = conManImp.getContacts(" ");
+        Set<Contact> fullSet = conManImp.getContacts("");
         assertEquals(3, fullSet.size());
     }
 
