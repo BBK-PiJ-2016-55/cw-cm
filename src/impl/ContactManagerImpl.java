@@ -93,7 +93,11 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public Set<Contact> getContacts(int... ids) {
-        return null;
+        Set<Contact> idSet = new HashSet<>();
+        for (int id : ids) {
+            idSet.add(contactList.get(id - 1));
+        }
+        return idSet;
     }
 
     @Override

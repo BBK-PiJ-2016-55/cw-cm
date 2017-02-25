@@ -5,7 +5,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
+import impl.ContactImpl;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -112,8 +114,14 @@ public class ContactManagerImplTest {
         conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         conManImp.addNewContact("Joey", "A beautiful idiot. ");
         conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
-        Set<Contact> idSet = conManImp.getContacts(1, 2);
+        Set<Contact> idSet = conManImp.getContacts(1, 3);
         assertEquals(2, idSet.size());
+        String nameString = "";
+        for (Contact contact : idSet) {
+            nameString = nameString + contact.getName();
+        }
+        assertTrue(nameString.equals("BethBethan") || nameString.equals("BethanBeth"));
+
     }
 
     @After
