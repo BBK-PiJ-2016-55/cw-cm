@@ -99,6 +99,23 @@ public class ContactManagerImplTest {
         Set<Contact> fullSet = conManImp.getContacts(nullName);
     }
 
+    @Test
+    public void testGetContactsNoMatches() {
+        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
+        Set<Contact> fullSet = conManImp.getContacts("Jo");
+        assertEquals(0, fullSet.size());
+    }
+
+    @Test
+    public void testGetContactsIdsPopulated() {
+        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        conManImp.addNewContact("Joey", "A beautiful idiot. ");
+        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
+        Set<Contact> idSet = conManImp.getContacts(1, 2);
+        assertEquals(2, idSet.size());
+    }
+
     @After
     public void tearDown() {
         conManImp.contactList.clear();
