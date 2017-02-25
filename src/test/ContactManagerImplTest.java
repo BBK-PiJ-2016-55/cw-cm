@@ -120,6 +120,17 @@ public class ContactManagerImplTest {
             nameString = nameString + contact.getName();
         }
         assertTrue(nameString.equals("BethBethan") || nameString.equals("BethanBeth"));
+    }
+
+    @Test
+    public void testGetContactsIdsPopulatedSingleId() {
+        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        Set<Contact> idSet = conManImp.getContacts(1);
+        String nameString = "";
+        for (Contact contact : idSet) {
+            nameString = nameString + contact.getName();
+        }
+        assertTrue(nameString.equals("Beth"));
 
     }
 
