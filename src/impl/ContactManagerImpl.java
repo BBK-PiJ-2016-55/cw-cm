@@ -26,8 +26,7 @@ public class ContactManagerImpl implements ContactManager {
      * For testing purposes - comment out/remove in final sub
      */
     public int getIdCount() {
-        int returnCounter = idCounter;
-        return returnCounter;
+        return idCounter;
     }
 
     /**
@@ -35,8 +34,7 @@ public class ContactManagerImpl implements ContactManager {
      * For testing purposes - comment out/remove in final sub
      */
     public int getContactListSize() {
-        int returnListSize = contactList.size();
-        return returnListSize;
+        return contactList.size();
     }
 
     @Override
