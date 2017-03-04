@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -52,19 +53,17 @@ public class ContactManagerImplTest {
     @Test
     public void testAddNewContactToContactArrayList() {
         int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        assertTrue(conManImp.getContactListSize() == 1);
-        assertEquals(2, conManImp.getIdCount());
+        Set<Contact> testSet = conManImp.getContacts("Beth");
+        assertTrue(testSet.size() == 1);
+        assertTrue(conId == 1);
     }
 
     @Test
     public void testAddNewContactToContactArrayListMulti() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        assertTrue(conManImp.getContactListSize() == 1);
-        assertEquals(2, conManImp.getIdCount());
+        int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        assertTrue(conManImp.getContactListSize() == 2);
-        assertEquals(3, conManImp.getIdCount());
-
+        Set<Contact> testSet = conManImp.getContacts("");
+        assertTrue(testSet.size() == 2);
     }
 
     @Test

@@ -11,32 +11,6 @@ public class ContactManagerImpl implements ContactManager {
     private HashMap<Integer, Contact> contactMap = new HashMap<>();
     private static int idCounter = 1;
 
-
-//    /**
-//     * Resets value of ContactManagerImpl
-//     * For testing purposes - comment out/remove in final sub
-//     */
-//    public void resetConManImpl() {
-//        idCounter = 1;
-//        contactList.clear();
-//    }
-
-    /**
-     * @return current value of idCounter
-     * For testing purposes - comment out/remove in final sub
-     */
-    public int getIdCount() {
-        return idCounter;
-    }
-
-    /**
-     * @return current size of contactList
-     * For testing purposes - comment out/remove in final sub
-     */
-    public int getContactListSize() {
-        return contactMap.size();
-    }
-
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         return 0;
@@ -87,11 +61,11 @@ public class ContactManagerImpl implements ContactManager {
         if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
-            // Use incrementing id to generate UIDs and assign Contact to corresponding (index - 1)
+            // Use incrementing id to generate UIDs and assign Contact to corresponding key
             int id = idCounter;
             Contact newContact = new ContactImpl(id, name, notes);
             contactMap.put(id, newContact);
-            // Iterate idCounter in prep for next addition
+            // Iterate idCounter in prep for next new Contact
             idCounter++;
             return id;
         }
