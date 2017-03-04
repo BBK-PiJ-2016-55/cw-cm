@@ -2,7 +2,6 @@ package impl;
 
 import spec.Contact;
 import spec.PastMeeting;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
