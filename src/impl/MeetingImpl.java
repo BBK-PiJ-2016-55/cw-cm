@@ -16,7 +16,7 @@ public abstract class MeetingImpl implements Meeting {
     private Set<Contact> attendees;
 
     public MeetingImpl(int id, Date date, Set<Contact> attendees) throws IllegalArgumentException {
-        if (id < 0) {
+        if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be negative");
         } else {
             this.id = id;
