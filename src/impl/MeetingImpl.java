@@ -18,6 +18,8 @@ public abstract class MeetingImpl implements Meeting {
     public MeetingImpl(int id, Date date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be negative");
+        } else if (attendees.isEmpty()) {
+            throw new IllegalArgumentException("Contact set cannot be empty");
         } else if (date == null || attendees == null) {
             throw new NullPointerException("Date and Contact set cannot be null");
         } else {
