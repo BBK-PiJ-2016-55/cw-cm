@@ -11,10 +11,19 @@ import java.util.Set;
  * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public abstract class MeetingImpl implements Meeting {
+    private int id;
+    private Date date;
+    private Set<Contact> attendees;
+
+    public MeetingImpl(int id, Date date, Set<Contact> attendees) {
+        this.id = id;
+        this.date = date;
+        this.attendees = attendees;
+    }
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
