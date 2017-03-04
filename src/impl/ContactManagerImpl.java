@@ -8,34 +8,34 @@ import java.util.*;
  * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public class ContactManagerImpl implements ContactManager {
-    private ArrayList<Contact> contactList = new ArrayList<>();
+    private HashMap<Integer, Contact> contactMap = new HashMap<>();
     private static int idCounter = 1;
 
 
-    /**
-     * Resets value of ContactManagerImpl
-     * For testing purposes - comment out/remove in final sub
-     */
-    public void resetConManImpl() {
-        idCounter = 1;
-        contactList.clear();
-    }
-
-    /**
-     * @return current value of idCounter
-     * For testing purposes - comment out/remove in final sub
-     */
-    public int getIdCount() {
-        return idCounter;
-    }
-
-    /**
-     * @return current size of contactList
-     * For testing purposes - comment out/remove in final sub
-     */
-    public int getContactListSize() {
-        return contactList.size();
-    }
+//    /**
+//     * Resets value of ContactManagerImpl
+//     * For testing purposes - comment out/remove in final sub
+//     */
+//    public void resetConManImpl() {
+//        idCounter = 1;
+//        contactList.clear();
+//    }
+//
+//    /**
+//     * @return current value of idCounter
+//     * For testing purposes - comment out/remove in final sub
+//     */
+//    public int getIdCount() {
+//        return idCounter;
+//    }
+//
+//    /**
+//     * @return current size of contactList
+//     * For testing purposes - comment out/remove in final sub
+//     */
+//    public int getContactListSize() {
+//        return contactList.size();
+//    }
 
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
@@ -90,7 +90,7 @@ public class ContactManagerImpl implements ContactManager {
             // Use incrementing id to generate UIDs and assign Contact to corresponding (index - 1)
             int id = idCounter;
             Contact newContact = new ContactImpl(id, name, notes);
-            contactList.add(newContact);
+            contactMap.put(id, newContact);
             // Iterate idCounter in prep for next addition
             idCounter++;
             return id;
@@ -102,13 +102,13 @@ public class ContactManagerImpl implements ContactManager {
         Set<Contact> nameSet = new HashSet<>();
         // return full list if string is empty
         if (name.equals("")) {
-            for (Contact contact: contactList) {
-                nameSet.add(contact);
+            for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
+                nameSet.add(entry.getValue());
             }
         } else {
-            for (Contact contact : contactList) {
-                if (contact.getName().contains(name)) {
-                    nameSet.add(contact);
+            for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
+                if (entry.getValue().getName().contains(name)) {
+                    nameSet.add(entry.getValue());
                 }
             }
         }
@@ -123,11 +123,11 @@ public class ContactManagerImpl implements ContactManager {
         Set<Contact> idSet = new HashSet<>();
         for (int id : ids) {
             // Check for invalid IDs
-            if (id >= idCounter++ || id < 1) {
+            if (!contactMap.containsKey(id)) {
                 throw new IllegalArgumentException("Invalid ID entered");
             }
             // (id - 1) maps to the contact's index in contactList
-            idSet.add(contactList.get(id - 1));
+            idSet.add(contactMap.get(id));
         }
         return idSet;
     }
