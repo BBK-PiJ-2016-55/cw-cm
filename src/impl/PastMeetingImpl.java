@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * Created by essvee on 17/02/2017.
+ * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
     private String notes;
@@ -16,12 +16,6 @@ public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
     public PastMeetingImpl(int id, Date date, Set<Contact> attendees, String notes) {
         super(id, date, attendees);
         this.notes = notes;
-    }
-
-
-    @Override
-    public int getId() {
-        return 0;
     }
 
     @Override
