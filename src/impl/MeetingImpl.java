@@ -4,12 +4,14 @@ import spec.Contact;
 import spec.Meeting;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 /**
- * Created by essvee on 17/02/2017.
+ * Created by svince04 on 17/02/2017 for cw-cm.
  */
-public class MeetingImpl implements Meeting {
+public abstract class MeetingImpl implements Meeting {
+
     @Override
     public int getId() {
         return 0;

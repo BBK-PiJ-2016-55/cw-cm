@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by essvee on 17/02/2017.
  */
-public class PastMeetingImpl implements PastMeeting {
+public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
     @Override
     public int getId() {
         return 0;

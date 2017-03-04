@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by essvee on 17/02/2017.
  */
-public class FutureMeetingImpl implements FutureMeeting {
+public class FutureMeetingImpl extends MeetingImpl implements FutureMeeting {
     @Override
     public int getId() {
         return 0;
