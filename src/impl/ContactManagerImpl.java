@@ -100,7 +100,6 @@ public class ContactManagerImpl implements ContactManager {
             if (!contactMap.containsKey(id)) {
                 throw new IllegalArgumentException("Invalid ID entered");
             }
-            // (id - 1) maps to the contact's index in contactList
             idSet.add(contactMap.get(id));
         }
         return idSet;
