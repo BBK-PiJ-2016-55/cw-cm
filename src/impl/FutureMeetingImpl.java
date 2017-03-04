@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Set;
 
 /**
- * Created by essvee on 17/02/2017.
+ * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public class FutureMeetingImpl extends MeetingImpl implements FutureMeeting {
     @Override

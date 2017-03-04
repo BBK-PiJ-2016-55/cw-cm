@@ -1,12 +1,10 @@
 package test;
 
 import impl.ContactManagerImpl;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
