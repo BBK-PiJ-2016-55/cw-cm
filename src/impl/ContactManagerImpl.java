@@ -20,22 +20,22 @@ public class ContactManagerImpl implements ContactManager {
 //        idCounter = 1;
 //        contactList.clear();
 //    }
-//
-//    /**
-//     * @return current value of idCounter
-//     * For testing purposes - comment out/remove in final sub
-//     */
-//    public int getIdCount() {
-//        return idCounter;
-//    }
-//
-//    /**
-//     * @return current size of contactList
-//     * For testing purposes - comment out/remove in final sub
-//     */
-//    public int getContactListSize() {
-//        return contactList.size();
-//    }
+
+    /**
+     * @return current value of idCounter
+     * For testing purposes - comment out/remove in final sub
+     */
+    public int getIdCount() {
+        return idCounter;
+    }
+
+    /**
+     * @return current size of contactList
+     * For testing purposes - comment out/remove in final sub
+     */
+    public int getContactListSize() {
+        return contactMap.size();
+    }
 
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {

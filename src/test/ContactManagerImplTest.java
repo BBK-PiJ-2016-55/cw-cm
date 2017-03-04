@@ -141,9 +141,4 @@ public class ContactManagerImplTest {
         Set<Contact> idSet = conManImp.getContacts(-1, 9);
     }
 
-    @After
-    public void tearDown() {
-        conManImp.resetConManImpl();
-    }
-
 }
