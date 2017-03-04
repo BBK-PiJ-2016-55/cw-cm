@@ -15,13 +15,15 @@ public abstract class MeetingImpl implements Meeting {
     private Date date;
     private Set<Contact> attendees;
 
-    public MeetingImpl(int id, Date date, Set<Contact> attendees) throws IllegalArgumentException {
+    public MeetingImpl(int id, Date date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be negative");
+        } else if (date == null || attendees == null) {
+            throw new NullPointerException("Date and Contact set cannot be null");
         } else {
-            this.id = id;
-            this.date = date;
-            this.attendees = attendees;
+                this.id = id;
+                this.date = date;
+                this.attendees = attendees;
         }
     }
 
