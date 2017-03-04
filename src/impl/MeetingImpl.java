@@ -15,10 +15,14 @@ public abstract class MeetingImpl implements Meeting {
     private Date date;
     private Set<Contact> attendees;
 
-    public MeetingImpl(int id, Date date, Set<Contact> attendees) {
-        this.id = id;
-        this.date = date;
-        this.attendees = attendees;
+    public MeetingImpl(int id, Date date, Set<Contact> attendees) throws IllegalArgumentException {
+        if (id < 0) {
+            throw new IllegalArgumentException("ID cannot be negative");
+        } else {
+            this.id = id;
+            this.date = date;
+            this.attendees = attendees;
+        }
     }
 
     @Override
