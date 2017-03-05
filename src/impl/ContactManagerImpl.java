@@ -51,10 +51,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public FutureMeeting getFutureMeeting(int id) {
         // todo - add error checking in here
-        Meeting meeting = meetingMap.get(id);
-        FutureMeeting futureMeeting = (FutureMeeting) meeting;
-        // todo - is there a way of combing the two lines above?
-        return futureMeeting;
+        return (FutureMeeting) meetingMap.get(id);
     }
 
     @Override
