@@ -4,6 +4,7 @@ import spec.Contact;
 import spec.PastMeeting;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Set;
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
     private String notes;
 
-    public PastMeetingImpl(int id, Date date, Set<Contact> attendees, String notes) {
+    public PastMeetingImpl(int id, GregorianCalendar date, Set<Contact> attendees, String notes) {
         super(id, date, attendees);
         this.notes = notes;
     }

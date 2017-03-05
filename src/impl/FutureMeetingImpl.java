@@ -5,6 +5,7 @@ import spec.FutureMeeting;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Set;
  */
 public class FutureMeetingImpl extends MeetingImpl implements FutureMeeting {
 
-    public FutureMeetingImpl(int id, Date date, Set<Contact> attendees) {
+    public FutureMeetingImpl(int id, GregorianCalendar date, Set<Contact> attendees) {
         super(id, date, attendees);
     }
 

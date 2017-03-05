@@ -4,7 +4,7 @@ import spec.Contact;
 import spec.Meeting;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
@@ -12,10 +12,10 @@ import java.util.Set;
  */
 public abstract class MeetingImpl implements Meeting {
     private int id;
-    private Date date;
+    private GregorianCalendar date;
     private Set<Contact> attendees;
 
-    public MeetingImpl(int id, Date date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
+    public MeetingImpl(int id, GregorianCalendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be negative");
         } else if (attendees.isEmpty()) {

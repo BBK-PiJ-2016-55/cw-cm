@@ -9,6 +9,7 @@ import spec.Contact;
 import spec.Meeting;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
  * Created by svince04 on 04/03/2017 for cw-cm.
  */
 public class FutureMeetingImplTest {
-    Date date;
+    GregorianCalendar date;
     Set<Contact> attendeeSet;
     Meeting meeting;
 
@@ -27,7 +28,7 @@ public class FutureMeetingImplTest {
         attendeeSet = new HashSet<>();
         Contact contact = new ContactImpl(1, "Theresa", "Smelled slightly of cheese");
         attendeeSet.add(contact);
-        date = new Date();
+        date = new GregorianCalendar(2017, 04, 05, 11, 30);
     }
 
     // Constructor test section

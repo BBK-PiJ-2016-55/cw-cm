@@ -6,6 +6,7 @@ import spec.Contact;
 import spec.Meeting;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class PastMeetingImplTest {
     @Test
     public void getId() {
         Set<Contact> attendeeSet = new HashSet<>();
-        Date date = new Date();
+        GregorianCalendar date = new GregorianCalendar();
         Meeting meeting = new PastMeetingImpl(1, date, attendeeSet, "A big waste of time.");
         int id = meeting.getId();
         assertTrue(id == 1);
