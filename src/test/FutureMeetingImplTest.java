@@ -93,7 +93,7 @@ public class FutureMeetingImplTest {
         Contact contact = new ContactImpl(2, "Tiger", "A large, marmalade cat.");
         attendeeSet.add(contact);
         Meeting multiMeet = new FutureMeetingImpl(3, date, attendeeSet);
-        assertEquals(attendeeSet, meeting.getContacts());
+        assertEquals(attendeeSet, multiMeet.getContacts());
     }
 
     @After

@@ -21,106 +21,98 @@ public class ContactManagerImplTest {
    @Before
    public void startUp() {
        conManImp = new ContactManagerImpl();
+       conManImp.addNewContact("Garfield", "Won't meet on a Monday.");
+       conManImp.addNewContact("Cat in the Hat", "Doesn't follow through on promises.");
+       conManImp.addNewContact("Top Cat", "Authoritarian tendencies.");
    }
 
+   //Contact tests
+
    @Test (expected = IllegalArgumentException.class)
-   public void testAddNewContactEmptyName() {
-       int conId = conManImp.addNewContact("Joey", "");
+   public void testAddNewContactEmptyNotes() {
+       conManImp.addNewContact("Felix", "");
    }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testAddNewContactEmptyNotes() {
-        int conId = conManImp.addNewContact("", "A beautiful idiot");
+    public void testAddNewContactEmptyName() {
+        conManImp.addNewContact("", "Never speaks.");
     }
 
     @Test (expected = NullPointerException.class)
     public void testAddNewContactNullName() {
-        int conId = conManImp.addNewContact(null, "A beautiful idiot");
+        conManImp.addNewContact(null, "Never speaks.");
     }
 
     @Test (expected = NullPointerException.class)
     public void testAddNewContactNullNotes() {
-        int conId = conManImp.addNewContact("Joey", null);
+        conManImp.addNewContact("Felix", null);
     }
 
     @Test
-    public void testAddNewContactToContactMap() {
-        int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        Set<Contact> testSet = conManImp.getContacts("Beth");
-        assertTrue(testSet.size() == 1);
-    }
-
-    @Test
-    public void testAddNewContactToContactArrayListMulti() {
-        int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        conManImp.addNewContact("Joey", "A beautiful idiot. ");
+    public void testAddNewContactSingle() {
+        conManImp.addNewContact("Tom", "Makes grand plans that never work.");
         Set<Contact> testSet = conManImp.getContacts("");
-        assertTrue(testSet.size() == 2);
+        assertTrue(testSet.size() == 4);
+    }
+
+    @Test
+    public void testAddNewContactMulti() {
+        conManImp.addNewContact("Tom", "Makes grand plans that never work.");
+        conManImp.addNewContact("Sylvester", "Difficult to understand.");
+        Set<Contact> testSet = conManImp.getContacts("");
+        assertTrue(testSet.size() == 5);
     }
 
     @Test
     public void testAddNewContactUniqueId() {
-        int joeyId = conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        int kangaId = conManImp.addNewContact("Kanga", "A bigger version of Joey. ");
-        assertFalse(joeyId == kangaId);
+        int tomId = conManImp.addNewContact("Tom", "Makes grand plans that never work.");
+        int sylvesterId = conManImp.addNewContact("Sylvester", "Difficult to understand.");
+        assertFalse(tomId == sylvesterId);
     }
 
     @Test
     public void testGetContactsNamePopulated() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
-        Set<Contact> bethSet = conManImp.getContacts("Beth");
-        assertEquals(2, bethSet.size());
+        Set<Contact> catSet = conManImp.getContacts("Cat");
+        assertEquals(2, catSet.size());
     }
 
     @Test
     public void testGetContactsEmptyString() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
-        conManImp.addNewContact("Joey", "A beautiful idiot. ");
         Set<Contact> fullSet = conManImp.getContacts("");
         assertEquals(3, fullSet.size());
     }
 
     @Test (expected = NullPointerException.class)
     public void testGetContactsNullInput() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         String nullName = null;
         Set<Contact> fullSet = conManImp.getContacts(nullName);
     }
 
     @Test
     public void testGetContactsNoMatches() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
-        Set<Contact> fullSet = conManImp.getContacts("Jo");
+        Set<Contact> fullSet = conManImp.getContacts("Fritz");
         assertEquals(0, fullSet.size());
     }
 
     @Test
     public void testGetContactsIdsPopulated() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        conManImp.addNewContact("Bethan", "A bigger version of Beth. ");
-        Set<Contact> idSet = conManImp.getContacts(1, 3);
+        conManImp.addNewContact("Tom", "Makes grand plans that never work. ");
+        Set<Contact> idSet = conManImp.getContacts(1, 4);
         String nameString = "";
         for (Contact contact : idSet) {
             nameString = nameString + contact.getName();
         }
-        assertTrue(nameString.equals("BethBethan") || nameString.equals("BethanBeth"));
+        assertTrue(nameString.equals("TomGarfield") || nameString.equals("GarfieldTom"));
     }
 
     @Test
     public void testGetContactsIdsPopulatedSingleId() {
-        int thisId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
-        Set<Contact> allSet = conManImp.getContacts("");
         Set<Contact> idSet = conManImp.getContacts(1);
         String nameString = "";
         for (Contact contact : idSet) {
             nameString = nameString + contact.getName();
         }
-        assertTrue(nameString.equals("Beth"));
+        assertTrue(nameString.equals("Garfield"));
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -132,6 +124,14 @@ public class ContactManagerImplTest {
     public void testGetContactsIdsInvalidIds() {
         Set<Contact> idSet = conManImp.getContacts(-1, 9);
     }
+
+    //FutureMeeting tests
+
+//    @Test
+//    public void testAddFutureMeeting() {
+//       conManImp.addFutureMeeting();
+//    }
+
 
     @After
     public void tearDown() {

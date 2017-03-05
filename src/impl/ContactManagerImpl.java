@@ -9,10 +9,13 @@ import java.util.*;
  */
 public class ContactManagerImpl implements ContactManager {
     private HashMap<Integer, Contact> contactMap = new HashMap<>();
-    private static int idCounter = 1;
+    private HashMap<Integer, Meeting> meetingMap = new HashMap<>();
+    private static int contactIdCounter = 1;
+    private static int meetingIdCounter = 1;
 
     public void resetCounter() {
-        idCounter = 1;
+        contactIdCounter = 1;
+        meetingIdCounter = 1;
     }
 
     @Override
@@ -66,11 +69,11 @@ public class ContactManagerImpl implements ContactManager {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
             // Use incrementing id to generate UIDs and assign Contact to corresponding key
-            int id = idCounter;
+            int id = contactIdCounter;
             Contact newContact = new ContactImpl(id, name, notes);
             contactMap.put(id, newContact);
             // Iterate idCounter in prep for next new Contact
-            idCounter++;
+            contactIdCounter++;
             return id;
         }
     }
@@ -84,6 +87,7 @@ public class ContactManagerImpl implements ContactManager {
                 nameSet.add(entry.getValue());
             }
         } else {
+            // otherwise just return matching contacts
             for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
                 if (entry.getValue().getName().contains(name)) {
                     nameSet.add(entry.getValue());
