@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -17,6 +19,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class ContactManagerImplTest {
    private ContactManagerImpl conManImp;
+   private Calendar date = new GregorianCalendar(2017, 4, 5);
 
    @Before
    public void startUp() {
@@ -127,10 +130,12 @@ public class ContactManagerImplTest {
 
     //FutureMeeting tests
 
-//    @Test
-//    public void testAddFutureMeeting() {
-//       conManImp.addFutureMeeting();
-//    }
+    @Test
+    public void testAddFutureMeeting() {
+       Set<Contact> fullSet = conManImp.getContacts("");
+       int id = conManImp.addFutureMeeting(fullSet, date);
+       assertTrue(id == 1);
+    }
 
 
     @After
