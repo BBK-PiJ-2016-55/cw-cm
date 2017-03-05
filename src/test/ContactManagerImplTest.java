@@ -1,6 +1,7 @@
 package test;
 
 import impl.ContactManagerImpl;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
@@ -42,18 +43,11 @@ public class ContactManagerImplTest {
         int conId = conManImp.addNewContact("Joey", null);
     }
 
-   @Test
-   public void testAddNewContact() {
-        int conId = conManImp.addNewContact("Joey", "A beautiful idiot. ");
-        assertEquals(1, conId);
-    }
-
     @Test
-    public void testAddNewContactToContactArrayList() {
+    public void testAddNewContactToContactMap() {
         int conId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
         Set<Contact> testSet = conManImp.getContacts("Beth");
         assertTrue(testSet.size() == 1);
-        assertTrue(conId == 1);
     }
 
     @Test
@@ -119,7 +113,8 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetContactsIdsPopulatedSingleId() {
-        conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        int thisId = conManImp.addNewContact("Beth", "Beth, Beth, it rhymes with death. ");
+        Set<Contact> allSet = conManImp.getContacts("");
         Set<Contact> idSet = conManImp.getContacts(1);
         String nameString = "";
         for (Contact contact : idSet) {
@@ -138,4 +133,9 @@ public class ContactManagerImplTest {
         Set<Contact> idSet = conManImp.getContacts(-1, 9);
     }
 
+    @After
+    public void tearDown() {
+       conManImp.resetCounter();
+       conManImp = null;
+    }
 }

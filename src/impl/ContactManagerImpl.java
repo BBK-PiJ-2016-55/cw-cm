@@ -11,6 +11,10 @@ public class ContactManagerImpl implements ContactManager {
     private HashMap<Integer, Contact> contactMap = new HashMap<>();
     private static int idCounter = 1;
 
+    public void resetCounter() {
+        idCounter = 1;
+    }
+
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         return 0;

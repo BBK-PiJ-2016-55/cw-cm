@@ -8,10 +8,7 @@ import org.junit.Test;
 import spec.Contact;
 import spec.Meeting;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -19,9 +16,9 @@ import static org.junit.Assert.*;
  * Created by svince04 on 04/03/2017 for cw-cm.
  */
 public class FutureMeetingImplTest {
-    GregorianCalendar date;
-    Set<Contact> attendeeSet;
-    Meeting meeting;
+    private Calendar date;
+    private Set<Contact> attendeeSet;
+    private Meeting meeting;
 
     @Before
     public void setUp() {

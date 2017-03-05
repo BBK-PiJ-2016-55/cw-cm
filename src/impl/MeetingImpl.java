@@ -12,16 +12,16 @@ import java.util.Set;
  */
 public abstract class MeetingImpl implements Meeting {
     private int id;
-    private GregorianCalendar date;
+    private Calendar date;
     private Set<Contact> attendees;
 
-    public MeetingImpl(int id, GregorianCalendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
+    public MeetingImpl(int id, Calendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be negative");
-        } else if (attendees.isEmpty()) {
-            throw new IllegalArgumentException("Contact set cannot be empty");
         } else if (date == null || attendees == null) {
             throw new NullPointerException("Date and Contact set cannot be null");
+        } else if (attendees.isEmpty()) {
+            throw new IllegalArgumentException("Contact set cannot be empty");
         } else {
                 this.id = id;
                 this.date = date;
@@ -36,7 +36,7 @@ public abstract class MeetingImpl implements Meeting {
 
     @Override
     public Calendar getDate() {
-        return null;
+        return date;
     }
 
     @Override
