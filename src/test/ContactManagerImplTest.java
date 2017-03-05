@@ -2,10 +2,12 @@ package test;
 
 import impl.ContactImpl;
 import impl.ContactManagerImpl;
+import impl.FutureMeetingImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
+import spec.Meeting;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -173,6 +175,15 @@ public class ContactManagerImplTest {
     public void testAddFutureMeetingNullContacts() {
         Set<Contact> nullSet = null;
         conManImp.addFutureMeeting(nullSet, date);
+    }
+
+    @Test
+    public void testGetFutureMeeting() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        Meeting meeting = new FutureMeetingImpl(1, date, fullSet);
+        int id = conManImp.addFutureMeeting(fullSet, date);
+        Meeting returnedMeeting = conManImp.getFutureMeeting(1);
+        assertEquals(meeting, returnedMeeting);
     }
 
     @After
