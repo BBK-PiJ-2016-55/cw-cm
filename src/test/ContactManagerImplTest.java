@@ -131,12 +131,27 @@ public class ContactManagerImplTest {
     //FutureMeeting tests
 
     @Test
-    public void testAddFutureMeeting() {
+    public void testAddFutureMeetingSingle() {
        Set<Contact> fullSet = conManImp.getContacts("");
        int id = conManImp.addFutureMeeting(fullSet, date);
        assertTrue(id == 1);
     }
 
+    @Test
+    public void testAddFutureMeetingMulti() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addFutureMeeting(fullSet, date);
+        assertTrue(id == 1);
+        id = conManImp.addFutureMeeting(fullSet, date);
+        assertTrue(id == 2);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testAddFutureMeetingPastError() {
+        Calendar pastDate = new GregorianCalendar(2012, 4, 5);
+        Set<Contact> fullSet = conManImp.getContacts("");
+        conManImp.addFutureMeeting(fullSet, pastDate);
+    }
 
     @After
     public void tearDown() {
