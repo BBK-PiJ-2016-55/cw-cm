@@ -28,7 +28,7 @@ public class FutureMeetingImplTest {
         attendeeSet = new HashSet<>();
         Contact contact = new ContactImpl(1, "Theresa", "Smelled slightly of cheese");
         attendeeSet.add(contact);
-        date = new GregorianCalendar(2017, 04, 05, 11, 30);
+        date = new GregorianCalendar(2017, 4, 5, 11, 30);
     }
 
     // Constructor test section
@@ -78,12 +78,13 @@ public class FutureMeetingImplTest {
         assertTrue(id == 2);
     }
 
-//    @Test
-//    public void getDate() {
-//        Date testDate = new Date();
-//        meeting = new FutureMeetingImpl(1, testDate, attendeeSet);
-//        assertTrue(testDate, meeting.getDate());
-//    }
+    // getDate() test section
+
+    @Test
+    public void getDate() {
+        meeting = new FutureMeetingImpl(1, date, attendeeSet);
+        assertEquals(date, meeting.getDate());
+    }
 
     @Test
     public void getContacts() {
