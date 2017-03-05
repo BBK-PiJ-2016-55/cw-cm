@@ -23,51 +23,50 @@ public class FutureMeetingImplTest {
     @Before
     public void setUp() {
         attendeeSet = new HashSet<>();
-        Contact contact = new ContactImpl(1, "Theresa", "Smelled slightly of cheese");
+        Contact contact = new ContactImpl(1, "Theresa", "Smells slightly of cheese");
         attendeeSet.add(contact);
         date = new GregorianCalendar(2017, 4, 5, 11, 30);
+        meeting = new FutureMeetingImpl(1, date, attendeeSet);
     }
 
     // Constructor test section
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdBelowZero() {
-        meeting = new FutureMeetingImpl(-4, date, attendeeSet);
+        Meeting invalidMeet = new FutureMeetingImpl(-4, date, attendeeSet);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdZero() {
-        meeting = new FutureMeetingImpl(0, date, attendeeSet);
+        Meeting invalidMeet = new FutureMeetingImpl(0, date, attendeeSet);
     }
 
     @Test (expected = NullPointerException.class)
     public void testDateNull() {
-        meeting = new FutureMeetingImpl(1, null, attendeeSet);
+        Meeting invalidMeet = new FutureMeetingImpl(1, null, attendeeSet);
     }
 
     @Test (expected = NullPointerException.class)
     public void testAttendeesNull() {
-        meeting = new FutureMeetingImpl(1, date, null);
+        Meeting invalidMeet = new FutureMeetingImpl(1, date, null);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testAttendeesEmpty() {
         attendeeSet.clear();
-        meeting = new FutureMeetingImpl(1, date, attendeeSet);
+        Meeting invalidMeet = new FutureMeetingImpl(1, date, attendeeSet);
     }
 
     // getId() test section
 
     @Test
     public void testGetId() {
-        meeting = new FutureMeetingImpl(1, date, attendeeSet);
         int id = meeting.getId();
         assertTrue(id == 1);
     }
 
     @Test
     public void testGetMultipleIds() {
-        meeting = new FutureMeetingImpl(1, date, attendeeSet);
         Meeting secondMeeting = new FutureMeetingImpl(2, date, attendeeSet);
         int id = meeting.getId();
         assertTrue(id == 1);
@@ -78,19 +77,21 @@ public class FutureMeetingImplTest {
     // getDate() test section
 
     @Test
-    public void getDate() {
-        meeting = new FutureMeetingImpl(1, date, attendeeSet);
+    public void testGetDate() {
         assertEquals(date, meeting.getDate());
     }
 
-    @Test
-    public void getContacts() {
+    // getContacts() test section
 
+    @Test
+    public void testGetContacts() {
+        assertEquals(attendeeSet, meeting.getContacts());
     }
 
     @After
     public void tearDown() {
         attendeeSet = null;
         date = null;
+        meeting = null;
     }
 }
