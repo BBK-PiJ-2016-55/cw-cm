@@ -1,5 +1,6 @@
 package test;
 
+import impl.ContactImpl;
 import impl.ContactManagerImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -151,6 +152,14 @@ public class ContactManagerImplTest {
         Calendar pastDate = new GregorianCalendar(2017, 2, 4);
         Set<Contact> fullSet = conManImp.getContacts("");
         conManImp.addFutureMeeting(fullSet, pastDate);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testAddFutureMeetingInvalidContact() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        Contact Lassie = new ContactImpl(4, "Lassie", "Odd one out");
+        fullSet.add(Lassie);
+        conManImp.addFutureMeeting(fullSet, date);
     }
 
     @After
