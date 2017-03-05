@@ -181,9 +181,11 @@ public class ContactManagerImplTest {
     public void testGetFutureMeeting() {
         Set<Contact> fullSet = conManImp.getContacts("");
         Meeting meeting = new FutureMeetingImpl(1, date, fullSet);
-        int id = conManImp.addFutureMeeting(fullSet, date);
+        conManImp.addFutureMeeting(fullSet, date);
         Meeting returnedMeeting = conManImp.getFutureMeeting(1);
-        assertEquals(meeting, returnedMeeting);
+        assertTrue(meeting.getId() == returnedMeeting.getId());
+        assertTrue(meeting.getDate().equals(returnedMeeting.getDate()));
+        assertTrue(meeting.getContacts().equals(returnedMeeting.getContacts()));
     }
 
     @After

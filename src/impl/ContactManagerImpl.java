@@ -25,6 +25,7 @@ public class ContactManagerImpl implements ContactManager {
             throw new NullPointerException("Date and/or attendees cannot be null");
         }
         // Checks that future meeting is not in past
+        // todo - move these errors into separate methods
         if ((date.compareTo(currentTime) < 0)) {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
         }
@@ -49,7 +50,11 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public FutureMeeting getFutureMeeting(int id) {
-        return null;
+        // todo - add error checking in here
+        Meeting meeting = meetingMap.get(id);
+        FutureMeeting futureMeeting = (FutureMeeting) meeting;
+        // todo - is there a way of combing the two lines above?
+        return futureMeeting;
     }
 
     @Override
