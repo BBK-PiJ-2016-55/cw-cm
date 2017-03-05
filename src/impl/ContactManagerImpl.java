@@ -19,7 +19,11 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public int addFutureMeeting(Set<Contact> attendees, Calendar date) {
+    public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException {
+        Calendar currentTime = new GregorianCalendar();
+        if ((date.compareTo(currentTime) < 0)) {
+            throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
+        }
         int id = meetingIdCounter;
         Meeting newMeeting = new FutureMeetingImpl(id, date, attendees);
         meetingMap.put(id, newMeeting);

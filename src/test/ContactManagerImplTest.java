@@ -148,7 +148,7 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testAddFutureMeetingPastError() {
-        Calendar pastDate = new GregorianCalendar(2012, 4, 5);
+        Calendar pastDate = new GregorianCalendar(2017, 2, 4);
         Set<Contact> fullSet = conManImp.getContacts("");
         conManImp.addFutureMeeting(fullSet, pastDate);
     }
