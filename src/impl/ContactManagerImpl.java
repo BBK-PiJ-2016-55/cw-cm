@@ -19,8 +19,11 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException {
+    public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException, NullPointerException {
         Calendar currentTime = new GregorianCalendar();
+        if (attendees == null || date == null) {
+            throw new NullPointerException("Date and/or attendees cannot be null");
+        }
         // Checks that future meeting is not in past
         if ((date.compareTo(currentTime) < 0)) {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");

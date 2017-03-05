@@ -162,6 +162,19 @@ public class ContactManagerImplTest {
         conManImp.addFutureMeeting(fullSet, date);
     }
 
+    @Test (expected = NullPointerException.class)
+    public void testAddFutureMeetingNullDate() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        date = null;
+        conManImp.addFutureMeeting(fullSet, date);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testAddFutureMeetingNullContacts() {
+        Set<Contact> nullSet = null;
+        conManImp.addFutureMeeting(nullSet, date);
+    }
+
     @After
     public void tearDown() {
        conManImp.resetCounter();
