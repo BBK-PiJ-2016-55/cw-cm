@@ -84,7 +84,15 @@ public class FutureMeetingImplTest {
     // getContacts() test section
 
     @Test
-    public void testGetContacts() {
+    public void testGetContactsSingle() {
+        assertEquals(attendeeSet, meeting.getContacts());
+    }
+
+    @Test
+    public void testGetContactsMulti() {
+        Contact contact = new ContactImpl(2, "Tiger", "A large, marmalade cat.");
+        attendeeSet.add(contact);
+        Meeting multiMeet = new FutureMeetingImpl(3, date, attendeeSet);
         assertEquals(attendeeSet, meeting.getContacts());
     }
 
