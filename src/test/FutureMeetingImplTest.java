@@ -13,7 +13,8 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 /**
- * Created by svince04 on 04/03/2017 for cw-cm.
+ * Created by svince04 on 04/03/2017.
+ * PiJ Coursework 3
  */
 public class FutureMeetingImplTest {
     private Calendar date;
@@ -33,28 +34,28 @@ public class FutureMeetingImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdBelowZero() {
-        Meeting invalidMeet = new FutureMeetingImpl(-4, date, attendeeSet);
+        new FutureMeetingImpl(-4, date, attendeeSet);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdZero() {
-        Meeting invalidMeet = new FutureMeetingImpl(0, date, attendeeSet);
+        new FutureMeetingImpl(0, date, attendeeSet);
     }
 
     @Test (expected = NullPointerException.class)
     public void testDateNull() {
-        Meeting invalidMeet = new FutureMeetingImpl(1, null, attendeeSet);
+        new FutureMeetingImpl(1, null, attendeeSet);
     }
 
     @Test (expected = NullPointerException.class)
     public void testAttendeesNull() {
-        Meeting invalidMeet = new FutureMeetingImpl(1, date, null);
+        new FutureMeetingImpl(1, date, null);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testAttendeesEmpty() {
         attendeeSet.clear();
-        Meeting invalidMeet = new FutureMeetingImpl(1, date, attendeeSet);
+        new FutureMeetingImpl(1, date, attendeeSet);
     }
 
     // getId() test section

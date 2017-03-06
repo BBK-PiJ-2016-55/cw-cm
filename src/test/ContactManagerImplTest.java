@@ -18,7 +18,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by svince04 on 18/02/2017 for cw-cm.
+ * Created by svince04 on 18/02/2017.
+ * PiJ Coursework 3
  */
 public class ContactManagerImplTest {
    private ContactManagerImpl conManImp;
@@ -91,7 +92,7 @@ public class ContactManagerImplTest {
     @Test (expected = NullPointerException.class)
     public void testGetContactsNullInput() {
         String nullName = null;
-        Set<Contact> fullSet = conManImp.getContacts(nullName);
+        conManImp.getContacts(nullName);
     }
 
     @Test
@@ -123,12 +124,12 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsIdsNoIds() {
-        Set<Contact> idSet = conManImp.getContacts();
+        conManImp.getContacts();
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsIdsInvalidIds() {
-        Set<Contact> idSet = conManImp.getContacts(-1, 9);
+        conManImp.getContacts(-1, 9);
     }
 
     //FutureMeeting tests
@@ -167,14 +168,12 @@ public class ContactManagerImplTest {
     @Test (expected = NullPointerException.class)
     public void testAddFutureMeetingNullDate() {
         Set<Contact> fullSet = conManImp.getContacts("");
-        date = null;
-        conManImp.addFutureMeeting(fullSet, date);
+        conManImp.addFutureMeeting(fullSet, null);
     }
 
     @Test (expected = NullPointerException.class)
     public void testAddFutureMeetingNullContacts() {
-        Set<Contact> nullSet = null;
-        conManImp.addFutureMeeting(nullSet, date);
+        conManImp.addFutureMeeting(null, date);
     }
 
     @Test

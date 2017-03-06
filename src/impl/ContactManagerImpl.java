@@ -5,7 +5,8 @@ import spec.*;
 import java.util.*;
 
 /**
- * Created by svince04 on 17/02/2017 for cw-cm.
+ * Created by svince04 on 17/02/2017.
+ * PiJ coursework 3
  */
 public class ContactManagerImpl implements ContactManager {
     private HashMap<Integer, Contact> contactMap = new HashMap<>();

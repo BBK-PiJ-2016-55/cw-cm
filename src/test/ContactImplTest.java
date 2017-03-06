@@ -7,7 +7,8 @@ import spec.Contact;
 import static org.junit.Assert.*;
 
 /**
- * Created by svince04 on 17/02/2017 for cw-cm.
+ * Created by svince04 on 17/02/2017.
+ * PiJ Coursework 3
  */
 public class ContactImplTest {
 
@@ -74,27 +75,32 @@ public class ContactImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testFullConstructorZeroNegativeId() {
-        Contact carl = new ContactImpl(-7, "Carl", "Inherently unstable person");
+        new ContactImpl(-7, "Carl", "Inherently unstable person");
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testBriefConstructorZeroNegativeId() {
-        Contact carl = new ContactImpl(-7, "Carl");
+    public void testBriefConstructorNegativeId() {
+        new ContactImpl(-7, "Carl");
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testBriefConstructorZeroId() {
+        new ContactImpl(0, "Carl");
     }
 
     @Test (expected = NullPointerException.class)
     public void testFullConstructorNullName() {
-        Contact carl = new ContactImpl(6, null, "Inherently unstable person");
+        new ContactImpl(6, null, "Inherently unstable person");
     }
 
     @Test (expected = NullPointerException.class)
     public void testBriefConstructorNullName() {
-        Contact carl = new ContactImpl(6, null, "Inherently unstable person");
+        new ContactImpl(6, null, "Inherently unstable person");
     }
 
     @Test (expected = NullPointerException.class)
     public void testFullConstructorNullNotes() {
-        Contact carl = new ContactImpl(6, "Carl", null);
+        new ContactImpl(6, "Carl", null);
     }
 
 }
