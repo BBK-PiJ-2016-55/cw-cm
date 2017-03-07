@@ -51,7 +51,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public FutureMeeting getFutureMeeting(int id) {
-        // todo - add error checking in here
+        // todo - throws IllegalStateException if meeting is in past
         return (FutureMeeting) meetingMap.get(id);
     }
 

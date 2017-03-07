@@ -7,15 +7,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import spec.Contact;
+import spec.FutureMeeting;
 import spec.Meeting;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by svince04 on 18/02/2017.
@@ -185,6 +184,11 @@ public class ContactManagerImplTest {
         assertTrue(meeting.getId() == returnedMeeting.getId());
         assertTrue(meeting.getDate().equals(returnedMeeting.getDate()));
         assertTrue(meeting.getContacts().equals(returnedMeeting.getContacts()));
+    }
+
+    @Test
+    public void testGetFutureMeetingNoMatchReturnsNull() {
+        assertNull(conManImp.getFutureMeeting(250));
     }
 
     @After
