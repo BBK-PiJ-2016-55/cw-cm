@@ -1,8 +1,6 @@
 package test;
 
-import impl.ContactImpl;
-import impl.ContactManagerImpl;
-import impl.FutureMeetingImpl;
+import impl.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +21,10 @@ import static org.junit.Assert.*;
 public class ContactManagerImplTest {
    private ContactManagerImpl conManImp;
    private Calendar date = new GregorianCalendar(2017, 4, 5);
+   private Calendar pastDate = new GregorianCalendar(2016, 4, 5);
 
-   @Before
+
+    @Before
    public void startUp() {
        conManImp = new ContactManagerImpl();
        conManImp.addNewContact("Garfield", "Won't meet on a Monday.");
@@ -186,10 +186,17 @@ public class ContactManagerImplTest {
         assertTrue(meeting.getContacts().equals(returnedMeeting.getContacts()));
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void testGetFutureMeetingNoMatchReturnsNull() {
         assertNull(conManImp.getFutureMeeting(250));
     }
+
+//    @Test (expected = IllegalStateException.class)
+//    public void testGetFutureMeetingInPastThrowsError() {
+//        Set<Contact> fullSet = conManImp.getContacts("");
+//        conManImp.addNewPastMeeting(fullSet, pastDate, "Past meeting notes.");
+//        assertNull(conManImp.getFutureMeeting(5));
+//    }
 
     @After
     public void tearDown() {

@@ -21,13 +21,11 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException, NullPointerException {
-        Calendar currentTime = new GregorianCalendar();
         if (attendees == null || date == null) {
             throw new NullPointerException("Date and/or attendees cannot be null");
         }
         // Checks that future meeting is not in past
-        // todo - move these errors into separate methods
-        if ((date.compareTo(currentTime) < 0)) {
+        if ((checkMeetingDate(date)) < 0) {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
         }
         // Checks that all contacts are known/existent
@@ -44,14 +42,28 @@ public class ContactManagerImpl implements ContactManager {
         return id;
     }
 
+    /**
+     * Checks date passed in against current time.
+     *
+     * @param date date to be checked against current date
+     * @return int -1 if date is in past, 0 if present at 1 if in future compared to current time
+     *
+     */
+    private int checkMeetingDate(Calendar date) {
+        Calendar currentTime = new GregorianCalendar();
+        return date.compareTo(currentTime);
+    }
+
     @Override
     public PastMeeting getPastMeeting(int id) {
         return null;
     }
 
     @Override
-    public FutureMeeting getFutureMeeting(int id) {
-        // todo - throws IllegalStateException if meeting is in past
+    public FutureMeeting getFutureMeeting(int id) throws IllegalStateException {
+        if (checkMeetingDate(meetingMap.get(id).getDate()) < 0) {
+            throw new IllegalStateException("Meeting is not in the future.");
+        }
         return (FutureMeeting) meetingMap.get(id);
     }
 
