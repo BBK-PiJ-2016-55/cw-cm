@@ -14,6 +14,7 @@ public class ContactManagerImpl implements ContactManager {
     private static int contactIdCounter = 1;
     private static int meetingIdCounter = 1;
 
+    // todo - add javadoc or get rid of this before submission
     public void resetCounter() {
         contactIdCounter = 1;
         meetingIdCounter = 1;
@@ -30,7 +31,7 @@ public class ContactManagerImpl implements ContactManager {
         }
         // Checks that all contacts are known/existent
         for (Contact contact : attendees) {
-            if (!contactMap.containsValue(contact)) {
+            if (!checkContactsExist(contact)) {
                 throw new IllegalArgumentException("Invalid Contact entered.");
             }
         }
@@ -43,10 +44,20 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     /**
+     * Checks whether contact exists.
+     *
+     * @param contact to be validated
+     * @return true if valid, false otherwise.
+     */
+    private boolean checkContactsExist(Contact contact) {
+            return (contactMap.containsValue(contact));
+    }
+
+    /**
      * Checks date passed in against current time.
      *
-     * @param date date to be checked against current date
-     * @return int -1 if date is in past, 0 if present at 1 if in future compared to current time
+     * @param date to be checked against current date
+     * @return int -1 if date is in past, 0 if present and 1 if in future compared to current time
      *
      */
     private int checkMeetingDate(Calendar date) {
@@ -99,6 +110,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addNewContact(String name, String notes) throws IllegalArgumentException, NullPointerException {
+        // todo = add explict NullPOinter throw here?
         if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {
