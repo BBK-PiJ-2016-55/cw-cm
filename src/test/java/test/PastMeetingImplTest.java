@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class PastMeetingImplTest {
     private Calendar pastDate;
     private Set<Contact> attendeeSet = new HashSet<>();
-    private Meeting pastMeeting;
+    private PastMeetingImpl pastMeeting;
 
     // todo aww nuts. Move duplicated tests into MeetingImplTest class and re-factor.
 
@@ -64,29 +64,28 @@ public class PastMeetingImplTest {
     // getId tests
 
     @Test
-    public void getId() {
-        int id = pastMeeting.getId();
-        assertTrue(id == 1);
+    public void testGetId() {
+        assertEquals(pastMeeting.getId(), 1);
     }
 
 
     // getDate tests
 
     @Test
-    public void getDate() {
+    public void testGetDate() {
 
     }
 
     // getContacts tests
 
     @Test
-    public void getContacts() {
+    public void testGetContacts() {
 
     }
 
     @Test
-    public void getNotes() {
-    // empty string is returned if there are no notes
+    public void testGetNotes() {
+        assertEquals("I shouldn't have gone into the dog park.", pastMeeting.getNotes());
     }
 
 }
