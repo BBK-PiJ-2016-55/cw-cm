@@ -2,6 +2,8 @@ package main.java.impl;
 
 import main.java.spec.Contact;
 
+import java.util.Objects;
+
 /**
  * Created by svince04 on 17/02/2017 for cw-cm.
  */
@@ -17,10 +19,9 @@ public class ContactImpl implements Contact {
      * @throws NullPointerException if name is null
      */
     public ContactImpl(int id, String name) throws IllegalArgumentException, NullPointerException {
+        Objects.requireNonNull(name, "Name cannot be null");
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be 0 or less");
-        } else if (name == null) {
-            throw new NullPointerException("Name cannot be null");
         } else {
             this.id = id;
             this.name = name;
@@ -36,10 +37,10 @@ public class ContactImpl implements Contact {
      * @throws NullPointerException if name or notes are null
      */
     public ContactImpl(int id, String name, String notes) throws IllegalArgumentException, NullPointerException {
+        Objects.requireNonNull(name, "Name cannot be null");
+        Objects.requireNonNull(notes, "Notes cannot be null");
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be 0 or less");
-        } else if (name == null || notes == null) {
-            throw new NullPointerException("Name and Notes cannot be null");
         } else {
             this.id = id;
             this.name = name;

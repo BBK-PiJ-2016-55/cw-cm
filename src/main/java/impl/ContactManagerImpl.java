@@ -22,9 +22,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException, NullPointerException {
-        if (attendees == null || date == null) {
-            throw new NullPointerException("Date and/or attendees cannot be null");
-        }
+        Objects.requireNonNull(attendees, "Contacts cannot be null");
+        Objects.requireNonNull(date, "Date cannot be null");
         // Checks that future meeting is not in past
         if ((checkMeetingDate(date)) < 0) {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
@@ -110,7 +109,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addNewContact(String name, String notes) throws IllegalArgumentException, NullPointerException {
-        // todo = add explict NullPOinter throw here?
+        Objects.requireNonNull(name, "Name cannot be null");
+        Objects.requireNonNull(notes, "Notes cannot be null");
         if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         } else {

@@ -4,6 +4,7 @@ import main.java.spec.Contact;
 import main.java.spec.Meeting;
 
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -16,10 +17,10 @@ public abstract class MeetingImpl implements Meeting {
     private Set<Contact> attendees;
 
     MeetingImpl(int id, Calendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
+        Objects.requireNonNull(date, "Date cannot be null");
+        Objects.requireNonNull(attendees, "Contact set cannot be null");
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be negative");
-        } else if (date == null || attendees == null) {
-            throw new NullPointerException("Date and Contact set cannot be null");
         } else if (attendees.isEmpty()) {
             throw new IllegalArgumentException("Contact set cannot be empty");
         } else {
