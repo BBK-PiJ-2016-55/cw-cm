@@ -5,7 +5,6 @@ import main.java.impl.PastMeetingImpl;
 import org.junit.Before;
 import org.junit.Test;
 import main.java.spec.Contact;
-import main.java.spec.Meeting;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -73,14 +72,14 @@ public class PastMeetingImplTest {
 
     @Test
     public void testGetDate() {
-
+        assertEquals(pastDate, pastMeeting.getDate());
     }
 
     // getContacts tests
 
     @Test
     public void testGetContacts() {
-
+        assertEquals(attendeeSet, pastMeeting.getContacts());
     }
 
     @Test
