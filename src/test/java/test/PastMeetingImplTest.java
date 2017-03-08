@@ -1,7 +1,6 @@
 package test.java.test;
 
 import main.java.impl.ContactImpl;
-import main.java.impl.FutureMeetingImpl;
 import main.java.impl.PastMeetingImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,12 +15,15 @@ import java.util.Set;
 import static org.junit.Assert.*;
 
 /**
- * Created by svince04 on 04/03/2017 for cw-cm.
+ * Created by svince04 on 04/03/2017.
+ * PiJ Coursework 3.
  */
 public class PastMeetingImplTest {
     private Calendar pastDate;
     private Set<Contact> attendeeSet = new HashSet<>();
     private Meeting pastMeeting;
+
+    // todo aww nuts. Move duplicated tests into MeetingImplTest class and re-factor.
 
     @Before
     public void setUp() {
@@ -45,12 +47,18 @@ public class PastMeetingImplTest {
 
     @Test (expected = NullPointerException.class)
     public void testDateNull() {
-        new PastMeetingImpl(1, null, attendeeSet, "This date is invalid.");
+        new PastMeetingImpl(2, null, attendeeSet, "This date is invalid.");
     }
 
     @Test (expected = NullPointerException.class)
     public void testAttendeesNull() {
-        new PastMeetingImpl(1, pastDate, null, "This contact group is invalid.");
+        new PastMeetingImpl(2, pastDate, null, "This contact group is invalid.");
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testAttendeesEmpty() {
+        attendeeSet.clear();
+        new PastMeetingImpl(2, pastDate, attendeeSet, "Contact set is empty.");
     }
 
     // getId tests
@@ -61,10 +69,15 @@ public class PastMeetingImplTest {
         assertTrue(id == 1);
     }
 
+
+    // getDate tests
+
     @Test
     public void getDate() {
 
     }
+
+    // getContacts tests
 
     @Test
     public void getContacts() {
@@ -73,7 +86,7 @@ public class PastMeetingImplTest {
 
     @Test
     public void getNotes() {
-
+    // empty string is returned if there are no notes
     }
 
 }
