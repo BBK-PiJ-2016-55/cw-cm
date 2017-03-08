@@ -23,11 +23,10 @@ public abstract class MeetingImpl implements Meeting {
             throw new IllegalArgumentException("ID cannot be negative");
         } else if (attendees.isEmpty()) {
             throw new IllegalArgumentException("Contact set cannot be empty");
-        } else {
-                this.id = id;
-                this.date = date;
-                this.attendees = attendees;
         }
+        this.id = id;
+        this.date = date;
+        this.attendees = attendees;
     }
 
     @Override

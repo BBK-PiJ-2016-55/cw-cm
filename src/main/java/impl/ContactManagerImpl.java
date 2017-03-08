@@ -113,15 +113,14 @@ public class ContactManagerImpl implements ContactManager {
         Objects.requireNonNull(notes, "Notes cannot be null");
         if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
-        } else {
-            // Use incrementing id to generate UIDs and assign Contact to corresponding key
-            int id = contactIdCounter;
-            Contact newContact = new ContactImpl(id, name, notes);
-            contactMap.put(id, newContact);
-            // Iterate idCounter in prep for next new Contact
-            contactIdCounter++;
-            return id;
         }
+        // Use incrementing id to generate UIDs and assign Contact to corresponding key
+        int id = contactIdCounter;
+        Contact newContact = new ContactImpl(id, name, notes);
+        contactMap.put(id, newContact);
+        // Iterate idCounter in prep for next new Contact
+        contactIdCounter++;
+        return id;
     }
 
     @Override

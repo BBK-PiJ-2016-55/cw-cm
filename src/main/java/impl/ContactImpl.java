@@ -22,11 +22,10 @@ public class ContactImpl implements Contact {
         Objects.requireNonNull(name, "Name cannot be null");
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be 0 or less");
-        } else {
-            this.id = id;
-            this.name = name;
-            this.notes = "";
         }
+        this.id = id;
+        this.name = name;
+        this.notes = "";
     }
 
     /**
@@ -41,11 +40,10 @@ public class ContactImpl implements Contact {
         Objects.requireNonNull(notes, "Notes cannot be null");
         if (id <= 0) {
             throw new IllegalArgumentException("ID cannot be 0 or less");
-        } else {
-            this.id = id;
-            this.name = name;
-            this.notes = notes;
         }
+        this.id = id;
+        this.name = name;
+        this.notes = notes;
     }
 
     @Override
