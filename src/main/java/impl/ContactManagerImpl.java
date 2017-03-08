@@ -24,22 +24,21 @@ public class ContactManagerImpl implements ContactManager {
     public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException, NullPointerException {
         Objects.requireNonNull(attendees, "Contacts cannot be null");
         Objects.requireNonNull(date, "Date cannot be null");
-        // Checks that future meeting is not in past
+        // Check that future meeting is not in past
         if ((checkMeetingDate(date)) < 0) {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
         }
-        // Checks that all contacts are known/existent
+        // Check that all contacts are known/existent
         for (Contact contact : attendees) {
             if (!checkContactsExist(contact)) {
                 throw new IllegalArgumentException("Invalid Contact entered.");
             }
         }
-        int id = meetingIdCounter;
-        Meeting newMeeting = new FutureMeetingImpl(id, date, attendees);
-        meetingMap.put(id, newMeeting);
+        Meeting newMeeting = new FutureMeetingImpl(meetingIdCounter, date, attendees);
+        meetingMap.put(meetingIdCounter, newMeeting);
         // Iterate meetingCounter in prep for next new Meeting
         meetingIdCounter++;
-        return id;
+        return newMeeting.getId();
     }
 
     /**
@@ -114,13 +113,11 @@ public class ContactManagerImpl implements ContactManager {
         if (name.equals("") || notes.equals("")) {
             throw new IllegalArgumentException("Name and/or notes cannot be empty");
         }
-        // Use incrementing id to generate UIDs and assign Contact to corresponding key
-        int id = contactIdCounter;
-        Contact newContact = new ContactImpl(id, name, notes);
-        contactMap.put(id, newContact);
+        Contact newContact = new ContactImpl(contactIdCounter, name, notes);
+        contactMap.put(contactIdCounter, newContact);
         // Iterate idCounter in prep for next new Contact
         contactIdCounter++;
-        return id;
+        return newContact.getId();
     }
 
     @Override
@@ -131,12 +128,12 @@ public class ContactManagerImpl implements ContactManager {
             for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
                 nameSet.add(entry.getValue());
             }
-        } else {
-            // otherwise just return matching contacts
-            for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
-                if (entry.getValue().getName().contains(name)) {
-                    nameSet.add(entry.getValue());
-                }
+            return nameSet;
+        }
+        // otherwise just return matching contacts
+        for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
+            if (entry.getValue().getName().contains(name)) {
+                nameSet.add(entry.getValue());
             }
         }
         return nameSet;
