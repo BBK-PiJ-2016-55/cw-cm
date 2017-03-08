@@ -30,7 +30,7 @@ public class FutureMeetingImplTest {
         meeting = new FutureMeetingImpl(1, date, attendeeSet);
     }
 
-    // Constructor testUp.java.test section
+    // Constructor test section
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdBelowZero() {
@@ -58,7 +58,7 @@ public class FutureMeetingImplTest {
         new FutureMeetingImpl(1, date, attendeeSet);
     }
 
-    // getId() testUp.java.test section
+    // getId() test section
 
     @Test
     public void testGetId() {
@@ -75,14 +75,14 @@ public class FutureMeetingImplTest {
         assertTrue(id == 2);
     }
 
-    // getDate() testUp.java.test section
+    // getDate() test section
 
     @Test
     public void testGetDate() {
         assertEquals(date, meeting.getDate());
     }
 
-    // getContacts() testUp.java.test section
+    // getContacts() test section
 
     @Test
     public void testGetContactsSingle() {
