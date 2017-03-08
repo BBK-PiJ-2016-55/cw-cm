@@ -1,11 +1,10 @@
-package test;
+package test.java.test;
 
-import impl.PastMeetingImpl;
+import main.java.impl.PastMeetingImpl;
 import org.junit.Test;
-import spec.Contact;
-import spec.Meeting;
+import main.java.spec.Contact;
+import main.java.spec.Meeting;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;

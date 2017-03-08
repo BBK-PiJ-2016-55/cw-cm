@@ -1,12 +1,11 @@
-package test;
+package test.java.test;
 
-import impl.*;
+import main.java.impl.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import spec.Contact;
-import spec.FutureMeeting;
-import spec.Meeting;
+import main.java.spec.Contact;
+import main.java.spec.Meeting;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

@@ -1,12 +1,12 @@
-package test;
+package test.java.test;
 
-import impl.ContactImpl;
-import impl.FutureMeetingImpl;
+import main.java.impl.ContactImpl;
+import main.java.impl.FutureMeetingImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import spec.Contact;
-import spec.Meeting;
+import main.java.spec.Contact;
+import main.java.spec.Meeting;
 
 import java.util.*;
 
@@ -30,7 +30,7 @@ public class FutureMeetingImplTest {
         meeting = new FutureMeetingImpl(1, date, attendeeSet);
     }
 
-    // Constructor test section
+    // Constructor testUp.java.test section
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdBelowZero() {
@@ -58,7 +58,7 @@ public class FutureMeetingImplTest {
         new FutureMeetingImpl(1, date, attendeeSet);
     }
 
-    // getId() test section
+    // getId() testUp.java.test section
 
     @Test
     public void testGetId() {
@@ -75,14 +75,14 @@ public class FutureMeetingImplTest {
         assertTrue(id == 2);
     }
 
-    // getDate() test section
+    // getDate() testUp.java.test section
 
     @Test
     public void testGetDate() {
         assertEquals(date, meeting.getDate());
     }
 
-    // getContacts() test section
+    // getContacts() testUp.java.test section
 
     @Test
     public void testGetContactsSingle() {

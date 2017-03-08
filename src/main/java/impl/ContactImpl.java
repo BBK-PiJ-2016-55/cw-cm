@@ -1,6 +1,6 @@
-package impl;
+package main.java.impl;
 
-import spec.Contact;
+import main.java.spec.Contact;
 
 /**
  * Created by svince04 on 17/02/2017 for cw-cm.
