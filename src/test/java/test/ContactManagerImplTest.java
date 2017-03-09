@@ -101,24 +101,16 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetContactsIdsPopulated() {
-        conManImp.addNewContact("Tom", "Makes grand plans that never work. ");
-        Set<Contact> idSet = conManImp.getContacts(1, 4);
+        int tomId = conManImp.addNewContact("Tom", "Makes grand plans that never work. ");
+        Set<Contact> idSet = conManImp.getContacts(tomId);
         String nameString = "";
         for (Contact contact : idSet) {
             nameString = nameString + contact.getName();
         }
-        assertTrue(nameString.equals("TomGarfield") || nameString.equals("GarfieldTom"));
+        assertTrue(nameString.equals("Tom"));
     }
 
-    @Test
-    public void testGetContactsIdsPopulatedSingleId() {
-        Set<Contact> idSet = conManImp.getContacts(1);
-        String nameString = "";
-        for (Contact contact : idSet) {
-            nameString = nameString + contact.getName();
-        }
-        assertTrue(nameString.equals("Garfield"));
-    }
+    //todo - add test for multiple ids
 
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsIdsNoIds() {
@@ -143,9 +135,9 @@ public class ContactManagerImplTest {
     public void testAddFutureMeetingMulti() {
         Set<Contact> fullSet = conManImp.getContacts("");
         int id = conManImp.addFutureMeeting(fullSet, date);
-        assertTrue(id == 1);
+        assertTrue(conManImp.getFutureMeeting(id).getDate().equals(date));
         id = conManImp.addFutureMeeting(fullSet, date);
-        assertTrue(id == 2);
+        assertTrue(conManImp.getFutureMeeting(id).getDate().equals(date));
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -178,9 +170,8 @@ public class ContactManagerImplTest {
     public void testGetFutureMeeting() {
         Set<Contact> fullSet = conManImp.getContacts("");
         Meeting meeting = new FutureMeetingImpl(1, date, fullSet);
-        conManImp.addFutureMeeting(fullSet, date);
-        Meeting returnedMeeting = conManImp.getFutureMeeting(1);
-        assertTrue(meeting.getId() == returnedMeeting.getId());
+        int meetingId = conManImp.addFutureMeeting(fullSet, date);
+        Meeting returnedMeeting = conManImp.getFutureMeeting(meetingId);
         assertTrue(meeting.getDate().equals(returnedMeeting.getDate()));
         assertTrue(meeting.getContacts().equals(returnedMeeting.getContacts()));
     }
@@ -199,7 +190,7 @@ public class ContactManagerImplTest {
 
     @After
     public void tearDown() {
-       conManImp.resetCounter();
+       //conManImp.resetCounter();
        conManImp = null;
     }
 }

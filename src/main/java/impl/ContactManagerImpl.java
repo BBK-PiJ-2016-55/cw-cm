@@ -14,12 +14,6 @@ public class ContactManagerImpl implements ContactManager {
     private static int contactIdCounter = 1;
     private static int meetingIdCounter = 1;
 
-    // todo - add javadoc or get rid of this before submission
-    public void resetCounter() {
-        contactIdCounter = 1;
-        meetingIdCounter = 1;
-    }
-
     @Override
     public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException, NullPointerException {
         Objects.requireNonNull(attendees, "Contacts cannot be null");
@@ -59,8 +53,7 @@ public class ContactManagerImpl implements ContactManager {
      *
      */
     private int checkMeetingDate(Calendar date) {
-        Calendar currentTime = new GregorianCalendar();
-        return date.compareTo(currentTime);
+        return date.compareTo(Calendar.getInstance());
     }
 
     @Override
