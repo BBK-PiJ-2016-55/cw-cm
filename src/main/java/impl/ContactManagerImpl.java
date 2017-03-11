@@ -15,20 +15,20 @@ public class ContactManagerImpl implements ContactManager {
     private static int meetingIdCounter = 1;
 
     @Override
-    public int addFutureMeeting(Set<Contact> attendees, Calendar date) throws IllegalArgumentException, NullPointerException {
-        Objects.requireNonNull(attendees, "Contacts cannot be null");
+    public int addFutureMeeting(Set<Contact> contacts, Calendar date) throws IllegalArgumentException, NullPointerException {
+        Objects.requireNonNull(contacts, "Contacts cannot be null");
         Objects.requireNonNull(date, "Date cannot be null");
         // Check that future meeting is not in past
         if ((checkMeetingDate(date)) < 0) {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
         }
         // Check that all contacts are known/existent
-        for (Contact contact : attendees) {
+        for (Contact contact : contacts) {
             if (!checkContactsExist(contact)) {
                 throw new IllegalArgumentException("Invalid Contact entered.");
             }
         }
-        Meeting newMeeting = new FutureMeetingImpl(meetingIdCounter, date, attendees);
+        Meeting newMeeting = new FutureMeetingImpl(meetingIdCounter, date, contacts);
         meetingMap.put(meetingIdCounter, newMeeting);
         // Iterate meetingCounter in prep for next new Meeting
         meetingIdCounter++;
@@ -90,7 +90,12 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
-        return 0;
+
+        Meeting newPastMeeting = new PastMeetingImpl(meetingIdCounter, date, contacts, text);
+        meetingMap.put(meetingIdCounter, newPastMeeting);
+        // Iterate meetingCounter in prep for next new Meeting
+        meetingIdCounter++;
+        return newPastMeeting.getId();
     }
 
     @Override
