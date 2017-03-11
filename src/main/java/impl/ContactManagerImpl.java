@@ -81,9 +81,10 @@ public class ContactManagerImpl implements ContactManager {
         return (FutureMeeting) meetingMap.get(id);
     }
 
+    //todo - error checking if required
     @Override
     public Meeting getMeeting(int id) {
-        return null;
+        return meetingMap.get(id);
     }
 
     @Override
