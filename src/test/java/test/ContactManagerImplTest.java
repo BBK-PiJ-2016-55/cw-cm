@@ -240,6 +240,12 @@ public class ContactManagerImplTest {
         assertNull(conManImp.getPastMeeting(250));
     }
 
+    @Test (expected = IllegalStateException.class)
+    public void testGetPastMeetingInFutureThrowsError() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addFutureMeeting(fullSet, date);
+        conManImp.getPastMeeting(id);
+    }
     @After
     public void tearDown() {
        //conManImp.resetCounter();
