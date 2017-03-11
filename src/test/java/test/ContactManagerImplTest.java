@@ -292,19 +292,21 @@ public class ContactManagerImplTest {
 
     // getFutureMeetingList tests
 
-//    @Test
-//    public void testGetFutureMeetingList() {
-//        Set<Contact> fullSet = conManImp.getContacts("");
-//        conManImp.addNewPastMeeting(fullSet, date, "Past meeting notes");
-//        Set<Contact> garfieldSet = conManImp.getContacts("Gar");
-//        conManImp.addNewPastMeeting(garfield, date, "Past meeting notes");
-//        Contact garfield =
-//        List<Meeting> resultList = conManImp.getFutureMeetingList();
-//        assertTrue(resultList.size() == 2);
-//    }
+    @Test
+    public void testGetFutureMeetingList() {
+        conManImp.addNewPastMeeting(fullContactSet, pastDate, "Past meeting notes");
+        Set<Contact> garSet = conManImp.getContacts("Garfield");
+        conManImp.addNewPastMeeting(garSet, pastDate, "Past meeting notes");
+        Contact garfield = fullContactList.get(0);
+        List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
+        assertTrue(resultList.size() == 2);
+    }
 
     @After
     public void tearDown() {
        conManImp = null;
+       tempContactSet = null;
+       fullContactSet = null;
+       fullContactList = null;
     }
 }
