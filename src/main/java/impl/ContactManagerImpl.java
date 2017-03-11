@@ -42,7 +42,7 @@ public class ContactManagerImpl implements ContactManager {
      * @return true if valid, false otherwise.
      */
     private boolean checkContactsExist(Contact contact) {
-            return (contactMap.containsValue(contact));
+        return (contactMap.containsValue(contact));
     }
 
     /**
@@ -50,7 +50,6 @@ public class ContactManagerImpl implements ContactManager {
      *
      * @param date to be checked against current date
      * @return int -1 if date is in past, 0 if present and 1 if in future compared to current time
-     *
      */
     private int checkMeetingDate(Calendar date) {
         return date.compareTo(Calendar.getInstance());

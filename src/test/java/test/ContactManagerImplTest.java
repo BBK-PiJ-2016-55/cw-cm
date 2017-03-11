@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 public class ContactManagerImplTest {
    private ContactManagerImpl conManImp;
    private Calendar date = new GregorianCalendar(2017, 4, 5);
-   private Calendar pastDate = new GregorianCalendar(2016, 4, 5);
 
 
     @Before
@@ -103,11 +102,10 @@ public class ContactManagerImplTest {
     public void testGetContactsIdsPopulated() {
         int tomId = conManImp.addNewContact("Tom", "Makes grand plans that never work. ");
         Set<Contact> idSet = conManImp.getContacts(tomId);
-        String nameString = "";
         for (Contact contact : idSet) {
-            nameString = nameString + contact.getName();
+            assertTrue(contact.getName().equals("Tom"));
         }
-        assertTrue(nameString.equals("Tom"));
+
     }
 
     //todo - add test for multiple ids

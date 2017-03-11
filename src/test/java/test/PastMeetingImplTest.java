@@ -22,8 +22,6 @@ public class PastMeetingImplTest {
     private Set<Contact> attendeeSet = new HashSet<>();
     private PastMeetingImpl pastMeeting;
 
-    // todo aww nuts. Move duplicated tests into MeetingImplTest class and re-factor.
-
     @Before
     public void setUp() {
         Contact contact = new ContactImpl(1, "Pluto", "Tall and not very bright.");
@@ -31,8 +29,6 @@ public class PastMeetingImplTest {
         pastDate = new GregorianCalendar(2012, 4, 5, 11, 30);
         pastMeeting = new PastMeetingImpl(1, pastDate, attendeeSet, "I shouldn't have gone into the dog park.");
     }
-
-    // Constructor test section
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdBelowZero() {
@@ -60,29 +56,8 @@ public class PastMeetingImplTest {
         new PastMeetingImpl(2, pastDate, attendeeSet, "Contact set is empty.");
     }
 
-    // getId tests
-
-    @Test
-    public void testGetId() {
-        assertEquals(pastMeeting.getId(), 1);
-    }
-
-
-    // getDate tests
-
-    @Test
-    public void testGetDate() {
-        assertEquals(pastDate, pastMeeting.getDate());
-    }
-
     // getContacts tests
-
-    @Test
-    public void testGetContacts() {
-        assertEquals(attendeeSet, pastMeeting.getContacts());
-    }
-
-    @Test
+   @Test
     public void testGetNotes() {
         assertEquals("I shouldn't have gone into the dog park.", pastMeeting.getNotes());
     }

@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 public class FutureMeetingImplTest {
     private Calendar date;
     private Set<Contact> attendeeSet;
-    private Meeting meeting;
 
     @Before
     public void setUp() {
@@ -27,10 +26,7 @@ public class FutureMeetingImplTest {
         Contact contact = new ContactImpl(1, "Theresa", "Smells slightly of cheese");
         attendeeSet.add(contact);
         date = new GregorianCalendar(2017, 4, 5, 11, 30);
-        meeting = new FutureMeetingImpl(1, date, attendeeSet);
     }
-
-    // Constructor test section
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdBelowZero() {
@@ -58,49 +54,9 @@ public class FutureMeetingImplTest {
         new FutureMeetingImpl(1, date, attendeeSet);
     }
 
-    // getId() test section
-
-    @Test
-    public void testGetId() {
-        int id = meeting.getId();
-        assertTrue(id == 1);
-    }
-
-    @Test
-    public void testGetMultipleIds() {
-        Meeting secondMeeting = new FutureMeetingImpl(2, date, attendeeSet);
-        int id = meeting.getId();
-        assertTrue(id == 1);
-        id = secondMeeting.getId();
-        assertTrue(id == 2);
-    }
-
-    // getDate() test section
-
-    @Test
-    public void testGetDate() {
-        assertEquals(date, meeting.getDate());
-    }
-
-    // getContacts() test section
-
-    @Test
-    public void testGetContactsSingle() {
-        assertEquals(attendeeSet, meeting.getContacts());
-    }
-
-    @Test
-    public void testGetContactsMulti() {
-        Contact contact = new ContactImpl(2, "Tiger", "A large, marmalade cat.");
-        attendeeSet.add(contact);
-        Meeting multiMeet = new FutureMeetingImpl(3, date, attendeeSet);
-        assertEquals(attendeeSet, multiMeet.getContacts());
-    }
-
     @After
     public void tearDown() {
         attendeeSet = null;
         date = null;
-        meeting = null;
     }
 }
