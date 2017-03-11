@@ -247,6 +247,17 @@ public class ContactManagerImplTest {
         conManImp.getPastMeeting(id);
     }
 
+    // getMeeting tests
+
+    @Test
+    public void testGetMeeting() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int meetingId = conManImp.addNewPastMeeting(fullSet, pastDate, "Past meeting notes");
+        Meeting returnedMeeting = conManImp.getMeeting(meetingId);
+        assertTrue(returnedMeeting.getDate().equals(pastDate));
+        assertTrue(returnedMeeting.getContacts().equals(fullSet));
+    }
+
     // addMeetingNotes tests
 
     @Test
@@ -256,6 +267,8 @@ public class ContactManagerImplTest {
         Meeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
         assertTrue(returnedMeeting instanceof PastMeetingImpl);
     }
+
+
 
     @After
     public void tearDown() {
