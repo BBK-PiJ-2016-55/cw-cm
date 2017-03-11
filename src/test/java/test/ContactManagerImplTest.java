@@ -259,6 +259,11 @@ public class ContactManagerImplTest {
         assertTrue(returnedMeeting.getContacts().equals(fullSet));
     }
 
+    @Test
+    public void testGetMeetingNoMatch() {
+        assertNull(conManImp.getMeeting(534));
+    }
+
     // addMeetingNotes tests
 
     @Test
