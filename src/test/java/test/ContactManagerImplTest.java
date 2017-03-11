@@ -285,7 +285,24 @@ public class ContactManagerImplTest {
         assertTrue(returnedMeeting instanceof PastMeetingImpl);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testAddMeetingNotesNonexistentMeeting() {
+        conManImp.addMeetingNotes(765, "11/10 would meet again.");
+    }
 
+    @Test (expected = IllegalStateException.class)
+    public void testAddMeetingNotesFutureDateMeeting() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addFutureMeeting(fullSet, date);
+        conManImp.addMeetingNotes(id, "11/10 would meet again.");
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testAddMeetingNotesNullNotes() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addFutureMeeting(fullSet, date);
+        conManImp.addMeetingNotes(id, null);
+    }
 
     @After
     public void tearDown() {
