@@ -186,6 +186,16 @@ public class ContactManagerImplTest {
 //        assertNull(conManImp.getFutureMeeting(5));
 //    }
 
+
+    // PastMeeting tests
+
+    @Test
+    public void testAddPasteetingSingle() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addNewPastMeeting(fullSet, date, "Past meeting notes");
+        assertTrue(id == 1);
+    }
+
     @After
     public void tearDown() {
        //conManImp.resetCounter();
