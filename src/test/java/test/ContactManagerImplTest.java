@@ -266,16 +266,17 @@ public class ContactManagerImplTest {
         Set<Contact> fullSet = conManImp.getContacts("");
         int id = conManImp.addFutureMeeting(fullSet, date);
         PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
+        PastMeeting changedMeeting = (PastMeeting) conManImp.getMeeting(id);
         assertTrue(returnedMeeting instanceof PastMeetingImpl);
-        assertEquals("11/10 would meet again", returnedMeeting.getNotes());
+        assertEquals(returnedMeeting.getNotes(), changedMeeting.getNotes());
     }
 
     @Test
     public void testAddMeetingNotesPastMeeting() {
         Set<Contact> fullSet = conManImp.getContacts("");
-        int id = conManImp.addNewPastMeeting(fullSet, date, "Past meeting notes. ");
-        PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again. ");
-        assertEquals("Past meeting notes. 11/10 would meet again.", returnedMeeting.getNotes());
+        int id = conManImp.addNewPastMeeting(fullSet, pastDate, "");
+        PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again.");
+        assertEquals("11/10 would meet again.", returnedMeeting.getNotes());
         assertTrue(returnedMeeting instanceof PastMeetingImpl);
     }
 
