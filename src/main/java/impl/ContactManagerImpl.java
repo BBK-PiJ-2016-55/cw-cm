@@ -89,8 +89,19 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
-
+    public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) throws IllegalArgumentException, NullPointerException {
+        Objects.requireNonNull(contacts, "Contacts cannot be null");
+        Objects.requireNonNull(date, "Date cannot be null");
+        // Check that past meeting is in the past
+        if ((checkMeetingDate(date)) != -1) {
+            throw new IllegalArgumentException("Meeting is not in the past.");
+        }
+        // Check that all contacts are known/existent
+        for (Contact contact : contacts) {
+            if (!checkContactsExist(contact)) {
+                throw new IllegalArgumentException("Invalid Contact entered.");
+            }
+        }
         Meeting newPastMeeting = new PastMeetingImpl(meetingIdCounter, date, contacts, text);
         meetingMap.put(meetingIdCounter, newPastMeeting);
         // Iterate meetingCounter in prep for next new Meeting
