@@ -1,9 +1,7 @@
 package test.java.test;
 
 import main.java.impl.ContactImpl;
-import main.java.impl.FutureMeetingImpl;
 import main.java.impl.MockMeetingImpl;
-import main.java.impl.PastMeetingImpl;
 import main.java.spec.Contact;
 import main.java.spec.Meeting;
 import org.junit.Before;
@@ -15,8 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by svince04 on 11/03/2017.
@@ -24,7 +21,6 @@ import static org.junit.Assert.assertTrue;
  */
 public class MeetingTest {
     private Calendar date;
-    private Calendar secondDate;
     private MockMeetingImpl meeting;
     private MockMeetingImpl secondMeeting;
     private Set<Contact> attendeeSet = new HashSet<>();
@@ -33,12 +29,20 @@ public class MeetingTest {
     public void setUp() {
         attendeeSet.add(new ContactImpl(1, "Daffy", "Fond of white collars."));
         date = new GregorianCalendar(2005, 4, 5, 11, 30);
-        secondDate = new GregorianCalendar(2006, 4, 5, 11, 30);
+        Calendar secondDate = new GregorianCalendar(2006, 4, 5, 11, 30);
         meeting = new MockMeetingImpl(1, date, attendeeSet);
         secondMeeting = new MockMeetingImpl(2, secondDate, attendeeSet);
     }
 
-    // Constructor test section
+    // Test constructor
+
+    @Test
+    public void testConstructor() {
+        Meeting meeting = new MockMeetingImpl(3, date, attendeeSet);
+        assertNotNull(meeting.getId());
+        assertEquals(meeting.getDate(), date);
+        assertEquals(meeting.getContacts(), attendeeSet);
+    }
 
     @Test (expected = IllegalArgumentException.class)
     public void testIdBelowZero() {
@@ -74,18 +78,22 @@ public class MeetingTest {
     }
 
     @Test
-    public void testGetMultipleIds() {
-        int id = meeting.getId();
-        assertTrue(id == 1);
-        id = secondMeeting.getId();
-        assertTrue(id == 2);
+    public void testUniqueIds() {
+        assertTrue(meeting.getId() != secondMeeting.getId());
     }
 
     @Test
-    public void testContactsImmutableFromOutsideObject() {
+    public void testImmutableContacts() {
         Set<Contact> contacts = meeting.getContacts();
         contacts.add(new ContactImpl(4, "Donald", "I wish he'd wear trousers."));
         assertFalse(contacts.size() == meeting.getContacts().size());
+    }
+
+    @Test
+    public void testImmutableDate() {
+        Calendar date = meeting.getDate();
+        date.add(Calendar.YEAR, 1);
+        assertFalse(date.get(Calendar.YEAR) == meeting.getDate().get(Calendar.YEAR));
     }
 
 

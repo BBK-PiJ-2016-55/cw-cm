@@ -6,11 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import main.java.spec.Contact;
-import main.java.spec.Meeting;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by svince04 on 04/03/2017.
