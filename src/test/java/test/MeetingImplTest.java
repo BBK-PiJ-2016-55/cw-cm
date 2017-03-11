@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  * Created by svince04 on 11/03/2017.
  * PiJ Coursework 3.
  */
-public class MeetingTest {
+public class MeetingImplTest {
     private Calendar date;
     private MockMeetingImpl meeting;
     private MockMeetingImpl secondMeeting;
