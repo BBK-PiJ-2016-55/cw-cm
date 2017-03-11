@@ -56,7 +56,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public PastMeeting getPastMeeting(int id) {
-        return null;
+        return (PastMeeting) meetingMap.get(id);
     }
 
     @Override
