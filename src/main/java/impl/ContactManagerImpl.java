@@ -93,7 +93,10 @@ public class ContactManagerImpl implements ContactManager {
     public List<Meeting> getFutureMeetingList(Contact contact) {
         List<Meeting> resultList = new ArrayList<>();
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
+            if (entry.getValue().getContacts().contains(contact) && (checkMeetingDate(entry.getValue().getDate()))
+            == 1) {
                 resultList.add(entry.getValue());
+            }
         }
         return resultList;
     }
