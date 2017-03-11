@@ -3,9 +3,7 @@ package main.java.impl;
 import main.java.spec.Contact;
 import main.java.spec.Meeting;
 
-import java.util.Calendar;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by svince04 on 17/02/2017
@@ -36,11 +34,11 @@ public abstract class MeetingImpl implements Meeting {
 
     @Override
     public Calendar getDate() {
-        return date;
+        return (Calendar) date.clone();
     }
 
     @Override
     public Set<Contact> getContacts() {
-        return attendees;
+        return (new HashSet<>(attendees));
     }
 }

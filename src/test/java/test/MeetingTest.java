@@ -14,6 +14,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -30,8 +31,7 @@ public class MeetingTest {
 
     @Before
     public void setUp() {
-        Contact contact = new ContactImpl(1, "Daffy", "Fond of white collars.");
-        attendeeSet.add(contact);
+        attendeeSet.add(new ContactImpl(1, "Daffy", "Fond of white collars."));
         date = new GregorianCalendar(2005, 4, 5, 11, 30);
         secondDate = new GregorianCalendar(2006, 4, 5, 11, 30);
         meeting = new MockMeetingImpl(1, date, attendeeSet);
@@ -79,6 +79,13 @@ public class MeetingTest {
         assertTrue(id == 1);
         id = secondMeeting.getId();
         assertTrue(id == 2);
+    }
+
+    @Test
+    public void testContactsImmutableFromOutsideObject() {
+        Set<Contact> contacts = meeting.getContacts();
+        contacts.add(new ContactImpl(4, "Donald", "I wish he'd wear trousers."));
+        assertFalse(contacts.size() == meeting.getContacts().size());
     }
 
 
