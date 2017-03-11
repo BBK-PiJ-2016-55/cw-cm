@@ -123,7 +123,14 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public PastMeeting addMeetingNotes(int id, String text) {
+    public PastMeeting addMeetingNotes(int id, String text) throws IllegalArgumentException, IllegalStateException, NullPointerException {
+        Objects.requireNonNull(text, "Notes cannot be null");
+        if (!checkMeetingExists(id)) {
+            throw new IllegalArgumentException("Meeting does not exist");
+        }
+        if (checkMeetingDate(getMeeting(id).getDate()) != -1) {
+            throw new IllegalStateException("Meeting is not in the past.");
+        }
         // Create new PastMeeting with the same ID
         PastMeetingImpl returnMeeting = new PastMeetingImpl(id, getMeeting(id).getDate(),
                 getMeeting(id).getContacts(), text);

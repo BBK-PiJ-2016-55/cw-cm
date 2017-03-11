@@ -266,15 +266,16 @@ public class ContactManagerImplTest {
 
     // addMeetingNotes tests
 
-    @Test
-    public void testAddMeetingNotesFutureMeeting() {
-        Set<Contact> fullSet = conManImp.getContacts("");
-        int id = conManImp.addFutureMeeting(fullSet, date);
-        PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
-        PastMeeting changedMeeting = (PastMeeting) conManImp.getMeeting(id);
-        assertTrue(returnedMeeting instanceof PastMeetingImpl);
-        assertEquals(returnedMeeting.getNotes(), changedMeeting.getNotes());
-    }
+    // This test can't run successfully after exception handling for addMeetingNotes is in place.
+//    @Test
+//    public void testAddMeetingNotesFutureMeeting() {
+//        Set<Contact> fullSet = conManImp.getContacts("");
+//        int id = conManImp.addFutureMeeting(fullSet, date);
+//        PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
+//        PastMeeting changedMeeting = (PastMeeting) conManImp.getMeeting(id);
+//        assertTrue(returnedMeeting instanceof PastMeetingImpl);
+//        assertEquals(returnedMeeting.getNotes(), changedMeeting.getNotes());
+//    }
 
     @Test
     public void testAddMeetingNotesPastMeeting() {
