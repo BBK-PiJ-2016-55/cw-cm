@@ -168,11 +168,10 @@ public class ContactManagerImplTest {
     @Test
     public void testGetFutureMeeting() {
         Set<Contact> fullSet = conManImp.getContacts("");
-        Meeting meeting = new FutureMeetingImpl(1, date, fullSet);
         int meetingId = conManImp.addFutureMeeting(fullSet, date);
         Meeting returnedMeeting = conManImp.getFutureMeeting(meetingId);
-        assertTrue(meeting.getDate().equals(returnedMeeting.getDate()));
-        assertTrue(meeting.getContacts().equals(returnedMeeting.getContacts()));
+        assertTrue(returnedMeeting.getDate().equals(date));
+        assertTrue(returnedMeeting.getContacts().equals(fullSet));
     }
 
     @Test (expected = NullPointerException.class)
@@ -219,6 +218,15 @@ public class ContactManagerImplTest {
     @Test (expected = NullPointerException.class)
     public void testAddNewPastMeetingNullContacts() {
         conManImp.addFutureMeeting(null, date);
+    }
+
+    @Test
+    public void testGetPastMeeting() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int meetingId = conManImp.addNewPastMeeting(fullSet, pastDate, "Past meeting notes");
+        Meeting returnedMeeting = conManImp.getPastMeeting(meetingId);
+        assertTrue(returnedMeeting.getDate().equals(pastDate));
+        assertTrue(returnedMeeting.getContacts().equals(fullSet));
     }
 
     @After
