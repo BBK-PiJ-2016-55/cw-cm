@@ -89,9 +89,11 @@ public class ContactManagerImpl implements ContactManager {
         return meetingMap.get(id);
     }
 
+    //todo - would instance variables be more readable/worth using here?
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
         List<Meeting> resultList = new ArrayList<>();
+        // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
             if (entry.getValue().getContacts().contains(contact) && (checkMeetingDate(entry.getValue().getDate()))
             == 1) {

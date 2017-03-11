@@ -294,7 +294,6 @@ public class ContactManagerImplTest {
 
     // getFutureMeetingList tests
 
-    //todo - make sure the method below doesn't return any past meetings with garfield
     //todo - chronological sorting of returned list
     @Test
     public void testGetFutureMeetingList() {
