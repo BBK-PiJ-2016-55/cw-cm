@@ -147,7 +147,7 @@ public class ContactManagerImplTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testAddFutureMeetingInvalidContact() {
+    public void testAddFutureMeetingNonexistentContact() {
         Set<Contact> fullSet = conManImp.getContacts("");
         Contact Lassie = new ContactImpl(4, "Lassie", "Odd one out");
         fullSet.add(Lassie);
@@ -203,7 +203,7 @@ public class ContactManagerImplTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void testAddPastMeetingInvalidContact() {
+    public void testAddPastMeetingNonexistentContact() {
         Set<Contact> fullSet = conManImp.getContacts("");
         Contact Lassie = new ContactImpl(4, "Lassie", "Odd one out");
         fullSet.add(Lassie);

@@ -23,11 +23,7 @@ public class ContactManagerImpl implements ContactManager {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
         }
         // Check that all contacts are known/existent
-        for (Contact contact : contacts) {
-            if (!checkContactsExist(contact)) {
-                throw new IllegalArgumentException("Invalid Contact entered.");
-            }
-        }
+        checkContactsExist(contacts);
         Meeting newMeeting = new FutureMeetingImpl(meetingIdCounter, date, contacts);
         meetingMap.put(meetingIdCounter, newMeeting);
         // Iterate meetingCounter in prep for next new Meeting
@@ -36,13 +32,16 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     /**
-     * Checks whether contact exists.
+     * Checks whether each contact in set exists and throws exception if not.
      *
-     * @param contact to be validated
-     * @return true if valid, false otherwise.
+     * @param contacts to be validated
      */
-    private boolean checkContactsExist(Contact contact) {
-        return (contactMap.containsValue(contact));
+    private void checkContactsExist(Set<Contact> contacts) throws IllegalArgumentException {
+        for (Contact contact : contacts) {
+            if (!contactMap.containsValue(contact)) {
+                throw new IllegalArgumentException("Invalid Contact entered.");
+            }
+        }
     }
 
     /**
@@ -97,11 +96,7 @@ public class ContactManagerImpl implements ContactManager {
             throw new IllegalArgumentException("Meeting is not in the past.");
         }
         // Check that all contacts are known/existent
-        for (Contact contact : contacts) {
-            if (!checkContactsExist(contact)) {
-                throw new IllegalArgumentException("Invalid Contact entered.");
-            }
-        }
+        checkContactsExist(contacts);
         Meeting newPastMeeting = new PastMeetingImpl(meetingIdCounter, date, contacts, text);
         meetingMap.put(meetingIdCounter, newPastMeeting);
         // Iterate meetingCounter in prep for next new Meeting
