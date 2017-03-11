@@ -246,9 +246,19 @@ public class ContactManagerImplTest {
         int id = conManImp.addFutureMeeting(fullSet, date);
         conManImp.getPastMeeting(id);
     }
+
+    // addMeetingNotes tests
+
+    @Test
+    public void testAddMeetingNotes() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addFutureMeeting(fullSet, date);
+        Meeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
+        assertTrue(returnedMeeting instanceof PastMeetingImpl);
+    }
+
     @After
     public void tearDown() {
-       //conManImp.resetCounter();
        conManImp = null;
     }
 }
