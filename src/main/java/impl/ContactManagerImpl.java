@@ -44,6 +44,11 @@ public class ContactManagerImpl implements ContactManager {
         }
     }
 
+    //todo - add javadoc
+    private boolean checkMeetingExists(int id) {
+        return (meetingMap.containsKey(id));
+    }
+
     /**
      * Checks date passed in against current time.
      *
@@ -56,11 +61,17 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public PastMeeting getPastMeeting(int id) {
+        if (!checkMeetingExists(id)) {
+            return null;
+        }
         return (PastMeeting) meetingMap.get(id);
     }
 
     @Override
     public FutureMeeting getFutureMeeting(int id) throws IllegalStateException {
+        if (!checkMeetingExists(id)) {
+            return null;
+        }
         if (checkMeetingDate(meetingMap.get(id).getDate()) < 0) {
             throw new IllegalStateException("Meeting is not in the future.");
         }
