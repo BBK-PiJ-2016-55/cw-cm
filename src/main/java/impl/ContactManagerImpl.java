@@ -91,8 +91,11 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
-        List<Meeting> list = null;
-        return list;
+        List<Meeting> resultList = new ArrayList<>();
+        for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
+                resultList.add(entry.getValue());
+        }
+        return resultList;
     }
 
     @Override

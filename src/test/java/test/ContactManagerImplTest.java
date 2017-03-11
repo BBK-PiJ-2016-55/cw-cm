@@ -21,6 +21,7 @@ public class ContactManagerImplTest {
    private Calendar date = new GregorianCalendar(2017, 4, 5);
    private Calendar pastDate = new GregorianCalendar(2012, 4, 5);
    private Set<Contact> fullContactSet;
+    private Set<Contact> partContactSet;
    private Set<Contact> tempContactSet;
    private ArrayList<Contact> fullContactList;
 
@@ -32,6 +33,7 @@ public class ContactManagerImplTest {
        conManImp.addNewContact("Cat in the Hat", "Doesn't follow through on promises.");
        conManImp.addNewContact("Top Cat", "Authoritarian tendencies.");
        fullContactSet = conManImp.getContacts("");
+       partContactSet = conManImp.getContacts("Cat");
        fullContactList = new ArrayList<>(fullContactSet);
    }
 
@@ -292,15 +294,27 @@ public class ContactManagerImplTest {
 
     // getFutureMeetingList tests
 
+    //todo - make sure the method below doesn't return any past meetings with garfield
+    //todo - chronological sorting of returned list
     @Test
     public void testGetFutureMeetingList() {
-        conManImp.addNewPastMeeting(fullContactSet, pastDate, "Past meeting notes");
-        Set<Contact> garSet = conManImp.getContacts("Garfield");
-        conManImp.addNewPastMeeting(garSet, pastDate, "Past meeting notes");
+        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addFutureMeeting(fullContactSet, date);
         Contact garfield = fullContactList.get(0);
         List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
         assertTrue(resultList.size() == 2);
     }
+
+    @Test
+    public void testGetFutureMeetingListNoPastMeetings() {
+        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addNewPastMeeting(fullContactSet, pastDate, "Notes from under the floorboards");
+        Contact garfield = fullContactList.get(0);
+        List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
+        assertTrue(resultList.size() == 2);
+    }
+
 
     @After
     public void tearDown() {
