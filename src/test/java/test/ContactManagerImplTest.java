@@ -182,12 +182,12 @@ public class ContactManagerImplTest {
         assertNull(conManImp.getFutureMeeting(250));
     }
 
-//    @Test (expected = IllegalStateException.class)
-//    public void testGetFutureMeetingInPastThrowsError() {
-//        Set<Contact> fullSet = conManImp.getContacts("");
-//        conManImp.addNewPastMeeting(fullSet, pastDate, "Past meeting notes.");
-//        assertNull(conManImp.getFutureMeeting(5));
-//    }
+    @Test (expected = IllegalStateException.class)
+    public void testGetFutureMeetingInPastThrowsError() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addNewPastMeeting(fullSet, pastDate, "Past meeting notes.");
+        conManImp.getFutureMeeting(id);
+    }
 
 
     // PastMeeting tests
