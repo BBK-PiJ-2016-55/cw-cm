@@ -1,6 +1,7 @@
 package test.java.test;
 
 import main.java.impl.*;
+import main.java.spec.PastMeeting;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -261,10 +262,20 @@ public class ContactManagerImplTest {
     // addMeetingNotes tests
 
     @Test
-    public void testAddMeetingNotes() {
+    public void testAddMeetingNotesFutureMeeting() {
         Set<Contact> fullSet = conManImp.getContacts("");
         int id = conManImp.addFutureMeeting(fullSet, date);
-        Meeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
+        PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
+        assertTrue(returnedMeeting instanceof PastMeetingImpl);
+        assertEquals("11/10 would meet again", returnedMeeting.getNotes());
+    }
+
+    @Test
+    public void testAddMeetingNotesPastMeeting() {
+        Set<Contact> fullSet = conManImp.getContacts("");
+        int id = conManImp.addNewPastMeeting(fullSet, date, "Past meeting notes. ");
+        PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again. ");
+        assertEquals("Past meeting notes. 11/10 would meet again.", returnedMeeting.getNotes());
         assertTrue(returnedMeeting instanceof PastMeetingImpl);
     }
 

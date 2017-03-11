@@ -121,9 +121,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public PastMeeting addMeetingNotes(int id, String text) {
-        PastMeeting pastMeeting = new PastMeetingImpl(id, getFutureMeeting(id).getDate(),
+        return new PastMeetingImpl(id, getFutureMeeting(id).getDate(),
                 getFutureMeeting(id).getContacts(), text);
-        return pastMeeting;
     }
 
     @Override
