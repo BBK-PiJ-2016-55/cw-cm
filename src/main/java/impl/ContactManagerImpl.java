@@ -81,7 +81,6 @@ public class ContactManagerImpl implements ContactManager {
         return (FutureMeeting) meetingMap.get(id);
     }
 
-    // todo - check if this needs to throw exceptions
     @Override
     public Meeting getMeeting(int id) {
         if (!checkMeetingExists(id)) {
@@ -92,7 +91,8 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
-        return null;
+        List<Meeting> list = null;
+        return list;
     }
 
     @Override
