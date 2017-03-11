@@ -60,9 +60,12 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public PastMeeting getPastMeeting(int id) {
+    public PastMeeting getPastMeeting(int id) throws IllegalStateException {
         if (!checkMeetingExists(id)) {
             return null;
+        }
+        if (checkMeetingDate(meetingMap.get(id).getDate()) > -1) {
+            throw new IllegalStateException("Meeting is not in the past.");
         }
         return (PastMeeting) meetingMap.get(id);
     }
