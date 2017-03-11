@@ -81,7 +81,7 @@ public class ContactManagerImpl implements ContactManager {
         return (FutureMeeting) meetingMap.get(id);
     }
 
-    //todo - error checking if required
+    //todo - return null if no match found on id
     @Override
     public Meeting getMeeting(int id) {
         return meetingMap.get(id);
@@ -121,7 +121,9 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public PastMeeting addMeetingNotes(int id, String text) {
-        return null;
+        PastMeeting pastMeeting = new PastMeetingImpl(id, getFutureMeeting(id).getDate(),
+                getFutureMeeting(id).getContacts(), text);
+        return pastMeeting;
     }
 
     @Override
