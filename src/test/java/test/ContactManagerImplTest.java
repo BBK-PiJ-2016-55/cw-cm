@@ -360,7 +360,7 @@ public class ContactManagerImplTest {
     }
 
     @Test
-    public void testGetPastMeetingListNoMeetings() {
+    public void testGetPastMeetingListForNoMeetings() {
         conManImp.addNewPastMeeting(partContactSet, pastDateDistant, "Free sandwiches.");
         int id = conManImp.addNewContact("Hobbes", "The best of all.");
         Set<Contact> hobbesSet = conManImp.getContacts(id);
@@ -370,7 +370,7 @@ public class ContactManagerImplTest {
     }
 
     @Test
-    public void testGetPastMeetingListDateSorting() {
+    public void testGetPastMeetingListForDateSorting() {
         int id = conManImp.addNewContact("Hobbes", "The best of all.");
         tempContactSet = conManImp.getContacts("");
         conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, "Two hours I'll never get back.");
@@ -379,6 +379,17 @@ public class ContactManagerImplTest {
         ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
         List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
         assertTrue(resultList.get(0).getDate().equals(pastDateDistant));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetPastMeetingListForNonexistentContact() {
+        Contact lassie = new ContactImpl(2, "Lassie", "Odd one out");
+        conManImp.getPastMeetingListFor(lassie);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testGetPastMeetingListForNullContact() {
+        conManImp.getPastMeetingListFor(null);
     }
 
     @After
