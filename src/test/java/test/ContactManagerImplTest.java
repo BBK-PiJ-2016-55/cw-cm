@@ -392,6 +392,18 @@ public class ContactManagerImplTest {
         conManImp.getPastMeetingListFor(null);
     }
 
+    // getMeetingListOn tests
+
+    @Test
+    public void testGetMeetingListOn() {
+        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addNewPastMeeting(fullContactSet, pastDate, "Notes from under the floorboards");
+        List<Meeting> resultList = conManImp.getMeetingListOn(date);
+        assertTrue(resultList.size() == 2);
+    }
+
+
     @After
     public void tearDown() {
        conManImp = null;

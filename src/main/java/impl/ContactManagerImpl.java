@@ -92,9 +92,9 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException {
         Objects.requireNonNull(contact, "Contact cannot be null");
-        Set<Contact> soloSet = new HashSet<Contact>(1);
-        soloSet.add(contact);
-        checkContactsExist(soloSet);
+        if (!contactMap.containsValue(contact)) {
+            throw new IllegalArgumentException("Invalid Contact entered.");
+        }
         List<Meeting> resultList = new ArrayList<>();
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
@@ -116,10 +116,9 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public List<PastMeeting> getPastMeetingListFor(Contact contact) {
         Objects.requireNonNull(contact, "Contact cannot be null");
-        // todo - this is really awkward. Refactor checkContactsExist to take single contacts instead?
-        Set<Contact> soloSet = new HashSet<Contact>(1);
-        soloSet.add(contact);
-        checkContactsExist(soloSet);
+        if (!contactMap.containsValue(contact)) {
+            throw new IllegalArgumentException("Invalid Contact entered.");
+        }
         List<PastMeeting> resultList = new ArrayList<>();
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
