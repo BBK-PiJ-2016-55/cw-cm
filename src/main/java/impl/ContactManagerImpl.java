@@ -46,11 +46,6 @@ public class ContactManagerImpl implements ContactManager {
         }
     }
 
-    //todo - add javadoc
-    private boolean checkMeetingExists(int id) {
-        return meetingMap.containsKey(id);
-    }
-
     /**
      * Checks date passed in against current time.
      *
@@ -63,7 +58,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public PastMeeting getPastMeeting(int id) throws IllegalStateException {
-        if (!checkMeetingExists(id)) {
+        if (!meetingMap.containsKey(id)) {
             return null;
         }
         if (dateInFuture(meetingMap.get(id).getDate())) {
@@ -74,7 +69,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public FutureMeeting getFutureMeeting(int id) throws IllegalStateException {
-        if (!checkMeetingExists(id)) {
+        if (!meetingMap.containsKey(id)) {
             return null;
         }
         if (!dateInFuture(meetingMap.get(id).getDate())) {
@@ -85,7 +80,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public Meeting getMeeting(int id) {
-        if (!checkMeetingExists(id)) {
+        if (!meetingMap.containsKey(id)) {
             return null;
         }
         return meetingMap.get(id);
@@ -164,7 +159,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public PastMeeting addMeetingNotes(int id, String text) throws IllegalArgumentException, IllegalStateException, NullPointerException {
         Objects.requireNonNull(text, "Notes cannot be null");
-        if (!checkMeetingExists(id)) {
+        if (!meetingMap.containsKey(id)) {
             throw new IllegalArgumentException("Meeting does not exist");
         }
         if (dateInFuture(getMeeting(id).getDate())) {
