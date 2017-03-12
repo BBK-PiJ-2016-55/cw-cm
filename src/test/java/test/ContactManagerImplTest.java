@@ -359,6 +359,18 @@ public class ContactManagerImplTest {
         assertTrue(resultList.size() == 2);
     }
 
+    @Test
+    public void testGetPastMeetingListDateSorting() {
+        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        tempContactSet = conManImp.getContacts("");
+        conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, "Two hours I'll never get back.");
+        conManImp.addNewPastMeeting(tempContactSet, pastDate, "Why don't I learn.");
+        Set<Contact> hobbesSet = conManImp.getContacts(id);
+        ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
+        List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
+        assertTrue(resultList.get(0).getDate().equals(pastDate));
+    }
+
     @After
     public void tearDown() {
        conManImp = null;
