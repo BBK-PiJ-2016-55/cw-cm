@@ -115,7 +115,15 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public List<PastMeeting> getPastMeetingListFor(Contact contact) {
-        return null;
+        List<PastMeeting> resultList = new ArrayList<>();
+        // Loop through each meeting in meetingMap
+        for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
+            // Add to resultList only if FutureMeeting and matches Contact
+            if (entry.getValue().getContacts().contains(contact) && (entry.getValue() instanceof PastMeeting)) {
+                resultList.add((PastMeeting) entry.getValue());
+            }
+        }
+        return resultList;
     }
 
     @Override
