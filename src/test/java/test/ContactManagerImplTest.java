@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class ContactManagerImplTest {
    private ContactManagerImpl conManImp;
-   private Calendar date = new GregorianCalendar(2017, 4, 5);
+   private Calendar date = new GregorianCalendar(2017, 4, 5, 12, 00);
    private Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
    private Calendar pastDate = new GregorianCalendar(2012, 4, 5);
     private Calendar pastDateDistant = new GregorianCalendar(1812, 4, 5);
@@ -403,6 +403,19 @@ public class ContactManagerImplTest {
         assertTrue(resultList.size() == 2);
     }
 
+    @Test
+    public void testGetMeetingListOnDateSorting() {
+        Calendar dateLaterHour = new GregorianCalendar(2017, 4, 5, 14, 00);
+        Calendar dateEarlierHour = new GregorianCalendar(2017, 4, 5, 9, 00);
+        conManImp.addFutureMeeting(fullContactSet, dateLaterHour);
+        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addFutureMeeting(fullContactSet, dateEarlierHour);
+        List<Meeting> resultList = conManImp.getMeetingListOn(date);
+        assertTrue(resultList.get(0).getDate().equals(dateEarlierHour));
+        assertTrue(resultList.get(1).getDate().equals(date));
+        assertTrue(resultList.get(2).getDate().equals(dateLaterHour));
+
+    }
 
     @After
     public void tearDown() {
