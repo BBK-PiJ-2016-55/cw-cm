@@ -307,8 +307,10 @@ public class ContactManagerImplTest {
     @Test
     public void testGetFutureMeetingListNoMeetings() {
         conManImp.addFutureMeeting(partContactSet, futureDateDistant);
-        Contact garfield = fullContactList.get(0);
-        List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
+        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        Set<Contact> hobbesSet = conManImp.getContacts(id);
+        ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
+        List<Meeting> resultList = conManImp.getFutureMeetingList(hobbesList.get(0));
         assertTrue(resultList.size() == 0);
     }
 
@@ -338,6 +340,6 @@ public class ContactManagerImplTest {
        conManImp = null;
        tempContactSet = null;
        fullContactSet = null;
-       fullContactList = null;
+       fullContactList.clear();
     }
 }
