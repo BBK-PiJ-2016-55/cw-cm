@@ -333,6 +333,11 @@ public class ContactManagerImplTest {
         assertTrue(resultList.size() == 2);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetFutureMeetingListNonexistentContact() {
+        Contact lassie = new ContactImpl(2, "Lassie", "Odd one out");
+        conManImp.getFutureMeetingList(lassie);
+    }
 
 
     @After
