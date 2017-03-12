@@ -91,7 +91,10 @@ public class ContactManagerImpl implements ContactManager {
 
     // todo - exception handling
     @Override
-    public List<Meeting> getFutureMeetingList(Contact contact) {
+    public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException {
+        Set<Contact> soloSet = new HashSet<Contact>(1);
+        soloSet.add(contact);
+        checkContactsExist(soloSet);
         List<Meeting> resultList = new ArrayList<>();
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
