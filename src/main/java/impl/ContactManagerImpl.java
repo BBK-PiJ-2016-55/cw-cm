@@ -19,7 +19,7 @@ public class ContactManagerImpl implements ContactManager {
         Objects.requireNonNull(contacts, "Contacts cannot be null");
         Objects.requireNonNull(date, "Date cannot be null");
         // Check that future meeting is not in past
-        if ((checkMeetingDate(date)) < 0) {
+        if (!dateInFuture(date)) {
             throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
         }
         // Check that all contacts are known/existent
@@ -53,11 +53,10 @@ public class ContactManagerImpl implements ContactManager {
      * Checks date passed in against current time.
      *
      * @param date to be checked against current date
-     * @return int -1 if date is in past, 0 if present and 1 if in future compared to current time
+     * @return true if date in future, false otherwise
      */
-    // todo - refactor so this returns a boolean instead of an int?
-    private int checkMeetingDate(Calendar date) {
-        return date.compareTo(Calendar.getInstance());
+    private boolean dateInFuture(Calendar date) {
+        return (date.compareTo(Calendar.getInstance()) == 1);
     }
 
     @Override
@@ -65,7 +64,7 @@ public class ContactManagerImpl implements ContactManager {
         if (!checkMeetingExists(id)) {
             return null;
         }
-        if (checkMeetingDate(meetingMap.get(id).getDate()) > -1) {
+        if (dateInFuture(meetingMap.get(id).getDate())) {
             throw new IllegalStateException("Meeting is not in the past.");
         }
         return (PastMeeting) meetingMap.get(id);
@@ -76,7 +75,7 @@ public class ContactManagerImpl implements ContactManager {
         if (!checkMeetingExists(id)) {
             return null;
         }
-        if (checkMeetingDate(meetingMap.get(id).getDate()) < 0) {
+        if (!dateInFuture(meetingMap.get(id).getDate())) {
             throw new IllegalStateException("Meeting is not in the future.");
         }
         return (FutureMeeting) meetingMap.get(id);
@@ -90,6 +89,7 @@ public class ContactManagerImpl implements ContactManager {
         return meetingMap.get(id);
     }
 
+    // todo - exception handling
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
         List<Meeting> resultList = new ArrayList<>();
@@ -120,7 +120,7 @@ public class ContactManagerImpl implements ContactManager {
         Objects.requireNonNull(contacts, "Contacts cannot be null");
         Objects.requireNonNull(date, "Date cannot be null");
         // Check that past meeting is in the past
-        if ((checkMeetingDate(date)) != -1) {
+        if (dateInFuture(date)) {
             throw new IllegalArgumentException("Meeting is not in the past.");
         }
         // Check that all contacts are known/existent
@@ -138,7 +138,7 @@ public class ContactManagerImpl implements ContactManager {
         if (!checkMeetingExists(id)) {
             throw new IllegalArgumentException("Meeting does not exist");
         }
-        if (checkMeetingDate(getMeeting(id).getDate()) != -1) {
+        if (dateInFuture(getMeeting(id).getDate())) {
             throw new IllegalStateException("Meeting is not in the past.");
         }
         // Create new PastMeeting with the same ID
