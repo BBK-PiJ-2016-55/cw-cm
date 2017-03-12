@@ -123,6 +123,7 @@ public class ContactManagerImpl implements ContactManager {
                 resultList.add((PastMeeting) entry.getValue());
             }
         }
+        resultList.sort(Comparator.comparing(Meeting::getDate));
         return resultList;
     }
 

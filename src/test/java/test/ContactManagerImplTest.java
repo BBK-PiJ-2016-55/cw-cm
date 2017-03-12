@@ -368,7 +368,7 @@ public class ContactManagerImplTest {
         Set<Contact> hobbesSet = conManImp.getContacts(id);
         ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
         List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
-        assertTrue(resultList.get(0).getDate().equals(pastDate));
+        assertTrue(resultList.get(0).getDate().equals(pastDateDistant));
     }
 
     @After
