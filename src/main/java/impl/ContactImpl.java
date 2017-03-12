@@ -8,8 +8,8 @@ import java.util.Objects;
  * Created by svince04 on 17/02/2017 for cw-cm.
  */
 public class ContactImpl implements Contact {
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     private String notes;
 
     /**

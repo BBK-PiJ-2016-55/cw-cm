@@ -23,7 +23,7 @@ public class MeetingImplTest {
     private Calendar date;
     private MockMeetingImpl meeting;
     private MockMeetingImpl secondMeeting;
-    private Set<Contact> attendeeSet = new HashSet<>();
+    private final Set<Contact> attendeeSet = new HashSet<>();
 
     @Before
     public void setUp() {
@@ -79,21 +79,21 @@ public class MeetingImplTest {
 
     @Test
     public void testUniqueIds() {
-        assertTrue(meeting.getId() != secondMeeting.getId());
+        assertNotSame(meeting.getId(), secondMeeting.getId());
     }
 
     @Test
     public void testImmutableContacts() {
         Set<Contact> contacts = meeting.getContacts();
         contacts.add(new ContactImpl(4, "Donald", "I wish he'd wear trousers."));
-        assertFalse(contacts.size() == meeting.getContacts().size());
+        assertNotSame(contacts.size(), meeting.getContacts().size());
     }
 
     @Test
     public void testImmutableDate() {
         Calendar date = meeting.getDate();
         date.add(Calendar.YEAR, 1);
-        assertFalse(date.get(Calendar.YEAR) == meeting.getDate().get(Calendar.YEAR));
+        assertNotSame(date.get(Calendar.YEAR), meeting.getDate().get(Calendar.YEAR));
     }
 
 

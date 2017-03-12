@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  */
 public class PastMeetingImplTest {
     private Calendar pastDate;
-    private Set<Contact> attendeeSet = new HashSet<>();
+    private final Set<Contact> attendeeSet = new HashSet<>();
     private PastMeetingImpl pastMeeting;
 
     @Before

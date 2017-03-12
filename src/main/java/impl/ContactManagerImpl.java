@@ -10,8 +10,8 @@ import java.util.*;
  * PiJ coursework 3
  */
 public class ContactManagerImpl implements ContactManager {
-    private HashMap<Integer, Contact> contactMap = new HashMap<>();
-    private HashMap<Integer, Meeting> meetingMap = new HashMap<>();
+    private final HashMap<Integer, Contact> contactMap = new HashMap<>();
+    private final HashMap<Integer, Meeting> meetingMap = new HashMap<>();
     private static int contactIdCounter = 1;
     private static int meetingIdCounter = 1;
 
@@ -113,15 +113,15 @@ public class ContactManagerImpl implements ContactManager {
     public List<Meeting> getMeetingListOn(Calendar date) throws NullPointerException {
         Objects.requireNonNull(date, "Date cannot be null");
         List<Meeting> resultList = new ArrayList<>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
             // Add to resultList if date matches
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
             if (dateFormat.format(date.getTime()).equals(dateFormat.format(entry.getValue().getDate().getTime()))) {
                 resultList.add(entry.getValue());
             }
         }
-        resultList.sort(Comparator.comparing(m -> m.getDate().getTime()));
+        resultList.sort(Comparator.comparing(meeting -> meeting.getDate().getTime()));
         return resultList;
     }
 
