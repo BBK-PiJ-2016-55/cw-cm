@@ -360,6 +360,16 @@ public class ContactManagerImplTest {
     }
 
     @Test
+    public void testGetPastMeetingListNoMeetings() {
+        conManImp.addNewPastMeeting(partContactSet, pastDateDistant, "Free sandwiches.");
+        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        Set<Contact> hobbesSet = conManImp.getContacts(id);
+        ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
+        List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
+        assertTrue(resultList.size() == 0);
+    }
+
+    @Test
     public void testGetPastMeetingListDateSorting() {
         int id = conManImp.addNewContact("Hobbes", "The best of all.");
         tempContactSet = conManImp.getContacts("");
