@@ -327,7 +327,7 @@ public class ContactManagerImplTest {
     @Test
     public void testGetFutureMeetingListNoPastMeetings() {
         conManImp.addFutureMeeting(fullContactSet, date);
-        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
         conManImp.addNewPastMeeting(fullContactSet, pastDate, "Notes from under the floorboards");
         Contact garfield = fullContactList.get(0);
         List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);

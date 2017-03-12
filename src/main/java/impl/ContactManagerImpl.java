@@ -110,7 +110,17 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public List<Meeting> getMeetingListOn(Calendar date) {
-        return null;
+        List<Meeting> resultList = new ArrayList<>();
+        // Loop through each meeting in meetingMap
+        for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
+            // Add to resultList if date matches
+            // todo - what about time of meeting? or is that info not stored/relevant?
+            if (entry.getValue().getDate().equals(date)) {
+                resultList.add(entry.getValue());
+            }
+        }
+        resultList.sort(Comparator.comparing(Meeting::getDate));
+        return resultList;
     }
 
     @Override
@@ -122,7 +132,7 @@ public class ContactManagerImpl implements ContactManager {
         List<PastMeeting> resultList = new ArrayList<>();
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
-            // Add to resultList only if FutureMeeting and matches Contact
+            // Add to resultList only if PastMeeting and matches Contact
             if (entry.getValue().getContacts().contains(contact) && (entry.getValue() instanceof PastMeeting)) {
                 resultList.add((PastMeeting) entry.getValue());
             }
