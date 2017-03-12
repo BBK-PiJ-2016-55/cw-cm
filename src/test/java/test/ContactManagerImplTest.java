@@ -19,9 +19,10 @@ import static org.junit.Assert.*;
 public class ContactManagerImplTest {
    private ContactManagerImpl conManImp;
    private Calendar date = new GregorianCalendar(2017, 4, 5);
+   private Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
    private Calendar pastDate = new GregorianCalendar(2012, 4, 5);
    private Set<Contact> fullContactSet;
-    private Set<Contact> partContactSet;
+   private Set<Contact> partContactSet;
    private Set<Contact> tempContactSet;
    private ArrayList<Contact> fullContactList;
 
@@ -297,11 +298,20 @@ public class ContactManagerImplTest {
     //todo - chronological sorting of returned list
     @Test
     public void testGetFutureMeetingList() {
-        conManImp.addFutureMeeting(fullContactSet, date);
+        conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
         conManImp.addFutureMeeting(fullContactSet, date);
         Contact garfield = fullContactList.get(0);
         List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
         assertTrue(resultList.size() == 2);
+    }
+
+    @Test
+    public void testGetFutureMeetingListDateSorting() {
+        conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
+        conManImp.addFutureMeeting(fullContactSet, date);
+        Contact garfield = fullContactList.get(0);
+        List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
+        assertTrue(resultList.get(0).getDate().equals(date));
     }
 
     @Test

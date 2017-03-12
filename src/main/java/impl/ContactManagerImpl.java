@@ -90,6 +90,7 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     //todo - would instance variables be more readable/worth using here?
+    // todo- return in chronological order
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
         List<Meeting> resultList = new ArrayList<>();
@@ -102,6 +103,8 @@ public class ContactManagerImpl implements ContactManager {
         }
         return resultList;
     }
+
+
 
     @Override
     public List<Meeting> getMeetingListOn(Calendar date) {
