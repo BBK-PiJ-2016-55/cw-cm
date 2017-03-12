@@ -115,7 +115,6 @@ public class ContactManagerImpl implements ContactManager {
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
             // Add to resultList if date matches
-            // todo - what about time of meeting? or is that info not stored/relevant?
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
             if (dateFormat.format(date.getTime()).equals(dateFormat.format(entry.getValue().getDate().getTime()))) {
                 resultList.add(entry.getValue());

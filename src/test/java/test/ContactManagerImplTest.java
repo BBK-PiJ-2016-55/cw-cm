@@ -414,7 +414,18 @@ public class ContactManagerImplTest {
         assertTrue(resultList.get(0).getDate().equals(dateEarlierHour));
         assertTrue(resultList.get(1).getDate().equals(date));
         assertTrue(resultList.get(2).getDate().equals(dateLaterHour));
+    }
 
+    @Test
+    public void testGetMeetingListOnNoMeetings() {
+        conManImp.addNewPastMeeting(partContactSet, pastDateDistant, "Free sandwiches.");
+        List<Meeting> resultList = conManImp.getMeetingListOn(date);
+        assertTrue(resultList.size() == 0);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testGetMeetingListOnNullDate() {
+        conManImp.getMeetingListOn(null);
     }
 
     @After
