@@ -92,6 +92,7 @@ public class ContactManagerImpl implements ContactManager {
     // todo - exception handling
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException {
+        Objects.requireNonNull(contact, "Contact cannot be null");
         Set<Contact> soloSet = new HashSet<Contact>(1);
         soloSet.add(contact);
         checkContactsExist(soloSet);
