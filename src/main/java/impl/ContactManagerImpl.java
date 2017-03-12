@@ -102,7 +102,7 @@ public class ContactManagerImpl implements ContactManager {
             }
         }
         //sort by Date
-        Collections.sort(resultList, (meetingOne, meetingTwo) -> meetingOne.getDate().compareTo(meetingTwo.getDate()));
+        Collections.sort(resultList, (Comparator.comparing(meeting -> meeting.getDate())));
         return resultList;
     }
 
