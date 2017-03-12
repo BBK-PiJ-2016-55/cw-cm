@@ -110,7 +110,7 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public List<Meeting> getMeetingListOn(Calendar date) {
+    public List<Meeting> getMeetingListOn(Calendar date) throws NullPointerException {
         Objects.requireNonNull(date, "Date cannot be null");
         List<Meeting> resultList = new ArrayList<>();
         // Loop through each meeting in meetingMap
@@ -126,7 +126,7 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public List<PastMeeting> getPastMeetingListFor(Contact contact) {
+    public List<PastMeeting> getPastMeetingListFor(Contact contact) throws NullPointerException, IllegalArgumentException {
         Objects.requireNonNull(contact, "Contact cannot be null");
         if (!contactMap.containsValue(contact)) {
             throw new IllegalArgumentException("Invalid Contact entered.");
