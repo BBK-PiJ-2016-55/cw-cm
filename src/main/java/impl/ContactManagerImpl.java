@@ -55,6 +55,7 @@ public class ContactManagerImpl implements ContactManager {
      * @param date to be checked against current date
      * @return int -1 if date is in past, 0 if present and 1 if in future compared to current time
      */
+    // todo - refactor so this returns a boolean instead of an int?
     private int checkMeetingDate(Calendar date) {
         return date.compareTo(Calendar.getInstance());
     }
@@ -90,7 +91,6 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     //todo - would instance variables be more readable/worth using here?
-    // todo- return in chronological order
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
         List<Meeting> resultList = new ArrayList<>();
@@ -101,12 +101,10 @@ public class ContactManagerImpl implements ContactManager {
                 resultList.add(entry.getValue());
             }
         }
-        //sort by Date
-        Collections.sort(resultList, (Comparator.comparing(meeting -> meeting.getDate())));
+        // Sort by meeting date
+        resultList.sort(Comparator.comparing(Meeting::getDate));
         return resultList;
     }
-
-
 
     @Override
     public List<Meeting> getMeetingListOn(Calendar date) {
