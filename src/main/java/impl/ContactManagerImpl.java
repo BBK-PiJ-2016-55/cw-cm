@@ -111,6 +111,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public List<Meeting> getMeetingListOn(Calendar date) {
+        Objects.requireNonNull(date, "Date cannot be null");
         List<Meeting> resultList = new ArrayList<>();
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
