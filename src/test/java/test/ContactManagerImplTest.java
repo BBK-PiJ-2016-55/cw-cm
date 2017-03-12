@@ -21,6 +21,7 @@ public class ContactManagerImplTest {
    private Calendar date = new GregorianCalendar(2017, 4, 5);
    private Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
    private Calendar pastDate = new GregorianCalendar(2012, 4, 5);
+    private Calendar pastDateDistant = new GregorianCalendar(1812, 4, 5);
    private Set<Contact> fullContactSet;
    private Set<Contact> partContactSet;
    private Set<Contact> tempContactSet;
@@ -344,12 +345,27 @@ public class ContactManagerImplTest {
         conManImp.getFutureMeetingList(null);
     }
 
+    // getPastMeetingList tests
+
+    @Test
+    public void testGetPastMeetingListFor() {
+        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        tempContactSet = conManImp.getContacts("");
+        conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, "Two hours I'll never get back.");
+        conManImp.addNewPastMeeting(tempContactSet, pastDate, "Why don't I learn.");
+        Set<Contact> hobbesSet = conManImp.getContacts(id);
+        ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
+        List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
+        assertTrue(resultList.size() == 2);
+    }
 
     @After
     public void tearDown() {
        conManImp = null;
        tempContactSet = null;
+       partContactSet = null;
        fullContactSet = null;
        fullContactList.clear();
+
     }
 }

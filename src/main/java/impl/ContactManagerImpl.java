@@ -89,7 +89,6 @@ public class ContactManagerImpl implements ContactManager {
         return meetingMap.get(id);
     }
 
-    // todo - exception handling
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException {
         Objects.requireNonNull(contact, "Contact cannot be null");
