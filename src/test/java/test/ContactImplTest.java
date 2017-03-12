@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * PiJ Coursework 3
  */
 public class ContactImplTest {
-    private final String nameCarl = "Carl";
+    private final static String nameCarl = "Carl";
     private final Contact carl = new ContactImpl(3, nameCarl, "Inherently unstable person. ");
     private final Contact viv = new ContactImpl(67, "Viv");
 

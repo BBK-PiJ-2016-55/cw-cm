@@ -4,14 +4,15 @@ import main.java.spec.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by svince04 on 17/02/2017.
  * PiJ coursework 3
  */
 public class ContactManagerImpl implements ContactManager {
-    private final HashMap<Integer, Contact> contactMap = new HashMap<>();
-    private final HashMap<Integer, Meeting> meetingMap = new HashMap<>();
+    private final Map<Integer, Contact> contactMap = new ConcurrentHashMap<>();
+    private final Map<Integer, Meeting> meetingMap = new ConcurrentHashMap<>();
     private static int contactIdCounter = 1;
     private static int meetingIdCounter = 1;
 
@@ -113,7 +114,7 @@ public class ContactManagerImpl implements ContactManager {
     public List<Meeting> getMeetingListOn(Calendar date) throws NullPointerException {
         Objects.requireNonNull(date, "Date cannot be null");
         List<Meeting> resultList = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
             // Add to resultList if date matches
@@ -193,6 +194,7 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public Set<Contact> getContacts(String name) throws NullPointerException {
+        Objects.requireNonNull(name, "Name cannot be null");
         Set<Contact> nameSet = new HashSet<>();
         // return full list if string is empty
         if (name.equals("")) {
