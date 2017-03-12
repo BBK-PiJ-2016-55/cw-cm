@@ -339,6 +339,11 @@ public class ContactManagerImplTest {
         conManImp.getFutureMeetingList(lassie);
     }
 
+    @Test (expected = NullPointerException.class)
+    public void testGetFutureMeetingListNullContact() {
+        conManImp.getFutureMeetingList(null);
+    }
+
 
     @After
     public void tearDown() {
