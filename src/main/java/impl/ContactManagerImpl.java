@@ -2,6 +2,7 @@ package main.java.impl;
 
 import main.java.spec.*;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -115,11 +116,12 @@ public class ContactManagerImpl implements ContactManager {
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
             // Add to resultList if date matches
             // todo - what about time of meeting? or is that info not stored/relevant?
-            if (entry.getValue().getDate().equals(date)) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+            if (dateFormat.format(date.getTime()).equals(dateFormat.format(entry.getValue().getDate().getTime()))) {
                 resultList.add(entry.getValue());
             }
         }
-        resultList.sort(Comparator.comparing(Meeting::getDate));
+        resultList.sort(Comparator.comparing(m -> m.getDate().getTime()));
         return resultList;
     }
 
