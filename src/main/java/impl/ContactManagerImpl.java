@@ -47,7 +47,7 @@ public class ContactManagerImpl implements ContactManager {
 
     //todo - add javadoc
     private boolean checkMeetingExists(int id) {
-        return (meetingMap.containsKey(id));
+        return meetingMap.containsKey(id);
     }
 
     /**
@@ -57,7 +57,7 @@ public class ContactManagerImpl implements ContactManager {
      * @return true if date in future, false otherwise
      */
     private boolean dateInFuture(Calendar date) {
-        return (date.compareTo(Calendar.getInstance()) == 1);
+        return date.compareTo(Calendar.getInstance()) == 1;
     }
 
     @Override
@@ -100,7 +100,7 @@ public class ContactManagerImpl implements ContactManager {
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
             // Add to resultList only if FutureMeeting and matches Contact
-            if (entry.getValue().getContacts().contains(contact) && (entry.getValue() instanceof FutureMeeting)) {
+            if (entry.getValue().getContacts().contains(contact) && entry.getValue() instanceof FutureMeeting) {
                 resultList.add(entry.getValue());
             }
         }
@@ -135,7 +135,7 @@ public class ContactManagerImpl implements ContactManager {
         // Loop through each meeting in meetingMap
         for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
             // Add to resultList only if PastMeeting and matches Contact
-            if (entry.getValue().getContacts().contains(contact) && (entry.getValue() instanceof PastMeeting)) {
+            if (entry.getValue().getContacts().contains(contact) && entry.getValue() instanceof PastMeeting) {
                 resultList.add((PastMeeting) entry.getValue());
             }
         }

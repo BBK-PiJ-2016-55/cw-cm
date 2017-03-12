@@ -18,14 +18,19 @@ import static org.junit.Assert.*;
  */
 public class ContactManagerImplTest {
    private ContactManagerImpl conManImp;
-   private Calendar date = new GregorianCalendar(2017, 4, 5, 12, 00);
+   private Calendar date = new GregorianCalendar(2017, 4, 5, 12, 10);
    private Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
    private Calendar pastDate = new GregorianCalendar(2012, 4, 5);
-    private Calendar pastDateDistant = new GregorianCalendar(1812, 4, 5);
+   private Calendar pastDateDistant = new GregorianCalendar(1812, 4, 5);
    private Set<Contact> fullContactSet;
    private Set<Contact> partContactSet;
    private Set<Contact> tempContactSet;
    private ArrayList<Contact> fullContactList;
+   private String tom = "Tom";
+   private String hobbes = "Hobbes";
+   private String nameLassie = "Lassie";
+   private String notesLassie = "Odd dog out";
+   private String genericNotes = "I wish I had something interesting to say";
 
 
     @Before
@@ -48,12 +53,12 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testAddNewContactEmptyName() {
-        conManImp.addNewContact("", "Never speaks.");
+        conManImp.addNewContact("", genericNotes);
     }
 
     @Test (expected = NullPointerException.class)
     public void testAddNewContactNullName() {
-        conManImp.addNewContact(null, "Never speaks.");
+        conManImp.addNewContact(null, genericNotes);
     }
 
     @Test (expected = NullPointerException.class)
@@ -63,23 +68,23 @@ public class ContactManagerImplTest {
 
     @Test
     public void testAddNewContactSingle() {
-        conManImp.addNewContact("Tom", "Makes grand plans that never work.");
+        conManImp.addNewContact(tom, genericNotes);
         tempContactSet = conManImp.getContacts("");
         assertTrue(tempContactSet.size() == 4);
     }
 
     @Test
     public void testAddNewContactMulti() {
-        conManImp.addNewContact("Tom", "Makes grand plans that never work.");
-        conManImp.addNewContact("Sylvester", "Difficult to understand.");
+        conManImp.addNewContact(tom, genericNotes);
+        conManImp.addNewContact("Sylvester", genericNotes);
         tempContactSet = conManImp.getContacts("");
         assertTrue(tempContactSet.size() == 5);
     }
 
     @Test
     public void testAddNewContactUniqueId() {
-        int tomId = conManImp.addNewContact("Tom", "Makes grand plans that never work.");
-        int sylvesterId = conManImp.addNewContact("Sylvester", "Difficult to understand.");
+        int tomId = conManImp.addNewContact(tom, genericNotes);
+        int sylvesterId = conManImp.addNewContact("Sylvester", genericNotes);
         assertFalse(tomId == sylvesterId);
     }
 
@@ -109,10 +114,10 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetContactsIdsPopulated() {
-        int tomId = conManImp.addNewContact("Tom", "Makes grand plans that never work. ");
+        int tomId = conManImp.addNewContact(tom, genericNotes);
         tempContactSet = conManImp.getContacts(tomId);
         for (Contact contact : tempContactSet) {
-            assertTrue(contact.getName().equals("Tom"));
+            assertTrue(contact.getName().equals(tom));
         }
 
     }
@@ -154,7 +159,7 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testAddFutureMeetingNonexistentContact() {
-        Contact Lassie = new ContactImpl(4, "Lassie", "Odd one out");
+        Contact Lassie = new ContactImpl(4, nameLassie, notesLassie);
         fullContactSet.add(Lassie);
         conManImp.addFutureMeeting(fullContactSet, date);
     }
@@ -186,7 +191,7 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalStateException.class)
     public void testGetFutureMeetingInPastThrowsError() {
-        int id = conManImp.addNewPastMeeting(fullContactSet, pastDate, "Past meeting notes.");
+        int id = conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
         conManImp.getFutureMeeting(id);
     }
 
@@ -196,24 +201,24 @@ public class ContactManagerImplTest {
 
     @Test
     public void testAddNewPastMeetingSingle() {
-        assertNotNull(conManImp.addNewPastMeeting(fullContactSet, pastDate, "Past meeting notes"));
+        assertNotNull(conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes));
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testAddNewPastMeetingFutureDateError() {
-        conManImp.addNewPastMeeting(fullContactSet, date, "Past meeting notes");
+        conManImp.addNewPastMeeting(fullContactSet, date, genericNotes);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void testAddNewPastMeetingNonexistentContact() {
-        Contact Lassie = new ContactImpl(4, "Lassie", "Odd one out");
+        Contact Lassie = new ContactImpl(4, nameLassie, notesLassie);
         fullContactSet.add(Lassie);
-        conManImp.addNewPastMeeting(fullContactSet, pastDate, "Past meeting notes");
+        conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
     }
 
     @Test (expected = NullPointerException.class)
     public void testAddNewPastMeetingNullDate() {
-        conManImp.addNewPastMeeting(fullContactSet, null, "Past meeting notes");
+        conManImp.addNewPastMeeting(fullContactSet, null, genericNotes);
     }
 
     @Test (expected = NullPointerException.class)
@@ -225,7 +230,7 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetPastMeeting() {
-        int meetingId = conManImp.addNewPastMeeting(fullContactSet, pastDate, "Past meeting notes");
+        int meetingId = conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
         Meeting returnedMeeting = conManImp.getPastMeeting(meetingId);
         assertTrue(returnedMeeting.getDate().equals(pastDate));
         assertTrue(returnedMeeting.getContacts().equals(fullContactSet));
@@ -246,7 +251,7 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetMeeting() {
-        int meetingId = conManImp.addNewPastMeeting(fullContactSet, pastDate, "Past meeting notes");
+        int meetingId = conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
         Meeting returnedMeeting = conManImp.getMeeting(meetingId);
         assertTrue(returnedMeeting.getDate().equals(pastDate));
         assertTrue(returnedMeeting.getContacts().equals(fullContactSet));
@@ -279,13 +284,13 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testAddMeetingNotesNonexistentMeeting() {
-        conManImp.addMeetingNotes(765, "11/10 would meet again.");
+        conManImp.addMeetingNotes(765, genericNotes);
     }
 
     @Test (expected = IllegalStateException.class)
     public void testAddMeetingNotesFutureDateMeeting() {
         int id = conManImp.addFutureMeeting(fullContactSet, date);
-        conManImp.addMeetingNotes(id, "11/10 would meet again.");
+        conManImp.addMeetingNotes(id, genericNotes);
     }
 
     @Test (expected = NullPointerException.class)
@@ -308,7 +313,7 @@ public class ContactManagerImplTest {
     @Test
     public void testGetFutureMeetingListNoMeetings() {
         conManImp.addFutureMeeting(partContactSet, futureDateDistant);
-        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        int id = conManImp.addNewContact(hobbes, genericNotes);
         Set<Contact> hobbesSet = conManImp.getContacts(id);
         ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
         List<Meeting> resultList = conManImp.getFutureMeetingList(hobbesList.get(0));
@@ -328,7 +333,7 @@ public class ContactManagerImplTest {
     public void testGetFutureMeetingListNoPastMeetings() {
         conManImp.addFutureMeeting(fullContactSet, date);
         conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
-        conManImp.addNewPastMeeting(fullContactSet, pastDate, "Notes from under the floorboards");
+        conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
         Contact garfield = fullContactList.get(0);
         List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
         assertTrue(resultList.size() == 2);
@@ -336,7 +341,7 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testGetFutureMeetingListNonexistentContact() {
-        Contact lassie = new ContactImpl(2, "Lassie", "Odd one out");
+        Contact lassie = new ContactImpl(2, nameLassie, notesLassie);
         conManImp.getFutureMeetingList(lassie);
     }
 
@@ -349,10 +354,10 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetPastMeetingListFor() {
-        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        int id = conManImp.addNewContact(hobbes, genericNotes);
         tempContactSet = conManImp.getContacts("");
-        conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, "Two hours I'll never get back.");
-        conManImp.addNewPastMeeting(tempContactSet, pastDate, "Why don't I learn.");
+        conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, genericNotes);
+        conManImp.addNewPastMeeting(tempContactSet, pastDate, genericNotes);
         Set<Contact> hobbesSet = conManImp.getContacts(id);
         ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
         List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
@@ -361,8 +366,8 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetPastMeetingListForNoMeetings() {
-        conManImp.addNewPastMeeting(partContactSet, pastDateDistant, "Free sandwiches.");
-        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        conManImp.addNewPastMeeting(partContactSet, pastDateDistant, genericNotes);
+        int id = conManImp.addNewContact(hobbes, genericNotes);
         Set<Contact> hobbesSet = conManImp.getContacts(id);
         ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
         List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
@@ -371,10 +376,10 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetPastMeetingListForDateSorting() {
-        int id = conManImp.addNewContact("Hobbes", "The best of all.");
+        int id = conManImp.addNewContact(hobbes, genericNotes);
         tempContactSet = conManImp.getContacts("");
-        conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, "Two hours I'll never get back.");
-        conManImp.addNewPastMeeting(tempContactSet, pastDate, "Why don't I learn.");
+        conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, genericNotes);
+        conManImp.addNewPastMeeting(tempContactSet, pastDate, genericNotes);
         Set<Contact> hobbesSet = conManImp.getContacts(id);
         ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
         List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
@@ -383,7 +388,7 @@ public class ContactManagerImplTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void testGetPastMeetingListForNonexistentContact() {
-        Contact lassie = new ContactImpl(2, "Lassie", "Odd one out");
+        Contact lassie = new ContactImpl(2, nameLassie, notesLassie);
         conManImp.getPastMeetingListFor(lassie);
     }
 
@@ -398,15 +403,15 @@ public class ContactManagerImplTest {
     public void testGetMeetingListOn() {
         conManImp.addFutureMeeting(fullContactSet, date);
         conManImp.addFutureMeeting(fullContactSet, date);
-        conManImp.addNewPastMeeting(fullContactSet, pastDate, "Notes from under the floorboards");
+        conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
         List<Meeting> resultList = conManImp.getMeetingListOn(date);
         assertTrue(resultList.size() == 2);
     }
 
     @Test
     public void testGetMeetingListOnDateSorting() {
-        Calendar dateLaterHour = new GregorianCalendar(2017, 4, 5, 14, 00);
-        Calendar dateEarlierHour = new GregorianCalendar(2017, 4, 5, 9, 00);
+        Calendar dateLaterHour = new GregorianCalendar(2017, 4, 5, 14, 10);
+        Calendar dateEarlierHour = new GregorianCalendar(2017, 4, 5, 9, 10);
         conManImp.addFutureMeeting(fullContactSet, dateLaterHour);
         conManImp.addFutureMeeting(fullContactSet, date);
         conManImp.addFutureMeeting(fullContactSet, dateEarlierHour);
@@ -418,7 +423,7 @@ public class ContactManagerImplTest {
 
     @Test
     public void testGetMeetingListOnNoMeetings() {
-        conManImp.addNewPastMeeting(partContactSet, pastDateDistant, "Free sandwiches.");
+        conManImp.addNewPastMeeting(partContactSet, pastDateDistant, genericNotes);
         List<Meeting> resultList = conManImp.getMeetingListOn(date);
         assertTrue(resultList.size() == 0);
     }

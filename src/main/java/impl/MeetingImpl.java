@@ -39,6 +39,6 @@ public abstract class MeetingImpl implements Meeting {
 
     @Override
     public Set<Contact> getContacts() {
-        return (new HashSet<>(attendees));
+        return new HashSet<>(attendees);
     }
 }
