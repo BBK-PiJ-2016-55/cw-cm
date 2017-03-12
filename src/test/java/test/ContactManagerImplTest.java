@@ -295,7 +295,6 @@ public class ContactManagerImplTest {
 
     // getFutureMeetingList tests
 
-    //todo - chronological sorting of returned list
     @Test
     public void testGetFutureMeetingList() {
         conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
@@ -303,6 +302,14 @@ public class ContactManagerImplTest {
         Contact garfield = fullContactList.get(0);
         List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
         assertTrue(resultList.size() == 2);
+    }
+
+    @Test
+    public void testGetFutureMeetingListNoMeetings() {
+        conManImp.addFutureMeeting(partContactSet, futureDateDistant);
+        Contact garfield = fullContactList.get(0);
+        List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
+        assertTrue(resultList.size() == 0);
     }
 
     @Test
@@ -323,6 +330,7 @@ public class ContactManagerImplTest {
         List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
         assertTrue(resultList.size() == 2);
     }
+
 
 
     @After
