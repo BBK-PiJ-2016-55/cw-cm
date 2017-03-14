@@ -31,42 +31,29 @@ public class ContactManagerImplTest {
   private final Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
   private final Calendar pastDate = new GregorianCalendar(2012, 4, 5);
   private final Calendar pastDateDistant = new GregorianCalendar(1812, 4, 5);
-  private Set<Contact> fullContactSet = new HashSet<>();
+  private Set<Contact> fullContactSet;
   private Set<Contact> partContactSet;
   private Set<Contact> tempContactSet;
   private List<Contact> fullContactList;
   private final String tom = "Tom";
+  private final String tommy = "Tommy";
   private final String hobbes = "Hobbes";
   private final String nameLassie = "Lassie";
   private final String notesLassie = "Odd dog out";
   private final String genericNotes = "I wish I had something interesting to say";
-  private Contact garfield;
-  private Contact catInTheHat;
-  private Contact topCat;
-
 
   @Before
   public void startUp() {
     conManImp = new ContactManagerImpl();
-    fullContactList = new ArrayList<>();
-    garfield = new ContactImpl(1, "Garfield", "Won't meet on a Monday.");
-    conManImp.addNewContact("Garfield", "Wont's meet on a Monday.");
-    catInTheHat = new ContactImpl(2, "Cat in the Hat", "Doesn't follow through on promises.");
-    topCat = new ContactImpl(3, "Top Cat", "Authoritarian tendencies.");
-    fullContactSet.add(garfield);
-    fullContactSet.add(catInTheHat);
-    fullContactSet.add(topCat);
-//    partContactSet.add(catInTheHat);
-//    partContactSet.add(topCat);
-
+    conManImp.addNewContact("Garfield", "Won't meet on a Monday.");
+    conManImp.addNewContact("Cat in the Hat", "Doesn't follow through on promises.");
+    conManImp.addNewContact("Top Cat", "Authoritarian tendencies.");
+    fullContactSet = conManImp.getContacts("");
+    partContactSet = conManImp.getContacts("Cat");
+    fullContactList = new ArrayList<>(fullContactSet);
   }
 
   //Contact tests
-
-  @Test
-  public void testTest() {
-
-  }
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewContactEmptyNotes() {
@@ -90,15 +77,15 @@ public class ContactManagerImplTest {
 
   @Test
   public void testAddNewContactSingle() {
-    assertSame(conManImp.getContacts("").size(),3);
     conManImp.addNewContact(tom, genericNotes);
-    assertSame(conManImp.getContacts("").size(),4);
+    tempContactSet = conManImp.getContacts("");
+    assertSame(tempContactSet.size(),4);
   }
 
   @Test
   public void testAddNewContactMulti() {
     conManImp.addNewContact(tom, genericNotes);
-    conManImp.addNewContact(hobbes, genericNotes);
+    conManImp.addNewContact(tommy, genericNotes);
     tempContactSet = conManImp.getContacts("");
     assertSame(tempContactSet.size(), 5);
   }
@@ -106,7 +93,7 @@ public class ContactManagerImplTest {
   @Test
   public void testAddNewContactUniqueId() {
     int tomId = conManImp.addNewContact(tom, genericNotes);
-    int sylvesterId = conManImp.addNewContact(hobbes, genericNotes);
+    int sylvesterId = conManImp.addNewContact("Sylvester", genericNotes);
     assertNotSame(tomId, sylvesterId);
   }
 
@@ -130,7 +117,7 @@ public class ContactManagerImplTest {
 
   @Test
   public void testGetContactsNoMatches() {
-    tempContactSet = conManImp.getContacts(hobbes);
+    tempContactSet = conManImp.getContacts("Fritz");
     assertEquals(0, tempContactSet.size());
   }
 
@@ -144,7 +131,17 @@ public class ContactManagerImplTest {
 
   }
 
-  //todo - add test for multiple ids
+  @Test
+  public void testGetContactsFromIdsMulti() {
+    conManImp.addNewContact(tom, genericNotes);
+    conManImp.addNewContact(tommy, genericNotes);
+    tempContactSet = conManImp.getContacts("Tom");
+    Iterator<Contact> it = tempContactSet.iterator();
+    int firstId = it.next().getId();
+    int secondId = it.next().getId();
+    Set<Contact> returnedContacts = conManImp.getContacts(firstId, secondId);
+    assertEquals(tempContactSet, returnedContacts);
+  }
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetContactsIdsNoIds() {
@@ -377,12 +374,13 @@ public class ContactManagerImplTest {
 
   @Test
   public void testGetPastMeetingListFor() {
+    conManImp.addNewPastMeeting(partContactSet, pastDate, genericNotes);
     int id = conManImp.addNewContact(hobbes, genericNotes);
-    tempContactSet = conManImp.getContacts("");
-    conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, genericNotes);
-    conManImp.addNewPastMeeting(tempContactSet, pastDate, genericNotes);
     Set<Contact> hobbesSet = conManImp.getContacts(id);
+    fullContactSet = conManImp.getContacts("");
     ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
+    conManImp.addNewPastMeeting(fullContactSet, pastDateDistant, genericNotes);
+    conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
     List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
     assertSame(resultList.size(), 2);
   }
@@ -400,11 +398,11 @@ public class ContactManagerImplTest {
   @Test
   public void testGetPastMeetingListForDateSorting() {
     int id = conManImp.addNewContact(hobbes, genericNotes);
-    tempContactSet = conManImp.getContacts("");
-    conManImp.addNewPastMeeting(tempContactSet, pastDateDistant, genericNotes);
-    conManImp.addNewPastMeeting(tempContactSet, pastDate, genericNotes);
     Set<Contact> hobbesSet = conManImp.getContacts(id);
+    fullContactSet = conManImp.getContacts("");
     ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
+    conManImp.addNewPastMeeting(fullContactSet, pastDateDistant, genericNotes);
+    conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
     List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
     assertTrue(resultList.get(0).getDate().equals(pastDateDistant));
   }
