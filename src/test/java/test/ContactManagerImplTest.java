@@ -26,11 +26,11 @@ public class ContactManagerImplTest {
    private Set<Contact> partContactSet;
    private Set<Contact> tempContactSet;
    private List<Contact> fullContactList;
-   private final static String tom = "Tom";
-   private final static String hobbes = "Hobbes";
-   private final static String nameLassie = "Lassie";
-   private final static String notesLassie = "Odd dog out";
-   private final static String genericNotes = "I wish I had something interesting to say";
+   private final String tom = "Tom";
+   private final String hobbes = "Hobbes";
+   private final String nameLassie = "Lassie";
+   private final String notesLassie = "Odd dog out";
+   private final String genericNotes = "I wish I had something interesting to say";
 
 
   @Before
