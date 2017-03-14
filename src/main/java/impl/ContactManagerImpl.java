@@ -30,7 +30,8 @@ public class ContactManagerImpl implements ContactManager {
   private int meetingIdCounter = 1;
 
   @Override
-  public int addFutureMeeting(Set<Contact> contacts, Calendar date) throws IllegalArgumentException, NullPointerException {
+  public int addFutureMeeting(Set<Contact> contacts, Calendar date)
+          throws IllegalArgumentException, NullPointerException {
     Objects.requireNonNull(contacts, "Contacts cannot be null");
     Objects.requireNonNull(date, "Date cannot be null");
     // Check that future meeting is not in past
@@ -100,7 +101,8 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   @Override
-  public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException, NullPointerException {
+  public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException,
+          NullPointerException {
     Objects.requireNonNull(contact, "Contact cannot be null");
     if (!contactMap.containsValue(contact)) {
       throw new IllegalArgumentException("Invalid Contact entered.");
@@ -109,7 +111,8 @@ public class ContactManagerImpl implements ContactManager {
     // Loop through each meeting in meetingMap
     for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
       // Add to resultList only if FutureMeeting and matches Contact
-      if (entry.getValue().getContacts().contains(contact) && entry.getValue() instanceof FutureMeeting) {
+      if (entry.getValue().getContacts().contains(contact)
+              && entry.getValue() instanceof FutureMeeting) {
         resultList.add(entry.getValue());
       }
     }
@@ -126,7 +129,8 @@ public class ContactManagerImpl implements ContactManager {
     // Loop through each meeting in meetingMap
     for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
       // Add to resultList if date matches
-      if (dateFormat.format(date.getTime()).equals(dateFormat.format(entry.getValue().getDate().getTime()))) {
+      if (dateFormat.format(date.getTime()).equals(dateFormat.format(entry.getValue()
+              .getDate().getTime()))) {
         resultList.add(entry.getValue());
       }
     }
@@ -135,7 +139,8 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   @Override
-  public List<PastMeeting> getPastMeetingListFor(Contact contact) throws NullPointerException, IllegalArgumentException {
+  public List<PastMeeting> getPastMeetingListFor(Contact contact) throws
+          NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(contact, "Contact cannot be null");
     if (!contactMap.containsValue(contact)) {
       throw new IllegalArgumentException("Invalid Contact entered.");
@@ -144,7 +149,8 @@ public class ContactManagerImpl implements ContactManager {
     // Loop through each meeting in meetingMap
     for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
       // Add to resultList only if PastMeeting and matches Contact
-      if (entry.getValue().getContacts().contains(contact) && entry.getValue() instanceof PastMeeting) {
+      if (entry.getValue().getContacts().contains(contact)
+              && entry.getValue() instanceof PastMeeting) {
         resultList.add((PastMeeting) entry.getValue());
       }
     }
@@ -153,7 +159,8 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   @Override
-  public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) throws IllegalArgumentException, NullPointerException {
+  public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) throws
+          IllegalArgumentException, NullPointerException {
     Objects.requireNonNull(contacts, "Contacts cannot be null");
     Objects.requireNonNull(date, "Date cannot be null");
     // Check that past meeting is in the past
