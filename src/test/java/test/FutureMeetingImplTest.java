@@ -1,14 +1,16 @@
 package test.java.test;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
+
 import main.java.impl.ContactImpl;
 import main.java.impl.FutureMeetingImpl;
+import main.java.spec.Contact;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import main.java.spec.Contact;
-
-import java.util.*;
-
 
 /**
  * Created by svince04 on 04/03/2017.

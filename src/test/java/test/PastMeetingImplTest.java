@@ -1,17 +1,17 @@
 package test.java.test;
 
-import main.java.impl.ContactImpl;
-import main.java.impl.PastMeetingImpl;
-import org.junit.Before;
-import org.junit.Test;
-import main.java.spec.Contact;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import main.java.impl.ContactImpl;
+import main.java.impl.PastMeetingImpl;
+import main.java.spec.Contact;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Created by svince04 on 04/03/2017.
@@ -27,7 +27,8 @@ public class PastMeetingImplTest {
     Contact contact = new ContactImpl(1, "Pluto", "Tall and not very bright.");
     attendeeSet.add(contact);
     pastDate = new GregorianCalendar(2012, 4, 5, 11, 30);
-    pastMeeting = new PastMeetingImpl(1, pastDate, attendeeSet, "I shouldn't have gone into the dog park.");
+    pastMeeting = new PastMeetingImpl(1, pastDate, attendeeSet,
+            "I shouldn't have gone into the dog park.");
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -57,7 +58,7 @@ public class PastMeetingImplTest {
   }
 
   // getContacts tests
-   @Test
+  @Test
   public void testGetNotes() {
     assertEquals("I shouldn't have gone into the dog park.", pastMeeting.getNotes());
   }

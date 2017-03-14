@@ -1,18 +1,20 @@
 package test.java.test;
 
-import main.java.impl.ContactImpl;
-import main.java.impl.MockMeetingImpl;
-import main.java.spec.Contact;
-import main.java.spec.Meeting;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import main.java.impl.ContactImpl;
+import main.java.impl.MockMeetingImpl;
+import main.java.spec.Contact;
+import main.java.spec.Meeting;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Created by svince04 on 11/03/2017.
