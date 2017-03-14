@@ -1,20 +1,32 @@
 package main.java.impl;
 
+import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 import main.java.spec.Contact;
 import main.java.spec.Meeting;
 
-import java.util.*;
 
 /**
- * Created by svince04 on 17/02/2017
- * PiJ coursework 3
+ * Created by svince04 on 17/02/2017.
+ * PiJ coursework 3.
  */
 public abstract class MeetingImpl implements Meeting {
   private int id;
   private Calendar date;
   private Set<Contact> attendees;
 
-  MeetingImpl(int id, Calendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
+  /**
+   * @param id int - the unique id number of the meeting.
+   * @param date Calendar object contain date and time of the meeting.
+   * @param attendees Set of Contacts affiliated with the meeting.
+   * @throws IllegalArgumentException when ID is 0 or below.
+   * @throws NullPointerException when passed empty Contact Set.
+   */
+  MeetingImpl(int id, Calendar date, Set<Contact> attendees)
+          throws IllegalArgumentException, NullPointerException {
     Objects.requireNonNull(date, "Date cannot be null");
     Objects.requireNonNull(attendees, "Contact set cannot be null");
     if (id <= 0) {

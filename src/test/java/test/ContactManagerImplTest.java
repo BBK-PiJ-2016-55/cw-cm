@@ -1,55 +1,77 @@
 package test.java.test;
 
-import main.java.impl.*;
-import main.java.spec.PastMeeting;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import main.java.spec.Contact;
-import main.java.spec.Meeting;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
+import main.java.impl.ContactImpl;
+import main.java.impl.ContactManagerImpl;
+import main.java.impl.PastMeetingImpl;
+
+import main.java.spec.Contact;
+import main.java.spec.Meeting;
+import main.java.spec.PastMeeting;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Created by svince04 on 18/02/2017.
  * PiJ Coursework 3
  */
 public class ContactManagerImplTest {
-   private ContactManagerImpl conManImp;
-   private final Calendar date = new GregorianCalendar(2017, 4, 5, 12, 10);
-   private final Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
-   private final Calendar pastDate = new GregorianCalendar(2012, 4, 5);
-   private final Calendar pastDateDistant = new GregorianCalendar(1812, 4, 5);
-   private Set<Contact> fullContactSet;
-   private Set<Contact> partContactSet;
-   private Set<Contact> tempContactSet;
-   private List<Contact> fullContactList;
-   private final String tom = "Tom";
-   private final String hobbes = "Hobbes";
-   private final String nameLassie = "Lassie";
-   private final String notesLassie = "Odd dog out";
-   private final String genericNotes = "I wish I had something interesting to say";
+  private ContactManagerImpl conManImp;
+  private final Calendar date = new GregorianCalendar(2017, 4, 5, 12, 10);
+  private final Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
+  private final Calendar pastDate = new GregorianCalendar(2012, 4, 5);
+  private final Calendar pastDateDistant = new GregorianCalendar(1812, 4, 5);
+  private Set<Contact> fullContactSet = new HashSet<>();
+  private Set<Contact> partContactSet;
+  private Set<Contact> tempContactSet;
+  private List<Contact> fullContactList;
+  private final String tom = "Tom";
+  private final String hobbes = "Hobbes";
+  private final String nameLassie = "Lassie";
+  private final String notesLassie = "Odd dog out";
+  private final String genericNotes = "I wish I had something interesting to say";
+  private Contact garfield;
+  private Contact catInTheHat;
+  private Contact topCat;
 
 
   @Before
-   public void startUp() {
+  public void startUp() {
     conManImp = new ContactManagerImpl();
-    conManImp.addNewContact("Garfield", "Won't meet on a Monday.");
-    conManImp.addNewContact("Cat in the Hat", "Doesn't follow through on promises.");
-    conManImp.addNewContact("Top Cat", "Authoritarian tendencies.");
-    fullContactSet = conManImp.getContacts("");
-    partContactSet = conManImp.getContacts("Cat");
-    fullContactList = new ArrayList<>(fullContactSet);
-   }
+    fullContactList = new ArrayList<>();
+    garfield = new ContactImpl(1, "Garfield", "Won't meet on a Monday.");
+    conManImp.addNewContact("Garfield", "Wont's meet on a Monday.");
+    catInTheHat = new ContactImpl(2, "Cat in the Hat", "Doesn't follow through on promises.");
+    topCat = new ContactImpl(3, "Top Cat", "Authoritarian tendencies.");
+    fullContactSet.add(garfield);
+    fullContactSet.add(catInTheHat);
+    fullContactSet.add(topCat);
+//    partContactSet.add(catInTheHat);
+//    partContactSet.add(topCat);
 
-   //Contact tests
+  }
 
-   @Test (expected = IllegalArgumentException.class)
-   public void testAddNewContactEmptyNotes() {
+  //Contact tests
+
+  @Test
+  public void testTest() {
+
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddNewContactEmptyNotes() {
     conManImp.addNewContact("Felix", "");
-   }
+  }
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewContactEmptyName() {
@@ -68,15 +90,15 @@ public class ContactManagerImplTest {
 
   @Test
   public void testAddNewContactSingle() {
+    assertSame(conManImp.getContacts("").size(),3);
     conManImp.addNewContact(tom, genericNotes);
-    tempContactSet = conManImp.getContacts("");
-    assertSame(tempContactSet.size(),4);
+    assertSame(conManImp.getContacts("").size(),4);
   }
 
   @Test
   public void testAddNewContactMulti() {
     conManImp.addNewContact(tom, genericNotes);
-    conManImp.addNewContact("Sylvester", genericNotes);
+    conManImp.addNewContact(hobbes, genericNotes);
     tempContactSet = conManImp.getContacts("");
     assertSame(tempContactSet.size(), 5);
   }
@@ -84,7 +106,7 @@ public class ContactManagerImplTest {
   @Test
   public void testAddNewContactUniqueId() {
     int tomId = conManImp.addNewContact(tom, genericNotes);
-    int sylvesterId = conManImp.addNewContact("Sylvester", genericNotes);
+    int sylvesterId = conManImp.addNewContact(hobbes, genericNotes);
     assertNotSame(tomId, sylvesterId);
   }
 
@@ -108,7 +130,7 @@ public class ContactManagerImplTest {
 
   @Test
   public void testGetContactsNoMatches() {
-    tempContactSet = conManImp.getContacts("Fritz");
+    tempContactSet = conManImp.getContacts(hobbes);
     assertEquals(0, tempContactSet.size());
   }
 
@@ -263,16 +285,17 @@ public class ContactManagerImplTest {
   }
 
   // addMeetingNotes tests
+  // The test below can't run successfully after date-based exception handling
+  // for addMeetingNotes is in place.
 
-  // This test can't run successfully after date-based exception handling for addMeetingNotes is in place.
-//  @Test
-//  public void testAddMeetingNotesFutureMeeting() {
-//    int id = conManImp.addFutureMeeting(fullContactSet, date);
-//    PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
-//    PastMeeting changedMeeting = (PastMeeting) conManImp.getMeeting(id);
-//    assertTrue(returnedMeeting instanceof PastMeetingImpl);
-//    assertEquals(returnedMeeting.getNotes(), changedMeeting.getNotes());
-//  }
+  /* @Test
+  public void testAddMeetingNotesFutureMeeting() {
+    int id = conManImp.addFutureMeeting(fullContactSet, date);
+    PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again");
+    PastMeeting changedMeeting = (PastMeeting) conManImp.getMeeting(id);
+    assertTrue(returnedMeeting instanceof PastMeetingImpl);
+    assertEquals(returnedMeeting.getNotes(), changedMeeting.getNotes());
+  } */
 
   @Test
   public void testAddMeetingNotesPastMeeting() {

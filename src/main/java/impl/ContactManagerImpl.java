@@ -177,7 +177,8 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   @Override
-  public PastMeeting addMeetingNotes(int id, String text) throws IllegalArgumentException, IllegalStateException, NullPointerException {
+  public PastMeeting addMeetingNotes(int id, String text) throws
+          IllegalArgumentException, IllegalStateException, NullPointerException {
     Objects.requireNonNull(text, "Notes cannot be null");
     if (!meetingMap.containsKey(id)) {
       throw new IllegalArgumentException("Meeting does not exist");
@@ -194,7 +195,8 @@ public class ContactManagerImpl implements ContactManager {
   }
 
   @Override
-  public int addNewContact(String name, String notes) throws IllegalArgumentException, NullPointerException {
+  public int addNewContact(String name, String notes)
+          throws IllegalArgumentException, NullPointerException {
     Objects.requireNonNull(name, "Name cannot be null");
     Objects.requireNonNull(notes, "Notes cannot be null");
     if (name.equals("") || notes.equals("")) {

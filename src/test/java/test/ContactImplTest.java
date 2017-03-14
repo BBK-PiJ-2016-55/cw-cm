@@ -1,11 +1,11 @@
 package test.java.test;
 
-import main.java.impl.ContactImpl;
-import org.junit.Test;
-import main.java.spec.Contact;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import main.java.impl.ContactImpl;
+import main.java.spec.Contact;
+import org.junit.Test;
 
 /**
  * Created by svince04 on 17/02/2017.
