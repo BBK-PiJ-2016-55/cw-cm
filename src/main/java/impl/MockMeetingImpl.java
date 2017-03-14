@@ -12,7 +12,7 @@ import java.util.Set;
  * Mock class to facilitate testing of abstract class MeetingImpl
  */
 public class MockMeetingImpl extends MeetingImpl implements Meeting {
-    public MockMeetingImpl(int id, Calendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
-        super(id, date, attendees);
-    }
+  public MockMeetingImpl(int id, Calendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
+    super(id, date, attendees);
+  }
 }

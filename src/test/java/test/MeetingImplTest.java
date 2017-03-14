@@ -19,95 +19,95 @@ import static org.junit.Assert.*;
  * PiJ Coursework 3.
  */
 public class MeetingImplTest {
-    private Calendar date;
-    private MockMeetingImpl meeting;
-    private MockMeetingImpl secondMeeting;
-    private final Set<Contact> attendeeSet = new HashSet<>();
+  private Calendar date;
+  private MockMeetingImpl meeting;
+  private MockMeetingImpl secondMeeting;
+  private final Set<Contact> attendeeSet = new HashSet<>();
 
-    @Before
-    public void setUp() {
-        attendeeSet.add(new ContactImpl(1, "Daffy", "Fond of white collars."));
-        date = new GregorianCalendar(2005, 4, 5, 11, 30);
-        Calendar secondDate = new GregorianCalendar(2006, 4, 5, 11, 30);
-        meeting = new MockMeetingImpl(1, date, attendeeSet);
-        secondMeeting = new MockMeetingImpl(2, secondDate, attendeeSet);
-    }
+  @Before
+  public void setUp() {
+    attendeeSet.add(new ContactImpl(1, "Daffy", "Fond of white collars."));
+    date = new GregorianCalendar(2005, 4, 5, 11, 30);
+    Calendar secondDate = new GregorianCalendar(2006, 4, 5, 11, 30);
+    meeting = new MockMeetingImpl(1, date, attendeeSet);
+    secondMeeting = new MockMeetingImpl(2, secondDate, attendeeSet);
+  }
 
-    // Test constructor
+  // Test constructor
 
-    @Test
-    public void testConstructor() {
-        Meeting meeting = new MockMeetingImpl(3, date, attendeeSet);
-        assertNotNull(meeting.getId());
-        assertEquals(meeting.getDate(), date);
-        assertEquals(meeting.getContacts(), attendeeSet);
-    }
+  @Test
+  public void testConstructor() {
+    Meeting meeting = new MockMeetingImpl(3, date, attendeeSet);
+    assertNotNull(meeting.getId());
+    assertEquals(meeting.getDate(), date);
+    assertEquals(meeting.getContacts(), attendeeSet);
+  }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testIdBelowZero() {
-        new MockMeetingImpl(-4, date, attendeeSet);
-    }
+  @Test (expected = IllegalArgumentException.class)
+  public void testIdBelowZero() {
+    new MockMeetingImpl(-4, date, attendeeSet);
+  }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testIdZero() {
-        new MockMeetingImpl(0, date, attendeeSet);
-    }
+  @Test (expected = IllegalArgumentException.class)
+  public void testIdZero() {
+    new MockMeetingImpl(0, date, attendeeSet);
+  }
 
-    @Test (expected = NullPointerException.class)
-    public void testDateNull() {
-        new MockMeetingImpl(2, null, attendeeSet);
-    }
+  @Test (expected = NullPointerException.class)
+  public void testDateNull() {
+    new MockMeetingImpl(2, null, attendeeSet);
+  }
 
-    @Test (expected = NullPointerException.class)
-    public void testAttendeesNull() {
-        new MockMeetingImpl(2, date, null);
-    }
+  @Test (expected = NullPointerException.class)
+  public void testAttendeesNull() {
+    new MockMeetingImpl(2, date, null);
+  }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testAttendeesEmpty() {
-        attendeeSet.clear();
-        new MockMeetingImpl(2, date, attendeeSet);
-    }
+  @Test (expected = IllegalArgumentException.class)
+  public void testAttendeesEmpty() {
+    attendeeSet.clear();
+    new MockMeetingImpl(2, date, attendeeSet);
+  }
 
-    // getId tests
+  // getId tests
 
-    @Test
-    public void testGetId() {
-        assertEquals(meeting.getId(), 1);
-    }
+  @Test
+  public void testGetId() {
+    assertEquals(meeting.getId(), 1);
+  }
 
-    @Test
-    public void testUniqueIds() {
-        assertNotSame(meeting.getId(), secondMeeting.getId());
-    }
+  @Test
+  public void testUniqueIds() {
+    assertNotSame(meeting.getId(), secondMeeting.getId());
+  }
 
-    @Test
-    public void testImmutableContacts() {
-        Set<Contact> contacts = meeting.getContacts();
-        contacts.add(new ContactImpl(4, "Donald", "I wish he'd wear trousers."));
-        assertNotSame(contacts.size(), meeting.getContacts().size());
-    }
+  @Test
+  public void testImmutableContacts() {
+    Set<Contact> contacts = meeting.getContacts();
+    contacts.add(new ContactImpl(4, "Donald", "I wish he'd wear trousers."));
+    assertNotSame(contacts.size(), meeting.getContacts().size());
+  }
 
-    @Test
-    public void testImmutableDate() {
-        Calendar date = meeting.getDate();
-        date.add(Calendar.YEAR, 1);
-        assertNotSame(date.get(Calendar.YEAR), meeting.getDate().get(Calendar.YEAR));
-    }
+  @Test
+  public void testImmutableDate() {
+    Calendar date = meeting.getDate();
+    date.add(Calendar.YEAR, 1);
+    assertNotSame(date.get(Calendar.YEAR), meeting.getDate().get(Calendar.YEAR));
+  }
 
 
-    // getDate tests
+  // getDate tests
 
-    @Test
-    public void testGetDate() {
-        assertEquals(date, meeting.getDate());
-    }
+  @Test
+  public void testGetDate() {
+    assertEquals(date, meeting.getDate());
+  }
 
-    // getContacts tests
+  // getContacts tests
 
-    @Test
-    public void testGetContactsSingle() {
-        assertEquals(attendeeSet, meeting.getContacts());
-    }
+  @Test
+  public void testGetContactsSingle() {
+    assertEquals(attendeeSet, meeting.getContacts());
+  }
 
-    }
+  }

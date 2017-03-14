@@ -10,15 +10,15 @@ import java.util.Set;
  * PiJ coursework 3
  */
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
-    private String notes;
+  private String notes;
 
-    public PastMeetingImpl(int id, Calendar date, Set<Contact> attendees, String notes) {
-        super(id, date, attendees);
-        this.notes = notes;
-    }
+  public PastMeetingImpl(int id, Calendar date, Set<Contact> attendees, String notes) {
+    super(id, date, attendees);
+    this.notes = notes;
+  }
 
-    @Override
-    public String getNotes() {
-        return notes;
-    }
+  @Override
+  public String getNotes() {
+    return notes;
+  }
 }
