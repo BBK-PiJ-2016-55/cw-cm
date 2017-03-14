@@ -1,20 +1,33 @@
 package main.java.impl;
 
-import main.java.spec.*;
-
 import java.text.SimpleDateFormat;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import main.java.spec.Contact;
+import main.java.spec.ContactManager;
+import main.java.spec.FutureMeeting;
+import main.java.spec.Meeting;
+import main.java.spec.PastMeeting;
 
 /**
  * Created by svince04 on 17/02/2017.
  * PiJ coursework 3
  */
 public class ContactManagerImpl implements ContactManager {
-    private final Map<Integer, Contact> contactMap = new ConcurrentHashMap<>();
-    private final Map<Integer, Meeting> meetingMap = new ConcurrentHashMap<>();
-    private static int contactIdCounter = 1;
-    private static int meetingIdCounter = 1;
+    private Map<Integer, Contact> contactMap = new ConcurrentHashMap<>();
+    private Map<Integer, Meeting> meetingMap = new ConcurrentHashMap<>();
+    private int contactIdCounter = 1;
+    private int meetingIdCounter = 1;
 
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) throws IllegalArgumentException, NullPointerException {
@@ -87,7 +100,7 @@ public class ContactManagerImpl implements ContactManager {
     }
 
     @Override
-    public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException {
+    public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException, NullPointerException {
         Objects.requireNonNull(contact, "Contact cannot be null");
         if (!contactMap.containsValue(contact)) {
             throw new IllegalArgumentException("Invalid Contact entered.");

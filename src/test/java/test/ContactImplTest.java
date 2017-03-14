@@ -4,14 +4,15 @@ import main.java.impl.ContactImpl;
 import org.junit.Test;
 import main.java.spec.Contact;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by svince04 on 17/02/2017.
  * PiJ Coursework 3
  */
 public class ContactImplTest {
-    private final static String nameCarl = "Carl";
+    private final String nameCarl = "Carl";
     private final Contact carl = new ContactImpl(3, nameCarl, "Inherently unstable person. ");
     private final Contact viv = new ContactImpl(67, "Viv");
 

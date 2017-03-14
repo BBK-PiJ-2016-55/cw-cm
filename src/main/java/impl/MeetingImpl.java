@@ -10,9 +10,9 @@ import java.util.*;
  * PiJ coursework 3
  */
 public abstract class MeetingImpl implements Meeting {
-    private final int id;
-    private final Calendar date;
-    private final Set<Contact> attendees;
+    private int id;
+    private Calendar date;
+    private Set<Contact> attendees;
 
     MeetingImpl(int id, Calendar date, Set<Contact> attendees) throws IllegalArgumentException, NullPointerException {
         Objects.requireNonNull(date, "Date cannot be null");
