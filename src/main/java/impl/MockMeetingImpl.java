@@ -1,5 +1,6 @@
 package main.java.impl;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import main.java.spec.Meeting;
  * PiJ coursework 3.
  * Mock class to facilitate testing of abstract class MeetingImpl.
  */
-public class MockMeetingImpl extends MeetingImpl implements Meeting {
+public class MockMeetingImpl extends MeetingImpl implements Meeting, Serializable {
 
   /**
    * @param id int - the unique id number of the meeting.

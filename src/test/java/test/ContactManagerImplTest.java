@@ -435,7 +435,8 @@ public class ContactManagerImplTest {
 
   @Test
   public void testFlush() {
-    File file = new File("contactMap.ser");
+    conManImp.flush();
+    File file = new File("contacts.ser");
     assertTrue(file.exists());
   }
 }

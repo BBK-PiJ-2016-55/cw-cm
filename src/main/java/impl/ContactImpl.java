@@ -1,5 +1,6 @@
 package main.java.impl;
 
+import java.io.Serializable;
 import java.util.Objects;
 import main.java.spec.Contact;
 
@@ -7,7 +8,7 @@ import main.java.spec.Contact;
  * Created by svince04 on 17/02/2017.
  * PiJ Coursework 3.
  */
-public class ContactImpl implements Contact {
+public class ContactImpl implements Contact, Serializable {
 
   private int id;
   private String name;

@@ -1,5 +1,6 @@
 package main.java.impl;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,7 +14,7 @@ import main.java.spec.Meeting;
  * Created by svince04 on 17/02/2017.
  * PiJ coursework 3.
  */
-public abstract class MeetingImpl implements Meeting {
+public abstract class MeetingImpl implements Meeting, Serializable {
   private int id;
   private Calendar date;
   private Set<Contact> attendees;

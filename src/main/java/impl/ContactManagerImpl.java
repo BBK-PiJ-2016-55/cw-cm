@@ -1,5 +1,6 @@
 package main.java.impl;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -20,10 +21,12 @@ import main.java.spec.Meeting;
 import main.java.spec.PastMeeting;
 
 /**
- * Created by svince04 on 17/02/2017.
- * PiJ coursework 3
+ * PiJ coursework 3.
+ * Implementation of {@see ContactManager}.
+ * @author svince04
+ * @date 17/02/2017.
  */
-public class ContactManagerImpl implements ContactManager {
+public class ContactManagerImpl implements ContactManager, Serializable {
   private Map<Integer, Contact> contactMap = new ConcurrentHashMap<>();
   private Map<Integer, Meeting> meetingMap = new ConcurrentHashMap<>();
   private int contactIdCounter = 1;
@@ -194,6 +197,9 @@ public class ContactManagerImpl implements ContactManager {
     return returnMeeting;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public int addNewContact(String name, String notes)
           throws IllegalArgumentException, NullPointerException {
@@ -209,6 +215,9 @@ public class ContactManagerImpl implements ContactManager {
     return newContact.getId();
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public Set<Contact> getContacts(String name) throws NullPointerException {
     Objects.requireNonNull(name, "Name cannot be null");
@@ -229,6 +238,9 @@ public class ContactManagerImpl implements ContactManager {
     return nameSet;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public Set<Contact> getContacts(int... ids) throws IllegalArgumentException {
     if (ids.length == 0) {
@@ -245,8 +257,17 @@ public class ContactManagerImpl implements ContactManager {
     return idSet;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public void flush() {
-
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("contacts.ser"))) {
+      out.writeObject(contactMap);
+      out.writeObject(meetingMap);
+    } catch (IOException exception) {
+      System.out.println("Couldn't write contacts.ser");
+      exception.printStackTrace();
+    }
   }
 }

@@ -1,5 +1,6 @@
 package main.java.impl;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ import main.java.spec.PastMeeting;
  * Created by svince04 on 17/02/2017.
  * PiJ coursework 3.
  */
-public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
+public class PastMeetingImpl extends MeetingImpl implements PastMeeting, Serializable {
   private String notes;
 
   /**
