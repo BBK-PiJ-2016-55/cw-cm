@@ -43,8 +43,6 @@ public class ContactManagerImplTest {
   private final String tom = "Tom";
   private final String tommy = "Tommy";
   private final String hobbes = "Hobbes";
-  private final String nameLassie = "Lassie";
-  private final String notesLassie = "Odd dog out";
   private final String genericNotes = "I wish I had something interesting to say";
 
   @Before
@@ -62,7 +60,7 @@ public class ContactManagerImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewContactEmptyNotes() {
-    conManImp.addNewContact("Felix", "");
+    conManImp.addNewContact(tom, "");
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -77,7 +75,7 @@ public class ContactManagerImplTest {
 
   @Test (expected = NullPointerException.class)
   public void testAddNewContactNullNotes() {
-    conManImp.addNewContact("Felix", null);
+    conManImp.addNewContact(tom, null);
   }
 
   @Test
@@ -98,8 +96,8 @@ public class ContactManagerImplTest {
   @Test
   public void testAddNewContactUniqueId() {
     int tomId = conManImp.addNewContact(tom, genericNotes);
-    int sylvesterId = conManImp.addNewContact("Sylvester", genericNotes);
-    assertNotSame(tomId, sylvesterId);
+    int hobbesId = conManImp.addNewContact(hobbes, genericNotes);
+    assertNotSame(tomId, hobbesId);
   }
 
   @Test
@@ -122,7 +120,7 @@ public class ContactManagerImplTest {
 
   @Test
   public void testGetContactsNoMatches() {
-    tempContactSet = conManImp.getContacts("Fritz");
+    tempContactSet = conManImp.getContacts(hobbes);
     assertEquals(0, tempContactSet.size());
   }
 
@@ -183,8 +181,8 @@ public class ContactManagerImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddFutureMeetingNonexistentContact() {
-    Contact lassie = new ContactImpl(4, nameLassie, notesLassie);
-    fullContactSet.add(lassie);
+    Contact tomContact = new ContactImpl(4, tom, genericNotes);
+    fullContactSet.add(tomContact);
     conManImp.addFutureMeeting(fullContactSet, date);
   }
 
@@ -235,8 +233,8 @@ public class ContactManagerImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewPastMeetingNonexistentContact() {
-    Contact lassie = new ContactImpl(4, nameLassie, notesLassie);
-    fullContactSet.add(lassie);
+    Contact tomContact = new ContactImpl(4, tom, genericNotes);
+    fullContactSet.add(tomContact);
     conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
   }
 
@@ -302,8 +300,8 @@ public class ContactManagerImplTest {
   @Test
   public void testAddMeetingNotesPastMeeting() {
     int id = conManImp.addNewPastMeeting(fullContactSet, pastDate, "");
-    PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, "11/10 would meet again.");
-    assertEquals("11/10 would meet again.", returnedMeeting.getNotes());
+    PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, genericNotes);
+    assertEquals(genericNotes, returnedMeeting.getNotes());
     assertTrue(returnedMeeting instanceof PastMeetingImpl);
   }
 
@@ -366,8 +364,8 @@ public class ContactManagerImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetFutureMeetingListNonexistentContact() {
-    Contact lassie = new ContactImpl(2, nameLassie, notesLassie);
-    conManImp.getFutureMeetingList(lassie);
+    Contact tomContact = new ContactImpl(2, tom, genericNotes);
+    conManImp.getFutureMeetingList(tomContact);
   }
 
   @Test (expected = NullPointerException.class)
@@ -414,8 +412,8 @@ public class ContactManagerImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetPastMeetingListForNonexistentContact() {
-    Contact lassie = new ContactImpl(2, nameLassie, notesLassie);
-    conManImp.getPastMeetingListFor(lassie);
+    Contact tomContact = new ContactImpl(2, tom, genericNotes);
+    conManImp.getPastMeetingListFor(tomContact);
   }
 
   @Test (expected = NullPointerException.class)
@@ -459,13 +457,4 @@ public class ContactManagerImplTest {
     conManImp.getMeetingListOn(null);
   }
 
-  @After
-  public void tearDown() {
-    conManImp = null;
-    tempContactSet = null;
-    partContactSet = null;
-    fullContactSet = null;
-    fullContactList.clear();
-
-  }
 }

@@ -14,7 +14,11 @@ import main.java.spec.Meeting;
 public class MockMeetingImpl extends MeetingImpl implements Meeting {
 
   /**
-   * // todo inherit MeetingImpl constructor.
+   * @param id int - the unique id number of the meeting.
+   * @param date Calendar object contain date and time of the meeting.
+   * @param attendees Set of Contacts affiliated with the meeting.
+   * @throws IllegalArgumentException when ID is 0 or below.
+   * @throws NullPointerException when passed empty Contact Set.
    */
   public MockMeetingImpl(int id, Calendar date, Set<Contact> attendees)
           throws IllegalArgumentException, NullPointerException {
