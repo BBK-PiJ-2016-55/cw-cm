@@ -1,5 +1,11 @@
 package test.java.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,8 +20,6 @@ import main.java.spec.PastMeeting;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by svince04 on 18/02/2017.
@@ -36,11 +40,11 @@ public class ContactManagerImplTest {
   private final String hobbes = "Hobbes";
   private final String genericNotes = "I wish I had something interesting to say";
 
-    /**
-     * Sets up a ContactManagerImpl instance to reduce repetition in tests.
-     * Adds three contacts and constructs two contact sets
-     * for easier access to Contact objects.
-     */
+  /**
+   * Sets up a ContactManagerImpl instance to reduce repetition in tests.
+   * Adds three contacts and constructs two contact sets
+   * for easier access to Contact objects.
+   */
   @Before
   public void startUp() {
     conManImp = new ContactManagerImpl();
