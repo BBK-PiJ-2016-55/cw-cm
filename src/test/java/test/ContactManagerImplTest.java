@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -35,10 +36,11 @@ public class ContactManagerImplTest {
   private Set<Contact> partContactSet;
   private Set<Contact> tempContactSet;
   private Contact garfield;
-  private final String tom = "Tom";
-  private final String tommy = "Tommy";
-  private final String hobbes = "Hobbes";
-  private final String genericNotes = "I wish I had something interesting to say";
+  private static final String empty = "";
+  private static final String tom = "Tom";
+  private static final String tommy = "Tommy";
+  private static final String hobbes = "Hobbes";
+  private static final String genericNotes = "I wish I had something interesting to say";
 
   /**
    * Sets up a ContactManagerImpl instance to reduce repetition in tests.
@@ -52,7 +54,7 @@ public class ContactManagerImplTest {
     conManImp.addNewContact("Garfield", "Won't meet on a Monday.");
     conManImp.addNewContact("Cat in the Hat", "Doesn't follow through on promises.");
     conManImp.addNewContact("Top Cat", "Authoritarian tendencies.");
-    fullContactSet = conManImp.getContacts("");
+    fullContactSet = conManImp.getContacts(empty);
     partContactSet = conManImp.getContacts("Cat");
     for (Contact contact : fullContactSet) {
       if (contact.getName().equals("Garfield")) {
@@ -65,12 +67,12 @@ public class ContactManagerImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewContactEmptyNotes() {
-    conManImp.addNewContact(tom, "");
+    conManImp.addNewContact(tom, empty);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewContactEmptyName() {
-    conManImp.addNewContact("", genericNotes);
+    conManImp.addNewContact(empty, genericNotes);
   }
 
   @Test (expected = NullPointerException.class)
@@ -86,7 +88,7 @@ public class ContactManagerImplTest {
   @Test
   public void testAddNewContactSingle() {
     conManImp.addNewContact(tom, genericNotes);
-    tempContactSet = conManImp.getContacts("");
+    tempContactSet = conManImp.getContacts(empty);
     assertEquals(4, tempContactSet.size());
   }
 
@@ -94,7 +96,7 @@ public class ContactManagerImplTest {
   public void testAddNewContactMulti() {
     conManImp.addNewContact(tom, genericNotes);
     conManImp.addNewContact(tommy, genericNotes);
-    tempContactSet = conManImp.getContacts("");
+    tempContactSet = conManImp.getContacts(empty);
     assertEquals(5, tempContactSet.size());
   }
 
@@ -113,7 +115,7 @@ public class ContactManagerImplTest {
 
   @Test
   public void testGetContactsEmptyString() {
-    tempContactSet = conManImp.getContacts("");
+    tempContactSet = conManImp.getContacts(empty);
     assertEquals(3, tempContactSet.size());
   }
 
@@ -299,7 +301,7 @@ public class ContactManagerImplTest {
 
   @Test
   public void testAddMeetingNotesPastMeeting() {
-    int id = conManImp.addNewPastMeeting(fullContactSet, pastDate, "");
+    int id = conManImp.addNewPastMeeting(fullContactSet, pastDate, empty);
     PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, genericNotes);
     assertEquals(genericNotes, returnedMeeting.getNotes());
   }
@@ -429,4 +431,11 @@ public class ContactManagerImplTest {
     conManImp.getMeetingListOn(null);
   }
 
+  // flush() tests
+
+  @Test
+  public void testFlush() {
+    File file = new File("contactMap.ser");
+    assertTrue(file.exists());
+  }
 }

@@ -14,6 +14,7 @@ import org.junit.Test;
 public class ContactImplTest {
   private final Contact snoopy = new ContactImpl(3, "Snoopy", "Deluded fantasist.");
   private final Contact odie = new ContactImpl(67, "Odie");
+  private static final String lassieName = "Lassie";
 
   @Test
   public void testFullConstructorGetId() {
@@ -62,17 +63,17 @@ public class ContactImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testFullConstructorZeroNegativeId() {
-    new ContactImpl(-7, "Lassie", "Makes my teeth hurt.");
+    new ContactImpl(-7, lassieName, "Makes my teeth hurt.");
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testBriefConstructorNegativeId() {
-    new ContactImpl(-7, "Lassie");
+    new ContactImpl(-7, lassieName);
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testBriefConstructorZeroId() {
-    new ContactImpl(0, "Lassie");
+    new ContactImpl(0, lassieName);
   }
 
   @Test (expected = NullPointerException.class)
@@ -87,7 +88,7 @@ public class ContactImplTest {
 
   @Test (expected = NullPointerException.class)
   public void testFullConstructorNullNotes() {
-    new ContactImpl(6, "Lassie", null);
+    new ContactImpl(6, lassieName, null);
   }
 
 }
