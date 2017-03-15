@@ -8,7 +8,6 @@ import java.util.Set;
 import main.java.impl.ContactImpl;
 import main.java.impl.FutureMeetingImpl;
 import main.java.spec.Contact;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,15 +16,13 @@ import org.junit.Test;
  * PiJ Coursework 3
  */
 public class FutureMeetingImplTest {
-  private Calendar date;
-  private Set<Contact> attendeeSet;
+  private Calendar date = new GregorianCalendar(2017, 4, 5, 11, 30);
+  private Set<Contact> attendeeSet = new HashSet<>();
+  private Contact iago = new ContactImpl(1, "Iago", "Powerful friends.");
 
   @Before
   public void setUp() {
-    attendeeSet = new HashSet<>();
-    Contact contact = new ContactImpl(1, "Theresa", "Smells slightly of cheese");
-    attendeeSet.add(contact);
-    date = new GregorianCalendar(2017, 4, 5, 11, 30);
+    attendeeSet.add(iago);
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -52,11 +49,5 @@ public class FutureMeetingImplTest {
   public void testAttendeesEmpty() {
     attendeeSet.clear();
     new FutureMeetingImpl(1, date, attendeeSet);
-  }
-
-  @After
-  public void tearDown() {
-    attendeeSet = null;
-    date = null;
   }
 }

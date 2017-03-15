@@ -42,8 +42,9 @@ public class ContactManagerImplTest {
 
   /**
    * Sets up a ContactManagerImpl instance to reduce repetition in tests.
-   * Adds three contacts and constructs two contact sets
+   * Adds three contacts to ContactManager + creates a full and partial contact set
    * for easier access to Contact objects.
+   * Retrieves Contact garfield and stores in an instance variable.
    */
   @Before
   public void startUp() {

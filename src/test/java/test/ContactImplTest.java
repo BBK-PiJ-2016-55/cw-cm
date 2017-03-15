@@ -12,91 +12,82 @@ import org.junit.Test;
  * PiJ Coursework 3
  */
 public class ContactImplTest {
-  private final String nameCarl = "Carl";
-  private final Contact carl = new ContactImpl(3, nameCarl, "Inherently unstable person. ");
-  private final Contact viv = new ContactImpl(67, "Viv");
+  private final Contact snoopy = new ContactImpl(3, "Snoopy", "Deluded fantasist.");
+  private final Contact odie = new ContactImpl(67, "Odie");
 
   @Test
   public void testFullConstructorGetId() {
-    int result = carl.getId();
-    assertEquals(3, result);
+    assertEquals(3, snoopy.getId());
   }
 
   @Test
   public void testBriefConstructorGetId() {
-    int result = viv.getId();
-    assertEquals(67, result);
+    assertEquals(67, odie.getId());
   }
 
   @Test
   public void testFullConstructorGetName() {
-    String result = carl.getName();
-    assertEquals(nameCarl, result);
+    assertEquals("Snoopy", snoopy.getName());
   }
 
   @Test
   public void testBriefConstructorGetName() {
-    String result = viv.getName();
-    assertEquals("Viv", result);
+    assertEquals("Odie", odie.getName());
   }
 
   @Test
   public void testGetNotesPopulated() {
-    String result = carl.getNotes();
-    assertEquals("Inherently unstable person. ", result);
+    assertEquals("Deluded fantasist.", snoopy.getNotes());
   }
 
   @Test
   public void testGetNotesUnpopulated() {
-    String result = viv.getNotes();
-    assertEquals("", result);
+    assertEquals("", odie.getNotes());
   }
 
   @Test
   public void testSetNotesMultiple() {
-    carl.addNotes("Quite rich. ");
-    carl.addNotes("Treat with caution. ");
-    String result = carl.getNotes();
-    assertTrue(result.contains("Inherently unstable person. "));
-    assertTrue(result.contains("Quite rich. "));
-    assertTrue(result.contains("Treat with caution. "));
+    snoopy.addNotes("Owns property.");
+    snoopy.addNotes("Large network.");
+    assertTrue(snoopy.getNotes().contains("Deluded fantasist."));
+    assertTrue(snoopy.getNotes().contains("Owns property."));
+    assertTrue(snoopy.getNotes().contains("Large network."));
   }
 
   @Test
   public void testSetNotesBriefConstructor() {
-    viv.addNotes("Dark horse");
-    String result = viv.getNotes();
-    assertEquals("Dark horse", result);
+    odie.addNotes("Harmless.");
+    assertEquals("Harmless.", odie.getNotes());
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testFullConstructorZeroNegativeId() {
-    new ContactImpl(-7, nameCarl, "Inherently unstable person");
+    new ContactImpl(-7, "Lassie", "Makes my teeth hurt.");
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testBriefConstructorNegativeId() {
-    new ContactImpl(-7, nameCarl);
+    new ContactImpl(-7, "Lassie");
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testBriefConstructorZeroId() {
-    new ContactImpl(0, nameCarl);
+    new ContactImpl(0, "Lassie");
   }
 
   @Test (expected = NullPointerException.class)
   public void testFullConstructorNullName() {
-    new ContactImpl(6, null, "Inherently unstable person");
+    new ContactImpl(6, null, "Makes my teeth hurt.");
   }
 
   @Test (expected = NullPointerException.class)
   public void testBriefConstructorNullName() {
-    new ContactImpl(6, null, "Inherently unstable person");
+    new ContactImpl(6, null, "Makes my teeth hurt.");
   }
 
   @Test (expected = NullPointerException.class)
   public void testFullConstructorNullNotes() {
-    new ContactImpl(6, nameCarl, null);
+    new ContactImpl(6, "Lassie", null);
   }
 
 }
