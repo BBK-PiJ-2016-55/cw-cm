@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import main.java.impl.ContactImpl;
 import main.java.impl.ContactManagerImpl;
-import main.java.impl.PastMeetingImpl;
 
 import main.java.spec.Contact;
-import main.java.spec.Meeting;
 import main.java.spec.PastMeeting;
 
 import org.junit.Before;
@@ -33,7 +30,6 @@ public class ContactManagerImplTest {
   private Set<Contact> fullContactSet;
   private Set<Contact> partContactSet;
   private Set<Contact> tempContactSet;
-  private List<Contact> fullContactList;
   private Contact garfield;
   private final String tom = "Tom";
   private final String tommy = "Tommy";
@@ -42,8 +38,8 @@ public class ContactManagerImplTest {
 
     /**
      * Sets up a ContactManagerImpl instance to reduce repetition in tests.
-     * Adds three contacts and contructs two contact sets
-     * + one contact arraylist for easier access to Contact objects.
+     * Adds three contacts and constructs two contact sets
+     * for easier access to Contact objects.
      */
   @Before
   public void startUp() {
@@ -54,11 +50,10 @@ public class ContactManagerImplTest {
     fullContactSet = conManImp.getContacts("");
     partContactSet = conManImp.getContacts("Cat");
     for (Contact contact : fullContactSet) {
-        if (contact.getName().equals("Garfield")) {
-            garfield = contact;
-        }
+      if (contact.getName().equals("Garfield")) {
+        garfield = contact;
+      }
     }
-    fullContactList = new ArrayList<>(fullContactSet);
   }
 
   //Contact tests
@@ -205,9 +200,8 @@ public class ContactManagerImplTest {
   @Test
   public void testGetFutureMeeting() {
     int meetingId = conManImp.addFutureMeeting(fullContactSet, date);
-    Meeting returnedMeeting = conManImp.getFutureMeeting(meetingId);
-    assertTrue(returnedMeeting.getDate().equals(date));
-    assertTrue(returnedMeeting.getContacts().equals(fullContactSet));
+    assertEquals(date, conManImp.getFutureMeeting(meetingId).getDate());
+    assertEquals(fullContactSet, conManImp.getFutureMeeting(meetingId).getContacts());
   }
 
   @Test
@@ -221,8 +215,8 @@ public class ContactManagerImplTest {
     conManImp.getFutureMeeting(id);
   }
 
-
   // PastMeeting tests
+
   // addNewPastMeeting tests
 
   @Test
@@ -237,8 +231,7 @@ public class ContactManagerImplTest {
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewPastMeetingNonexistentContact() {
-    Contact tomContact = new ContactImpl(4, tom, genericNotes);
-    fullContactSet.add(tomContact);
+    fullContactSet.add(new ContactImpl(4, tom, genericNotes));
     conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
   }
 
@@ -257,9 +250,8 @@ public class ContactManagerImplTest {
   @Test
   public void testGetPastMeeting() {
     int meetingId = conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
-    Meeting returnedMeeting = conManImp.getPastMeeting(meetingId);
-    assertTrue(returnedMeeting.getDate().equals(pastDate));
-    assertTrue(returnedMeeting.getContacts().equals(fullContactSet));
+    assertEquals(pastDate, conManImp.getPastMeeting(meetingId).getDate());
+    assertEquals(fullContactSet, conManImp.getPastMeeting(meetingId).getContacts());
   }
 
   @Test
@@ -278,9 +270,8 @@ public class ContactManagerImplTest {
   @Test
   public void testGetMeeting() {
     int meetingId = conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
-    Meeting returnedMeeting = conManImp.getMeeting(meetingId);
-    assertTrue(returnedMeeting.getDate().equals(pastDate));
-    assertTrue(returnedMeeting.getContacts().equals(fullContactSet));
+    assertEquals(pastDate, conManImp.getMeeting(meetingId).getDate());
+    assertEquals(fullContactSet, conManImp.getMeeting(meetingId).getContacts());
   }
 
   @Test
@@ -306,7 +297,6 @@ public class ContactManagerImplTest {
     int id = conManImp.addNewPastMeeting(fullContactSet, pastDate, "");
     PastMeeting returnedMeeting = conManImp.addMeetingNotes(id, genericNotes);
     assertEquals(genericNotes, returnedMeeting.getNotes());
-    assertTrue(returnedMeeting instanceof PastMeetingImpl);
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -331,27 +321,22 @@ public class ContactManagerImplTest {
   public void testGetFutureMeetingList() {
     conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
     conManImp.addFutureMeeting(partContactSet, date);
-    List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
-    assertSame(1, resultList.size());
+    assertEquals(1, conManImp.getFutureMeetingList(garfield).size());
   }
 
   @Test
   public void testGetFutureMeetingListNoMeetings() {
     conManImp.addFutureMeeting(partContactSet, futureDateDistant);
     int id = conManImp.addNewContact(hobbes, genericNotes);
-    Set<Contact> hobbesSet = conManImp.getContacts(id);
-    ArrayList<Contact> hobbesList = new ArrayList<>(hobbesSet);
-    List<Meeting> resultList = conManImp.getFutureMeetingList(hobbesList.get(0));
-    assertSame(0, resultList.size());
+    ArrayList<Contact> hobbesList = new ArrayList<>(conManImp.getContacts(id));
+    assertEquals(0, conManImp.getFutureMeetingList(hobbesList.get(0)).size());
   }
 
   @Test
   public void testGetFutureMeetingListDateSorting() {
-    conManImp.addFutureMeeting(partContactSet, date);
     conManImp.addFutureMeeting(fullContactSet, date);
     conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
-    List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
-    assertTrue(resultList.get(0).getDate().equals(date));
+    assertEquals(date, conManImp.getFutureMeetingList(garfield).get(0).getDate());
   }
 
   @Test
@@ -359,14 +344,13 @@ public class ContactManagerImplTest {
     conManImp.addFutureMeeting(fullContactSet, date);
     conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
     conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
-    List<Meeting> resultList = conManImp.getFutureMeetingList(garfield);
-    assertSame(2, resultList.size());
+    assertEquals(2, conManImp.getFutureMeetingList(garfield).size());
+    assertNotEquals(pastDate, conManImp.getFutureMeetingList(garfield).get(0).getDate());
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetFutureMeetingListNonexistentContact() {
-    Contact tomContact = new ContactImpl(2, tom, genericNotes);
-    conManImp.getFutureMeetingList(tomContact);
+    conManImp.getFutureMeetingList(new ContactImpl(2, tom, genericNotes));
   }
 
   @Test (expected = NullPointerException.class)
@@ -381,31 +365,25 @@ public class ContactManagerImplTest {
     conManImp.addNewPastMeeting(partContactSet, pastDate, genericNotes);
     conManImp.addNewPastMeeting(fullContactSet, pastDateDistant, genericNotes);
     conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
-    List<PastMeeting> resultList = conManImp.getPastMeetingListFor(garfield);
-    assertSame(2, resultList.size());
+    assertEquals(2, conManImp.getPastMeetingListFor(garfield).size());
   }
 
   @Test
   public void testGetPastMeetingListForNoMeetings() {
     conManImp.addNewPastMeeting(partContactSet, pastDateDistant, genericNotes);
-    int id = conManImp.addNewContact(hobbes, genericNotes);
-    ArrayList<Contact> hobbesList = new ArrayList<>(conManImp.getContacts(id));
-    List<PastMeeting> resultList = conManImp.getPastMeetingListFor(hobbesList.get(0));
-    assertSame(0, resultList.size());
+    assertEquals(0, conManImp.getPastMeetingListFor(garfield).size());
   }
 
   @Test
   public void testGetPastMeetingListForDateSorting() {
     conManImp.addNewPastMeeting(fullContactSet, pastDateDistant, genericNotes);
     conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
-    List<PastMeeting> resultList = conManImp.getPastMeetingListFor(garfield);
-    assertTrue(resultList.get(0).getDate().equals(pastDateDistant));
+    assertEquals(pastDateDistant, conManImp.getPastMeetingListFor(garfield).get(0).getDate());
   }
 
   @Test (expected = IllegalArgumentException.class)
   public void testGetPastMeetingListForNonexistentContact() {
-    Contact tomContact = new ContactImpl(2, tom, genericNotes);
-    conManImp.getPastMeetingListFor(tomContact);
+    conManImp.getPastMeetingListFor(new ContactImpl(2, tom, genericNotes));
   }
 
   @Test (expected = NullPointerException.class)
@@ -420,8 +398,7 @@ public class ContactManagerImplTest {
     conManImp.addFutureMeeting(fullContactSet, date);
     conManImp.addFutureMeeting(fullContactSet, date);
     conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
-    List<Meeting> resultList = conManImp.getMeetingListOn(date);
-    assertSame(2, resultList.size());
+    assertEquals(2, conManImp.getMeetingListOn(date).size());
   }
 
   @Test
@@ -431,17 +408,15 @@ public class ContactManagerImplTest {
     conManImp.addFutureMeeting(fullContactSet, dateLaterHour);
     conManImp.addFutureMeeting(fullContactSet, date);
     conManImp.addFutureMeeting(fullContactSet, dateEarlierHour);
-    List<Meeting> resultList = conManImp.getMeetingListOn(date);
-    assertTrue(resultList.get(0).getDate().equals(dateEarlierHour));
-    assertTrue(resultList.get(1).getDate().equals(date));
-    assertTrue(resultList.get(2).getDate().equals(dateLaterHour));
+    assertEquals(dateEarlierHour, conManImp.getMeetingListOn(date).get(0).getDate());
+    assertEquals(date, conManImp.getMeetingListOn(date).get(1).getDate());
+    assertEquals(dateLaterHour, conManImp.getMeetingListOn(date).get(2).getDate());
   }
 
   @Test
   public void testGetMeetingListOnNoMeetings() {
     conManImp.addNewPastMeeting(partContactSet, pastDateDistant, genericNotes);
-    List<Meeting> resultList = conManImp.getMeetingListOn(date);
-    assertSame(0, resultList.size());
+    assertEquals(0, conManImp.getMeetingListOn(date).size());
   }
 
   @Test (expected = NullPointerException.class)
