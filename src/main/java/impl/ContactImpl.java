@@ -21,13 +21,7 @@ public class ContactImpl implements Contact, Serializable {
    * @throws NullPointerException if name is null.
    */
   public ContactImpl(int id, String name) throws IllegalArgumentException, NullPointerException {
-    Objects.requireNonNull(name, "Name cannot be null");
-    if (id <= 0) {
-      throw new IllegalArgumentException("ID cannot be 0 or less");
-    }
-    this.id = id;
-    this.name = name;
-    this.notes = "";
+        this(id, name, "");
   }
 
   /**
