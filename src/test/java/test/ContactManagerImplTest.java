@@ -19,6 +19,7 @@ import main.java.impl.ContactManagerImpl;
 import main.java.spec.Contact;
 import main.java.spec.PastMeeting;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -434,9 +435,17 @@ public class ContactManagerImplTest {
   // flush() tests
 
   @Test
-  public void testFlush() {
+  public void testFlushFileCreation() {
     conManImp.flush();
     File file = new File("contacts.ser");
     assertTrue(file.exists());
+  }
+
+  @After
+  public void cleanUp() {
+    File file = new File("contacts.ser");
+    if (file.exists()) {
+      file.delete();
+    }
   }
 }

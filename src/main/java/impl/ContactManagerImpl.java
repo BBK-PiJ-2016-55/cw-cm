@@ -24,13 +24,37 @@ import main.java.spec.PastMeeting;
  * PiJ coursework 3.
  * Implementation of {@see ContactManager}.
  * @author svince04
- * @date 17/02/2017.
  */
 public class ContactManagerImpl implements ContactManager, Serializable {
-  private Map<Integer, Contact> contactMap = new ConcurrentHashMap<>();
-  private Map<Integer, Meeting> meetingMap = new ConcurrentHashMap<>();
-  private int contactIdCounter = 1;
-  private int meetingIdCounter = 1;
+  private Map<Integer, Contact> contactMap;
+  private Map<Integer, Meeting> meetingMap;
+  private int contactIdCounter;
+  private int meetingIdCounter;
+
+  // todo - add javadoc
+  public ContactManagerImpl() {
+    if (new File("contacts.ser").exists()) {
+      loadContactManagerImpl();
+    } else {
+      contactMap = new ConcurrentHashMap<>();
+      meetingMap = new ConcurrentHashMap<>();
+      contactIdCounter = 1;
+      meetingIdCounter = 1;
+    }
+  }
+
+  // todo - add javadoc
+  public void loadContactManagerImpl() {
+    try {
+      ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"));
+      this.contactMap = (Map<Integer, Contact>) (on.readObject());
+      this.meetingMap = (Map<Integer, Meeting>) (on.readObject());
+      this.contactIdCounter = contactMap.size() + 1;
+      this.meetingIdCounter = meetingMap.size() + 1;
+    } catch (Exception e) {
+      System.out.println("Problem serializing: " + e);
+    }
+  }
 
   @Override
   public int addFutureMeeting(Set<Contact> contacts, Calendar date)
