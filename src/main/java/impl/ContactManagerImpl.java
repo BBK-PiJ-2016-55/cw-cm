@@ -12,13 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import main.java.spec.Contact;
 import main.java.spec.ContactManager;
@@ -42,8 +42,8 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (new File("contacts.ser").exists()) {
       loadContactManagerImpl();
     } else {
-      contactMap = new ConcurrentHashMap<>();
-      meetingMap = new ConcurrentHashMap<>();
+      contactMap = new HashMap<>();
+      meetingMap = new HashMap<>();
       contactIdCounter = 1;
       meetingIdCounter = 1;
     }
@@ -51,8 +51,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
 
   // todo - add javadoc
   private void loadContactManagerImpl() {
-    try {
-      ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"));
+    try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
       this.contactMap = (Map<Integer, Contact>) (on.readObject());
       this.meetingMap = (Map<Integer, Meeting>) (on.readObject());
       this.contactIdCounter = contactMap.size() + 1;

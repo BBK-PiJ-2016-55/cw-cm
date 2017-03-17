@@ -445,6 +445,8 @@ public class ContactManagerImplTest {
   @After
   public void cleanUp() {
     File file = new File("contacts.ser");
-    file.delete();
+    if (file.exists() && !file.delete()) {
+      System.out.println("Unable to delete file");
+    }
   }
 }
