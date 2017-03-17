@@ -17,6 +17,7 @@ import main.java.impl.ContactImpl;
 import main.java.impl.ContactManagerImpl;
 
 import main.java.spec.Contact;
+import main.java.spec.ContactManager;
 import main.java.spec.PastMeeting;
 
 import org.junit.After;
@@ -28,7 +29,7 @@ import org.junit.Test;
  * PiJ Coursework 3
  */
 public class ContactManagerImplTest {
-  private ContactManagerImpl conManImp;
+  private ContactManager conManImp;
   private final Calendar date = new GregorianCalendar(2017, 4, 5, 12, 10);
   private final Calendar futureDateDistant = new GregorianCalendar(2022, 4, 5);
   private final Calendar pastDate = new GregorianCalendar(2012, 4, 5);
