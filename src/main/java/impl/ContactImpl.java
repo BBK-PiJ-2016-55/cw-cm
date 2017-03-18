@@ -60,7 +60,10 @@ public class ContactImpl implements Contact, Serializable {
 
   @Override
   public void addNotes(String notes) {
-    // todo - add delimiter.
+    // If there are existing notes, delimit with a space.
+    if (this.notes != "") {
+      notes = " " + notes;
+    }
     this.notes += notes;
   }
 }
