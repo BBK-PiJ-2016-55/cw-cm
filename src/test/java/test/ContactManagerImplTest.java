@@ -20,6 +20,7 @@ import main.java.spec.Contact;
 import main.java.spec.ContactManager;
 import main.java.spec.PastMeeting;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -441,4 +442,41 @@ public class ContactManagerImplTest {
     assertTrue(file.exists());
     assertTrue(file.delete());
   }
+
+  @Test
+  public void testFlushContactList() {
+    conManImp.addNewPastMeeting(partContactSet, pastDateDistant, genericNotes);
+    conManImp.flush();
+    assertEquals(new ContactManagerImpl().getContacts("Cat").size(), partContactSet.size());
+  }
+
+  @Test
+  public void testFlushContactListMultiFlush() {
+    conManImp.addNewPastMeeting(fullContactSet, pastDateDistant, genericNotes);
+    conManImp.flush();
+    assertEquals(new ContactManagerImpl().getContacts(empty).size(), 3);
+    conManImp.addNewContact("Salem", "Magical.");
+    conManImp.flush();
+    assertEquals(new ContactManagerImpl().getContacts(empty).size(), 4);
+  }
+
+  @Test
+  public void testFlushMeetingListMultiFlush() {
+    conManImp.addFutureMeeting(partContactSet, futureDateDistant);
+    conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
+    conManImp.flush();
+    Calendar futureDateDistantEve = new GregorianCalendar(2022, 4, 5, 18, 5);
+    conManImp.addFutureMeeting(partContactSet, futureDateDistantEve);
+    conManImp.flush();
+    assertEquals(3, new ContactManagerImpl().getMeetingListOn(futureDateDistant).size());
+  }
+
+  @After
+  public void cleanUp() {
+    File file = new File("contacts.ser");
+    if (file.exists()) {
+      assertTrue(file.delete());
+    }
+  }
 }
+
