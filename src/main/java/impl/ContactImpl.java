@@ -61,8 +61,8 @@ public class ContactImpl implements Contact, Serializable {
   @Override
   public void addNotes(String notes) {
     // If there are existing notes, delimit with a space.
-    if (this.notes != "") {
-      notes = " " + notes;
+    if (!this.notes.equals("")) {
+      this.notes += " ";
     }
     this.notes += notes;
   }
