@@ -241,7 +241,6 @@ public class ContactManagerImpl implements ContactManager, Serializable {
       throw new IllegalStateException("Meeting is not in the past.");
     }
     // Create new PastMeeting with the same ID
-    // todo - check if populated notes should be concatenated or replaced
     PastMeetingImpl returnMeeting = new PastMeetingImpl(id, getMeeting(id).getDate(),
         getMeeting(id).getContacts(), text);
     // Replace outdated or note-free meeting in meetingMap

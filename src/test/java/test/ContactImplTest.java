@@ -59,7 +59,10 @@ public class ContactImplTest {
   public void testSetNotesBriefConstructor() {
     odie.addNotes("Harmless.");
     assertEquals("Harmless.", odie.getNotes());
+    odie.addNotes("Mostly.");
+    assertEquals("Harmless. Mostly.", odie.getNotes());
   }
+
 
   @Test (expected = IllegalArgumentException.class)
   public void testFullConstructorZeroNegativeId() {
