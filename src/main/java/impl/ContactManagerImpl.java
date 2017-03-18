@@ -32,39 +32,25 @@ import main.java.spec.PastMeeting;
  * @author svince04
  */
 public class ContactManagerImpl implements ContactManager, Serializable {
-  private Map<Integer, Contact> contactMap;
-  private Map<Integer, Meeting> meetingMap;
-  private int contactIdCounter;
-  private int meetingIdCounter;
+  private Map<Integer, Contact> contactMap = new HashMap<>();
+  private Map<Integer, Meeting> meetingMap = new HashMap<>();
+  private int contactIdCounter = 1;
+  private int meetingIdCounter = 1;
 
   /**
    * Constructor.
    */
+  @SuppressWarnings("unchecked")
   public ContactManagerImpl() {
     if (new File("contacts.ser").exists()) {
-      loadContactManagerImpl();
-    } else {
-        // todo - will these be better instatnttiated in the instace variable?
-      contactMap = new HashMap<>();
-      meetingMap = new HashMap<>();
-      contactIdCounter = 1;
-      meetingIdCounter = 1;
-    }
-  }
-
-  /**
-   * Populates object with data from serialized file.
-   */
-  @SuppressWarnings("unchecked")
-  private void loadContactManagerImpl() {
-    try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
-      this.contactMap = (Map<Integer, Contact>) (on.readObject());
-      this.meetingMap = (Map<Integer, Meeting>) (on.readObject());
-      // todo - maybe don't need these if instantiating at instance lever?
-      this.contactIdCounter = contactMap.size() + 1;
-      this.meetingIdCounter = meetingMap.size() + 1;
-    } catch (Exception e) {
-      System.out.println("Problem serializing: " + e);
+      try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
+        contactMap = (Map<Integer, Contact>) (on.readObject());
+        meetingMap = (Map<Integer, Meeting>) (on.readObject());
+        contactIdCounter += contactMap.size();
+        meetingIdCounter += meetingMap.size();
+      } catch (Exception e) {
+        System.out.println("Problem serializing: " + e);
+      }
     }
   }
 
@@ -146,7 +132,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    */
   @Override
   public Meeting getMeeting(int id) {
-      // todo - what happens if three lines below are removed?
+    // todo - what happens if three lines below are removed?
     if (!meetingMap.containsKey(id)) {
       return null;
     }
@@ -289,7 +275,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     Objects.requireNonNull(name, "Name cannot be null");
     Set<Contact> nameSet = new HashSet<>();
     // return full list if string is empty
-      // todo - can I just return the whole hashmap instead of iterating through?
+    // todo - can I just return the whole hashmap instead of iterating through?
     if (name.equals("")) {
       for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
         nameSet.add(entry.getValue());
