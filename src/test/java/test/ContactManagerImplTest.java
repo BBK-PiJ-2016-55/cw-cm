@@ -67,22 +67,22 @@ public class ContactManagerImplTest {
 
   //Contact tests
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testAddNewContactEmptyNotes() {
     conManImp.addNewContact(tom, empty);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testAddNewContactEmptyName() {
     conManImp.addNewContact(empty, genericNotes);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test (expected = NullPointerException.class)
   public void testAddNewContactNullName() {
     conManImp.addNewContact(null, genericNotes);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test (expected = NullPointerException.class)
   public void testAddNewContactNullNotes() {
     conManImp.addNewContact(tom, null);
   }
@@ -121,7 +121,7 @@ public class ContactManagerImplTest {
     assertEquals(3, tempContactSet.size());
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test (expected = NullPointerException.class)
   public void testGetContactsNullInput() {
     String nullName = null;
     conManImp.getContacts(nullName);
@@ -155,12 +155,12 @@ public class ContactManagerImplTest {
     assertEquals(tempContactSet, returnedContacts);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testGetContactsIdsNoIds() {
     conManImp.getContacts();
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testGetContactsIdsInvalidIds() {
     conManImp.getContacts(-1, 9);
   }
@@ -183,23 +183,23 @@ public class ContactManagerImplTest {
     assertEquals(futureDateDistant, conManImp.getFutureMeeting(id).getDate());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testAddFutureMeetingPastError() {
     conManImp.addFutureMeeting(fullContactSet, pastDate);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testAddFutureMeetingNonexistentContact() {
     fullContactSet.add(new ContactImpl(4, tom, genericNotes));
     conManImp.addFutureMeeting(fullContactSet, date);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test (expected = NullPointerException.class)
   public void testAddFutureMeetingNullDate() {
     conManImp.addFutureMeeting(fullContactSet, null);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test (expected = NullPointerException.class)
   public void testAddFutureMeetingNullContacts() {
     conManImp.addFutureMeeting(null, date);
   }
@@ -231,7 +231,7 @@ public class ContactManagerImplTest {
     assertNull(conManImp.getFutureMeeting(250));
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test (expected = IllegalStateException.class)
   public void testGetFutureMeetingInPastThrowsError() {
     int id = conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
     conManImp.getFutureMeeting(id);
@@ -246,23 +246,23 @@ public class ContactManagerImplTest {
     assertNotNull(conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testAddNewPastMeetingFutureDateError() {
     conManImp.addNewPastMeeting(fullContactSet, date, genericNotes);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test (expected = IllegalArgumentException.class)
   public void testAddNewPastMeetingNonexistentContact() {
     fullContactSet.add(new ContactImpl(4, tom, genericNotes));
     conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test (expected = NullPointerException.class)
   public void testAddNewPastMeetingNullDate() {
     conManImp.addNewPastMeeting(fullContactSet, null, genericNotes);
   }
 
-  @Test(expected = NullPointerException.class)
+  @Test (expected = NullPointerException.class)
   public void testAddNewPastMeetingNullContacts() {
     conManImp.addFutureMeeting(null, date);
   }
@@ -281,7 +281,7 @@ public class ContactManagerImplTest {
     assertNull(conManImp.getPastMeeting(250));
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test (expected = IllegalStateException.class)
   public void testGetPastMeetingInFutureThrowsError() {
     int id = conManImp.addFutureMeeting(fullContactSet, date);
     conManImp.getPastMeeting(id);

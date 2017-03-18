@@ -128,7 +128,6 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (!dateInFuture(meetingMap.get(id).getDate())) {
       throw new IllegalStateException("Meeting is not in the future.");
     }
-    // todo - additional checks and measures if a PastMeeting (by date) sneaks in here
     return (FutureMeeting) meetingMap.get(id);
   }
 
@@ -137,10 +136,6 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    */
   @Override
   public Meeting getMeeting(int id) {
-    // todo - what happens if three lines below are removed?
-    if (!meetingMap.containsKey(id)) {
-      return null;
-    }
     return meetingMap.get(id);
   }
 
