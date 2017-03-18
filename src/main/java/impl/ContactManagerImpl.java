@@ -61,6 +61,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     }
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public int addFutureMeeting(Set<Contact> contacts, Calendar date)
           throws IllegalArgumentException, NullPointerException {
@@ -102,6 +105,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return date.compareTo(Calendar.getInstance()) == 1;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public PastMeeting getPastMeeting(int id) throws IllegalStateException {
     if (!meetingMap.containsKey(id)) {
@@ -113,6 +119,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return (PastMeeting) meetingMap.get(id);
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public FutureMeeting getFutureMeeting(int id) throws IllegalStateException {
     if (!meetingMap.containsKey(id)) {
@@ -124,6 +133,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return (FutureMeeting) meetingMap.get(id);
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public Meeting getMeeting(int id) {
     if (!meetingMap.containsKey(id)) {
@@ -132,6 +144,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return meetingMap.get(id);
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException,
           NullPointerException {
@@ -153,6 +168,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return resultList;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public List<Meeting> getMeetingListOn(Calendar date) throws NullPointerException {
     Objects.requireNonNull(date, "Date cannot be null");
@@ -170,6 +188,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return resultList;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public List<PastMeeting> getPastMeetingListFor(Contact contact) throws
           NullPointerException, IllegalArgumentException {
@@ -190,6 +211,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return resultList;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) throws
           IllegalArgumentException, NullPointerException {
@@ -208,6 +232,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     return newPastMeeting.getId();
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public PastMeeting addMeetingNotes(int id, String text) throws
           IllegalArgumentException, IllegalStateException, NullPointerException {
