@@ -38,6 +38,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   private int meetingIdCounter = 1;
 
   /**
+   * //todo - put proper doc here
    * Constructor.
    */
   @SuppressWarnings("unchecked")
@@ -62,7 +63,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
           throws IllegalArgumentException, NullPointerException {
     Objects.requireNonNull(contacts, "Contacts cannot be null");
     Objects.requireNonNull(date, "Date cannot be null");
-    // Check that future meeting is not in past
+    // Checks that future meeting is not in past
     if (!dateInFuture(date)) {
       throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
     }
@@ -109,7 +110,11 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (dateInFuture(meetingMap.get(id).getDate())) {
       throw new IllegalStateException("Meeting is not in the past.");
     }
-    return (PastMeeting) meetingMap.get(id);
+    try {
+      return (PastMeeting) meetingMap.get(id);
+    } catch (ClassCastException exception) {
+      throw new IllegalStateException("Meeting is not a past meeting.");
+    }
   }
 
   /**

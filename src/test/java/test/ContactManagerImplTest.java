@@ -204,6 +204,19 @@ public class ContactManagerImplTest {
     conManImp.addFutureMeeting(null, date);
   }
 
+  @Test (expected = IllegalStateException.class)
+  public void testFutureMeetingInThePast() {
+    Calendar nowCal = Calendar.getInstance();
+    nowCal.add(Calendar.MILLISECOND, 1);
+    int id = conManImp.addFutureMeeting(fullContactSet, nowCal);
+    try {
+      Thread.sleep(10);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    conManImp.getPastMeeting(id);
+  }
+
   // getFutureMeeting tests
 
   @Test
