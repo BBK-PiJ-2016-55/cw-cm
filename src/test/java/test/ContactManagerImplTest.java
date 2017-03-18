@@ -451,13 +451,20 @@ public class ContactManagerImplTest {
   }
 
   @Test
+  public void testFlushContactListContiguousIds() {
+    conManImp.flush();
+    ContactManager reloadedConManImp = new ContactManagerImpl();
+    assertEquals(4, reloadedConManImp.addNewContact("Salem", "Magical."));
+  }
+
+  @Test
   public void testFlushContactListMultiFlush() {
     conManImp.addNewPastMeeting(fullContactSet, pastDateDistant, genericNotes);
     conManImp.flush();
-    assertEquals(new ContactManagerImpl().getContacts(empty).size(), 3);
+    assertEquals(3, new ContactManagerImpl().getContacts(empty).size());
     conManImp.addNewContact("Salem", "Magical.");
     conManImp.flush();
-    assertEquals(new ContactManagerImpl().getContacts(empty).size(), 4);
+    assertEquals(4, new ContactManagerImpl().getContacts(empty).size());
   }
 
   @Test
@@ -471,6 +478,9 @@ public class ContactManagerImplTest {
     assertEquals(3, new ContactManagerImpl().getMeetingListOn(futureDateDistant).size());
   }
 
+  /**
+   * Deletes file created by serialization, if present.
+   */
   @After
   public void cleanUp() {
     File file = new File("contacts.ser");

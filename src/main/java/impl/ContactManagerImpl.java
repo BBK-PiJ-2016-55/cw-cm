@@ -37,7 +37,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   private int contactIdCounter;
   private int meetingIdCounter;
 
-  // todo - add javadoc
+  /**
+   * Constructor.
+   */
   public ContactManagerImpl() {
     if (new File("contacts.ser").exists()) {
       loadContactManagerImpl();
@@ -49,7 +51,10 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     }
   }
 
-  // todo - add javadoc
+  /**
+   * Populates object with data from serialized file.
+   */
+  @SuppressWarnings("unchecked")
   private void loadContactManagerImpl() {
     try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
       this.contactMap = (Map<Integer, Contact>) (on.readObject());
