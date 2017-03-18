@@ -1,5 +1,5 @@
 package main.java.impl;
-
+// todo - make package names shorter!
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -44,6 +44,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (new File("contacts.ser").exists()) {
       loadContactManagerImpl();
     } else {
+        // todo - will these be better instatnttiated in the instace variable?
       contactMap = new HashMap<>();
       meetingMap = new HashMap<>();
       contactIdCounter = 1;
@@ -59,6 +60,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
       this.contactMap = (Map<Integer, Contact>) (on.readObject());
       this.meetingMap = (Map<Integer, Meeting>) (on.readObject());
+      // todo - maybe don't need these if instantiating at instance lever?
       this.contactIdCounter = contactMap.size() + 1;
       this.meetingIdCounter = meetingMap.size() + 1;
     } catch (Exception e) {
@@ -135,6 +137,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (!dateInFuture(meetingMap.get(id).getDate())) {
       throw new IllegalStateException("Meeting is not in the future.");
     }
+    // todo - additional checks and measures if a PastMeeting (by date) sneaks in here
     return (FutureMeeting) meetingMap.get(id);
   }
 
@@ -143,6 +146,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    */
   @Override
   public Meeting getMeeting(int id) {
+      // todo - what happens if three lines below are removed?
     if (!meetingMap.containsKey(id)) {
       return null;
     }
@@ -285,6 +289,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     Objects.requireNonNull(name, "Name cannot be null");
     Set<Contact> nameSet = new HashSet<>();
     // return full list if string is empty
+      // todo - can I just return the whole hashmap instead of iterating through?
     if (name.equals("")) {
       for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
         nameSet.add(entry.getValue());
