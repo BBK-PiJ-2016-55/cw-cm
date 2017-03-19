@@ -7,7 +7,6 @@ import spec.Contact;
 import spec.Meeting;
 
 /**
- * PiJ coursework 3.
  * Mock class to facilitate testing of {@see Meeting}.
  * @author svince04
  */

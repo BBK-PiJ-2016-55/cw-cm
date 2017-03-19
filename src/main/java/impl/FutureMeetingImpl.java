@@ -7,7 +7,6 @@ import spec.Contact;
 import spec.FutureMeeting;
 
 /**
- * PiJ coursework 3.
  * Implementation of {@see FutureMeeting}.
  * @author svince04
  */

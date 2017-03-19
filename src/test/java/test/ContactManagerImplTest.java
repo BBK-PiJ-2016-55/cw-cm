@@ -22,7 +22,6 @@ import spec.ContactManager;
 import spec.PastMeeting;
 
 /**
- * PiJ Coursework 3.
  * Unit tests for {@see ContactManagerImpl}.
  * @author svince04
  */

@@ -5,12 +5,10 @@ import java.util.Objects;
 import spec.Contact;
 
 /**
- * PiJ Coursework 3.
  * Implementation of {@see Contact}.
  * @author svince04
  */
 public class ContactImpl implements Contact, Serializable {
-
   private int id;
   private String name;
   private String notes;

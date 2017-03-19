@@ -7,7 +7,6 @@ import spec.Contact;
 import spec.PastMeeting;
 
 /**
- * PiJ coursework 3.
  * Implementation of {@see PastMeeting}.
  * @author svince04
  */
@@ -27,6 +26,9 @@ public class PastMeetingImpl extends MeetingImpl implements PastMeeting, Seriali
     this.notes = notes;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public String getNotes() {
     return notes;

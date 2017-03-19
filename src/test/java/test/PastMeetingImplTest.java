@@ -11,7 +11,6 @@ import org.junit.Test;
 import spec.Contact;
 
 /**
- * PiJ Coursework 3.
  * Unit tests for {@see PastMeetingImpl}.
  * @author svince04
  */

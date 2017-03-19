@@ -10,7 +10,6 @@ import spec.Meeting;
 
 
 /**
- * PiJ coursework 3.
  * Implementation of {@see Meeting}.
  * @author svince04
  */
@@ -39,16 +38,25 @@ public abstract class MeetingImpl implements Meeting, Serializable {
     this.attendees = attendees;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public int getId() {
     return id;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public Calendar getDate() {
     return (Calendar) date.clone();
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public Set<Contact> getContacts() {
     return new HashSet<>(attendees);

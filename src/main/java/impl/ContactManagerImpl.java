@@ -27,7 +27,6 @@ import spec.Meeting;
 import spec.PastMeeting;
 
 /**
- * PiJ coursework 3.
  * Implementation of {@see ContactManager}.
  * @author svince04
  */

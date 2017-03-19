@@ -15,7 +15,6 @@ import spec.Contact;
 import spec.Meeting;
 
 /**
- * PiJ Coursework 3.
  * Unit tests for {@see MeetingImpl}, using mock object {@see MockMeetingImpl}.
  * @author svince04
  */
