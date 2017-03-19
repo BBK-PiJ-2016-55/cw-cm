@@ -119,6 +119,7 @@ public interface ContactManager {
    *
    * @param id   the ID of the meeting
    * @param text messages to be added about the meeting.
+   * @return the PastMeeting with notes
    * @throws IllegalArgumentException if the meeting does not exist
    * @throws IllegalStateException  if the meeting is set for a date in the future
    * @throws NullPointerException   if the notes are null

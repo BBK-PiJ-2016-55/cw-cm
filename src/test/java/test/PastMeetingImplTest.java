@@ -11,7 +11,7 @@ import org.junit.Test;
 import spec.Contact;
 
 /**
- * Unit tests for {@see PastMeetingImpl}.
+ * Unit tests for {@link PastMeetingImpl}.
  * @author svince04
  */
 public class PastMeetingImplTest {

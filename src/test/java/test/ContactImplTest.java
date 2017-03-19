@@ -8,7 +8,7 @@ import org.junit.Test;
 import spec.Contact;
 
 /**
- * Unit tests for {@see ContactImpl}.
+ * Unit tests for {@link ContactImpl}.
  * @author svince04
  */
 public class ContactImplTest {

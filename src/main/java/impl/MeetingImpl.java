@@ -10,7 +10,7 @@ import spec.Meeting;
 
 
 /**
- * Implementation of {@see Meeting}.
+ * Implementation of {@link Meeting}.
  * @author svince04
  */
 public abstract class MeetingImpl implements Meeting, Serializable {

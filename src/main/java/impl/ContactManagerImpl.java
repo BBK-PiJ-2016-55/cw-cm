@@ -27,7 +27,7 @@ import spec.Meeting;
 import spec.PastMeeting;
 
 /**
- * Implementation of {@see ContactManager}.
+ * Implementation of {@link ContactManager}.
  * @author svince04
  */
 public class ContactManagerImpl implements ContactManager, Serializable {

@@ -5,7 +5,7 @@ import java.util.Objects;
 import spec.Contact;
 
 /**
- * Implementation of {@see Contact}.
+ * Implementation of {@link Contact}.
  * @author svince04
  */
 public class ContactImpl implements Contact, Serializable {

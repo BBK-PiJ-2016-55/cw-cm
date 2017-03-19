@@ -7,7 +7,7 @@ import spec.Contact;
 import spec.Meeting;
 
 /**
- * Mock class to facilitate testing of {@see Meeting}.
+ * Mock class to facilitate testing of {@link Meeting}. Implements {@link Meeting}.
  * @author svince04
  */
 public class MockMeetingImpl extends MeetingImpl implements Meeting, Serializable {

@@ -7,7 +7,7 @@ import spec.Contact;
 import spec.FutureMeeting;
 
 /**
- * Implementation of {@see FutureMeeting}.
+ * Implementation of {@link FutureMeeting}.
  * @author svince04
  */
 public class FutureMeetingImpl extends MeetingImpl implements FutureMeeting, Serializable {

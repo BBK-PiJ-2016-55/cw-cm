@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import impl.ContactImpl;
+import impl.MeetingImpl;
 import impl.MockMeetingImpl;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -15,7 +16,7 @@ import spec.Contact;
 import spec.Meeting;
 
 /**
- * Unit tests for {@see MeetingImpl}, using mock object {@see MockMeetingImpl}.
+ * Unit tests for {@link MeetingImpl}, using mock object {@link MockMeetingImpl}.
  * @author svince04
  */
 public class MeetingImplTest {

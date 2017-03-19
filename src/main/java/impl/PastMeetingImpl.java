@@ -7,7 +7,7 @@ import spec.Contact;
 import spec.PastMeeting;
 
 /**
- * Implementation of {@see PastMeeting}.
+ * Implementation of {@link PastMeeting}.
  * @author svince04
  */
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting, Serializable {

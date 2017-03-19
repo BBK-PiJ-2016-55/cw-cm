@@ -22,7 +22,7 @@ import spec.ContactManager;
 import spec.PastMeeting;
 
 /**
- * Unit tests for {@see ContactManagerImpl}.
+ * Unit tests for {@link ContactManagerImpl}.
  * @author svince04
  */
 public class ContactManagerImplTest {
