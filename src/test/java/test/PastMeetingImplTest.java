@@ -1,15 +1,14 @@
-package test.java.test;
+package test;
 
+import impl.ContactImpl;
+import impl.PastMeetingImpl;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
-
-import main.java.impl.ContactImpl;
-import main.java.impl.PastMeetingImpl;
-import main.java.spec.Contact;
 import org.junit.Before;
 import org.junit.Test;
+import spec.Contact;
 
 /**
  * Created by svince04 on 04/03/2017.

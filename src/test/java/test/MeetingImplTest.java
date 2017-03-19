@@ -1,19 +1,19 @@
-package test.java.test;
+package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import impl.ContactImpl;
+import impl.MockMeetingImpl;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
-
-import main.java.impl.ContactImpl;
-import main.java.impl.MockMeetingImpl;
-import main.java.spec.Contact;
-import main.java.spec.Meeting;
 import org.junit.Before;
 import org.junit.Test;
+import spec.Contact;
+import spec.Meeting;
+
 
 /**
  * Created by svince04 on 11/03/2017.

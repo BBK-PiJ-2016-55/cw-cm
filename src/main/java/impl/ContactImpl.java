@@ -1,8 +1,8 @@
-package main.java.impl;
+package impl;
 
 import java.io.Serializable;
 import java.util.Objects;
-import main.java.spec.Contact;
+import spec.Contact;
 
 /**
  * Created by svince04 on 17/02/2017.

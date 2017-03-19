@@ -1,5 +1,5 @@
-package main.java.impl;
-// todo - make package names shorter!
+package impl;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,11 +20,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import main.java.spec.Contact;
-import main.java.spec.ContactManager;
-import main.java.spec.FutureMeeting;
-import main.java.spec.Meeting;
-import main.java.spec.PastMeeting;
+import spec.Contact;
+import spec.ContactManager;
+import spec.FutureMeeting;
+import spec.Meeting;
+import spec.PastMeeting;
 
 /**
  * PiJ coursework 3.

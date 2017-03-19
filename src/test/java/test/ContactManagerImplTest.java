@@ -1,10 +1,13 @@
-package test.java.test;
+package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+
+import impl.ContactImpl;
+import impl.ContactManagerImpl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,16 +16,13 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Set;
 
-import main.java.impl.ContactImpl;
-import main.java.impl.ContactManagerImpl;
-
-import main.java.spec.Contact;
-import main.java.spec.ContactManager;
-import main.java.spec.PastMeeting;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import spec.Contact;
+import spec.ContactManager;
+import spec.PastMeeting;
 
 /**
  * Created by svince04 on 18/02/2017.

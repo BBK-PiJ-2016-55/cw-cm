@@ -1,13 +1,12 @@
-package main.java.impl;
+package impl;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import main.java.spec.Contact;
-import main.java.spec.Meeting;
+import spec.Contact;
+import spec.Meeting;
 
 
 /**
