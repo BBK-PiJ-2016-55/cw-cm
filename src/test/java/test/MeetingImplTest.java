@@ -14,7 +14,6 @@ import org.junit.Test;
 import spec.Contact;
 import spec.Meeting;
 
-
 /**
  * Created by svince04 on 11/03/2017.
  * PiJ Coursework 3.

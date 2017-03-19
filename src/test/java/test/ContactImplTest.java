@@ -7,7 +7,6 @@ import impl.ContactImpl;
 import org.junit.Test;
 import spec.Contact;
 
-
 /**
  * Created by svince04 on 17/02/2017.
  * PiJ Coursework 3

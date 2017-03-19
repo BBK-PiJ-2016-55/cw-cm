@@ -8,18 +8,15 @@ import static org.junit.Assert.assertTrue;
 
 import impl.ContactImpl;
 import impl.ContactManagerImpl;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Set;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import spec.Contact;
 import spec.ContactManager;
 import spec.PastMeeting;

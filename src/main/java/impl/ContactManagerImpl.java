@@ -53,7 +53,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
         System.out.println("Problem loading file: " + ex);
         ex.printStackTrace();
       } catch (IOException ex) {
-        System.out.println("Problem loading file. " + ex);
+        System.out.println("IO problem when loading file. " + ex);
         ex.printStackTrace();
       }
     }
@@ -100,16 +100,12 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (!meetingMap.containsKey(id)) {
       return null;
     }
-    // Checks that date is not in the future
-    if (meetingMap.get(id).getDate().after(Calendar.getInstance())) {
-      throw new IllegalStateException("Meeting is not in the past.");
+    // Checks that date is not in the future + meeting is of type PastMeeting
+    if (meetingMap.get(id).getDate().after(Calendar.getInstance())
+            || (!(meetingMap.get(id) instanceof PastMeeting))) {
+      throw new IllegalStateException("Meeting not in the past/not a PastMeeting object.");
     }
-    try {
-      return (PastMeeting) meetingMap.get(id);
-    } catch (ClassCastException exception) {
-        //todo - shouldn't be throwing an exception in a catch block!
-      throw new IllegalStateException("Meeting is not a past meeting.");
-    }
+    return (PastMeeting) meetingMap.get(id);
   }
 
   /**
@@ -304,7 +300,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
       out.writeObject(contactMap);
       out.writeObject(meetingMap);
     } catch (IOException exception) {
-      System.out.println("Couldn't write contacts.txt");
+      System.out.println("Couldn't write contacts.ser");
       exception.printStackTrace();
     }
   }
