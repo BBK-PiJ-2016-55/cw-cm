@@ -13,9 +13,10 @@ import spec.Meeting;
 public class MockMeetingImpl extends MeetingImpl implements Meeting, Serializable {
 
   /**
-   * @param id int - the unique id number of the meeting.
-   * @param date Calendar object contain date and time of the meeting.
-   * @param attendees Set of Contacts affiliated with the meeting.
+   * Constructs a MockMeetingImpl object with an id, date and set of Contacts.
+   * @param id the unique id number of the meeting.
+   * @param date calendar object contain date and time of the meeting.
+   * @param attendees set of Contacts affiliated with the meeting.
    * @throws IllegalArgumentException when ID is 0 or below.
    * @throws NullPointerException when passed empty Contact Set.
    */
