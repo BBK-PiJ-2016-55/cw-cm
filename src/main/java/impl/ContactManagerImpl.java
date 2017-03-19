@@ -37,26 +37,29 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   private int meetingIdCounter = 1;
 
   /**
-   * Sole constructor for ContactManagerImpl. If a contacts.ser file already exists
-   * in the current directory, the ContactManagerImpl object will be instantiated using
-   * the previously serialized values. If there is no serialized object, the object
-   * will be constructed with empty data structures and id counters will be set at 1.
+   * Sole constructor for ContactManagerImpl. If no existing data is found,
+   * the new Contact Manager will be constructed with empty data
+   * structures and id counters will be set at 1.
    */
-  @SuppressWarnings("unchecked")
   public ContactManagerImpl() {
     if (new File("contacts.ser").exists()) {
-      try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
-        contactMap = (HashMap<Integer, Contact>) (on.readObject());
-        meetingMap = (HashMap<Integer, Meeting>) (on.readObject());
-        contactIdCounter += contactMap.size();
-        meetingIdCounter += meetingMap.size();
-      } catch (ClassNotFoundException ex) {
-        System.out.println("Class not found when loading file.");
-        ex.printStackTrace();
-      } catch (IOException ex) {
-        System.out.println("IO problem when loading file.");
-        ex.printStackTrace();
-      }
+      loadSerialized();
+    }
+  }
+
+  /**
+   * Loads previously serialized Contact and Meeting data into Contact Manager.
+   */
+  @SuppressWarnings("unchecked")
+  private void loadSerialized() {
+    try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
+      contactMap = (HashMap<Integer, Contact>) (on.readObject());
+      meetingMap = (HashMap<Integer, Meeting>) (on.readObject());
+      contactIdCounter += contactMap.size();
+      meetingIdCounter += meetingMap.size();
+    } catch (ClassNotFoundException | IOException ex) {
+      System.out.println("Unable to load serialized data.");
+      ex.printStackTrace();
     }
   }
 
@@ -161,10 +164,10 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   public List<Meeting> getMeetingListOn(Calendar date) {
     Objects.requireNonNull(date, "Date cannot be null");
     List<Meeting> resultList = new ArrayList<>();
+    // Defines date format used for finding matches.
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-    // Loop through each meeting in meetingMap
     for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
-      // Add to resultList if date matches
+      // Add to resultList if reformatted date matches date provided
       if (dateFormat.format(date.getTime()).equals(dateFormat.format(entry.getValue()
               .getDate().getTime()))) {
         resultList.add(entry.getValue());
@@ -184,7 +187,6 @@ public class ContactManagerImpl implements ContactManager, Serializable {
       throw new IllegalArgumentException("Invalid Contact entered.");
     }
     List<PastMeeting> resultList = new ArrayList<>();
-    // Loop through each meeting in meetingMap
     for (Map.Entry<Integer, Meeting> entry : meetingMap.entrySet()) {
       // Add to resultList only if PastMeeting and matches Contact
       if (entry.getValue().getContacts().contains(contact)
@@ -283,10 +285,10 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     }
     Set<Contact> idSet = new HashSet<>();
     for (int id : ids) {
-      // Check for invalid IDs
       if (!contactMap.containsKey(id)) {
         throw new IllegalArgumentException("Invalid ID entered");
       }
+      // Add matching ids to return set
       idSet.add(contactMap.get(id));
     }
     return idSet;
