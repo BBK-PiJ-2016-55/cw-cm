@@ -49,8 +49,12 @@ public class ContactManagerImpl implements ContactManager, Serializable {
         meetingMap = (Map<Integer, Meeting>) (on.readObject());
         contactIdCounter += contactMap.size();
         meetingIdCounter += meetingMap.size();
-      } catch (Exception e) {
-        System.out.println("Problem serializing: " + e);
+      } catch (ClassNotFoundException ex) {
+        System.out.println("Problem loading file: " + ex);
+        ex.printStackTrace();
+      } catch (IOException ex) {
+        System.out.println("Problem loading file. " + ex);
+        ex.printStackTrace();
       }
     }
   }
