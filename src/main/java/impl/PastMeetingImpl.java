@@ -14,10 +14,11 @@ public class PastMeetingImpl extends MeetingImpl implements PastMeeting, Seriali
   private String notes;
 
   /**
-   * @param id int - the unique id number of the meeting.
-   * @param date Calendar object contain past date and time of the meeting.
-   * @param attendees Set of Contacts affiliated with the meeting.
-   * @param notes String notes about the meeting.
+   * Constructs a FutureMeetingImpl with an id, future date and set of Contacts.
+   * @param id the unique id number of the meeting.
+   * @param date calendar object contain past date and time of the meeting.
+   * @param attendees set of Contacts affiliated with the meeting.
+   * @param notes string notes about the meeting.
    * @throws IllegalArgumentException when ID is 0 or below.
    * @throws NullPointerException when passed empty Contact Set.
    */
