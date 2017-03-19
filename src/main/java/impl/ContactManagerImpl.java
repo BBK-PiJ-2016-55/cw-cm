@@ -50,7 +50,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
         contactIdCounter += contactMap.size();
         meetingIdCounter += meetingMap.size();
       } catch (ClassNotFoundException ex) {
-        System.out.println("Problem loading file: " + ex);
+        System.out.println("Class not found when loading file: " + ex);
         ex.printStackTrace();
       } catch (IOException ex) {
         System.out.println("IO problem when loading file. " + ex);
@@ -102,7 +102,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     }
     // Checks that date is not in the future + meeting is of type PastMeeting
     if (meetingMap.get(id).getDate().after(Calendar.getInstance())
-            || (!(meetingMap.get(id) instanceof PastMeeting))) {
+            || !(meetingMap.get(id) instanceof PastMeeting)) {
       throw new IllegalStateException("Meeting not in the past/not a PastMeeting object.");
     }
     return (PastMeeting) meetingMap.get(id);

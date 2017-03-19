@@ -207,7 +207,7 @@ public class ContactManagerImplTest {
     nowCal.add(Calendar.MILLISECOND, 1);
     int id = conManImp.addFutureMeeting(fullContactSet, nowCal);
     try {
-      Thread.sleep(10);
+      Thread.sleep(20);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
