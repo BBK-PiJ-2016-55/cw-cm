@@ -64,7 +64,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     Objects.requireNonNull(contacts, "Contacts cannot be null");
     Objects.requireNonNull(date, "Date cannot be null");
     // Checks that future meeting is not in past
-    if (!dateInFuture(date)) {
+    if (date.before(Calendar.getInstance())) {
       throw new IllegalArgumentException("FutureMeeting cannot be in the past.");
     }
     // Check that all contacts are known/existent
@@ -90,16 +90,6 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   }
 
   /**
-   * Checks date passed in against current time.
-   *
-   * @param date to be checked against current date
-   * @return true if date in future, false otherwise
-   */
-  private boolean dateInFuture(Calendar date) {
-    return date.compareTo(Calendar.getInstance()) == 1;
-  }
-
-  /**
    * {@inheritDoc}.
    */
   @Override
@@ -107,7 +97,8 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (!meetingMap.containsKey(id)) {
       return null;
     }
-    if (dateInFuture(meetingMap.get(id).getDate())) {
+    // Checks that date is not in the future
+    if (meetingMap.get(id).getDate().after(Calendar.getInstance())) {
       throw new IllegalStateException("Meeting is not in the past.");
     }
     try {
@@ -125,7 +116,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (!meetingMap.containsKey(id)) {
       return null;
     }
-    if (!dateInFuture(meetingMap.get(id).getDate())) {
+    if (meetingMap.get(id).getDate().before(Calendar.getInstance()))  {
       throw new IllegalStateException("Meeting is not in the future.");
     }
     return (FutureMeeting) meetingMap.get(id);
@@ -215,7 +206,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     Objects.requireNonNull(contacts, "Contacts cannot be null");
     Objects.requireNonNull(date, "Date cannot be null");
     // Check that past meeting is in the past
-    if (dateInFuture(date)) {
+    if (date.after(Calendar.getInstance())) {
       throw new IllegalArgumentException("Meeting is not in the past.");
     }
     // Check that all contacts are known/existent
@@ -237,7 +228,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     if (!meetingMap.containsKey(id)) {
       throw new IllegalArgumentException("Meeting does not exist");
     }
-    if (dateInFuture(getMeeting(id).getDate())) {
+    if (meetingMap.get(id).getDate().after(Calendar.getInstance())) {
       throw new IllegalStateException("Meeting is not in the past.");
     }
     // Create new PastMeeting with the same ID
