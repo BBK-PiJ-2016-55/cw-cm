@@ -43,8 +43,8 @@ public class ContactManagerImplTest {
 
   /**
    * Sets up a ContactManagerImpl instance to reduce repetition in tests.
-   * Adds three contacts to ContactManager + creates a full and partial contact set
-   * for easier access to Contact objects.
+   * Adds three contacts to ContactManager + creates a full and partial
+   * contact set for easier access to Contact objects.
    * Retrieves Contact garfield and stores in an instance variable.
    */
   @Before
@@ -137,7 +137,6 @@ public class ContactManagerImplTest {
     for (Contact contact : tempContactSet) {
       assertTrue(contact.getName().equals(tom));
     }
-
   }
 
   @Test
@@ -206,6 +205,8 @@ public class ContactManagerImplTest {
     Calendar nowCal = Calendar.getInstance();
     nowCal.add(Calendar.MILLISECOND, 1);
     int id = conManImp.addFutureMeeting(fullContactSet, nowCal);
+    // Sends thread to sleep for a while until nowCal is in the past
+    // and can be tested as a past-date, FutureMeeting object.
     try {
       Thread.sleep(20);
     } catch (InterruptedException e) {
@@ -235,7 +236,6 @@ public class ContactManagerImplTest {
   }
 
   // PastMeeting tests
-
   // addNewPastMeeting tests
 
   @Test

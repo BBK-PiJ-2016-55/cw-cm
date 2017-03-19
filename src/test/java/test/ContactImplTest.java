@@ -63,7 +63,6 @@ public class ContactImplTest {
     assertEquals("Harmless. Mostly.", odie.getNotes());
   }
 
-
   @Test (expected = IllegalArgumentException.class)
   public void testFullConstructorZeroNegativeId() {
     new ContactImpl(-7, lassieName, "Makes my teeth hurt.");
