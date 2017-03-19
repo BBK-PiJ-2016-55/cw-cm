@@ -37,8 +37,10 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   private int meetingIdCounter = 1;
 
   /**
-   * //todo - put proper doc here
-   * Constructor.
+   * Sole constructor for ContactManagerImpl. If a contacts.ser file already exists
+   * in the current directory, the ContactManagerImpl object will be instantiated using
+   * the previously serialized values. If there is no serialized object, the object
+   * will be constructed with empty data structures and id counters will be set at 1.
    */
   @SuppressWarnings("unchecked")
   public ContactManagerImpl() {
@@ -79,9 +81,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   }
 
   /**
-   * Checks whether each contact in set exists and throws exception if not.
-   *
-   * @param contacts to be validated
+   * Checks whether each Contact in set exists and throws exception if not.
+   * @param contacts Contact objects to be validated.
+   * @throws IllegalArgumentException if id is not found in contactMap.
    */
   private void checkContactsExist(Set<Contact> contacts) {
     for (Contact contact : contacts) {
