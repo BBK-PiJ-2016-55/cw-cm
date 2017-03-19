@@ -14,8 +14,11 @@ public class ContactImpl implements Contact, Serializable {
   private String notes;
 
   /**
-   * @param id the id of the contact.
-   * @param name string name of the contact
+   * Brief constructor for ContactImpl, which constructs a new ContactImpl
+   * object with an id and a contact name. The Notes field
+   * of the instance will be initialised to the empty string.
+   * @param id the id of the contact. Must be unique and greater than 0.
+   * @param name string name of the contact.
    * @throws IllegalArgumentException if id is 0 or below.
    * @throws NullPointerException if name is null.
    */
@@ -24,9 +27,11 @@ public class ContactImpl implements Contact, Serializable {
   }
 
   /**
-   * @param id the id of the contact.
+   * Full constructor for ContactImpl, which constructs a new ContactImpl
+   * object with an id, a contact name and some notes.
+   * @param id the id of the contact. Must be unique and greater than 0.
    * @param name string name of the contact.
-   * @param notes notes relating to the contact
+   * @param notes string notes relating to the contact.
    * @throws IllegalArgumentException if ID is 0 or below.
    * @throws NullPointerException if name or notes are null.
    */
@@ -67,6 +72,8 @@ public class ContactImpl implements Contact, Serializable {
 
   /**
    * {@inheritDoc}.
+   * If there are already notes attached to this contact, the two sets with
+   * be delimited by a space.
    */
   @Override
   public void addNotes(String notes) {
