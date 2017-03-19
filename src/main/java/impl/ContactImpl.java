@@ -16,7 +16,7 @@ public class ContactImpl implements Contact, Serializable {
 
   /**
    * @param id the id of the contact.
-   * @param name the name of the contact.
+   * @param name string name of the contact
    * @throws IllegalArgumentException if id is 0 or below.
    * @throws NullPointerException if name is null.
    */
@@ -26,8 +26,8 @@ public class ContactImpl implements Contact, Serializable {
 
   /**
    * @param id the id of the contact.
-   * @param name the name of the contact.
-   * @param notes notes relating to the contact.
+   * @param name string name of the contact.
+   * @param notes notes relating to the contact
    * @throws IllegalArgumentException if ID is 0 or below.
    * @throws NullPointerException if name or notes are null.
    */
@@ -42,21 +42,33 @@ public class ContactImpl implements Contact, Serializable {
     this.notes = notes;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public int getId() {
     return id;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public String getNotes() {
     return notes;
   }
 
+  /**
+   * {@inheritDoc}.
+   */
   @Override
   public void addNotes(String notes) {
     // If there are existing notes, delimit with a space.
