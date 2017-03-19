@@ -9,6 +9,9 @@ import impl.ContactImpl;
 import impl.ContactManagerImpl;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -35,6 +38,7 @@ public class ContactManagerImplTest {
   private Set<Contact> partContactSet;
   private Set<Contact> tempContactSet;
   private Contact garfield;
+  private static final String TARGET_FILE = "contacts.ser";
   private static final String EMPTY = "";
   private static final String TOM = "Tom";
   private static final String TOMMY = "Tommy";
@@ -432,7 +436,7 @@ public class ContactManagerImplTest {
   @Test
   public void testFlushFileCreation() {
     conManImp.flush();
-    File file = new File("contacts.ser");
+    File file = new File(TARGET_FILE);
     assertTrue(file.exists());
     assertTrue(file.delete());
   }
@@ -487,7 +491,7 @@ public class ContactManagerImplTest {
   public void testFlushWriteOnlyOnSerializationError() {
     conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
     conManImp.flush();
-    File file = new File("contacts.ser");
+    File file = new File(TARGET_FILE);
     long lastModified = file.lastModified();
     // Sets file permissions to read only to induce exception-handling in flush()
     assertTrue(file.setReadOnly());
@@ -495,12 +499,29 @@ public class ContactManagerImplTest {
     assertEquals(file.lastModified(), lastModified);
   }
 
+  @Test
+  public void testLoadSerializedDisappearingFile() {
+    conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
+    conManImp.flush();
+    File file = new File(TARGET_FILE);
+    // Delete and replace contacts.ser with a blank file
+    assertTrue(file.delete());
+    try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(TARGET_FILE))) {
+      // Try to instantiate new object to test exception handling in testLoad...()
+      ContactManager tempConManImp = new ContactManagerImpl();
+      // Test to make sure that ContactMap has not been populated
+      assertEquals(0, tempConManImp.getContacts(EMPTY).size());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   /**
    * Deletes file created by serialization, if present.
    */
   @After
   public void cleanUp() {
-    File file = new File("contacts.ser");
+    File file = new File(TARGET_FILE);
     if (file.exists()) {
       assertTrue(file.delete());
     }
