@@ -275,8 +275,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     Set<Contact> nameSet = new HashSet<>();
     // return full list if string is empty
     if (name.equals("")) {
-      Set<Contact> fullSet = new HashSet<>(contactMap.values());
-      return fullSet;
+      return new HashSet<>(contactMap.values());
     }
     // otherwise just return matching contacts
     for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
