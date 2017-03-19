@@ -46,15 +46,15 @@ public class ContactManagerImpl implements ContactManager, Serializable {
   public ContactManagerImpl() {
     if (new File("contacts.ser").exists()) {
       try (ObjectInputStream on = new ObjectInputStream(new FileInputStream("contacts.ser"))) {
-        contactMap = (Map<Integer, Contact>) (on.readObject());
-        meetingMap = (Map<Integer, Meeting>) (on.readObject());
+        contactMap = (HashMap<Integer, Contact>) (on.readObject());
+        meetingMap = (HashMap<Integer, Meeting>) (on.readObject());
         contactIdCounter += contactMap.size();
         meetingIdCounter += meetingMap.size();
       } catch (ClassNotFoundException ex) {
-        System.out.println("Class not found when loading file: " + ex);
+        System.out.println("Class not found when loading file.");
         ex.printStackTrace();
       } catch (IOException ex) {
-        System.out.println("IO problem when loading file. " + ex);
+        System.out.println("IO problem when loading file.");
         ex.printStackTrace();
       }
     }
