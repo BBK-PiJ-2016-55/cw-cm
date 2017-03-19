@@ -85,14 +85,7 @@ public class ContactManagerImplTest {
   }
 
   @Test
-  public void testAddNewContactSingle() {
-    conManImp.addNewContact(tom, genericNotes);
-    tempContactSet = conManImp.getContacts(empty);
-    assertEquals(4, tempContactSet.size());
-  }
-
-  @Test
-  public void testAddNewContactMulti() {
+  public void testAddNewContacts() {
     conManImp.addNewContact(tom, genericNotes);
     conManImp.addNewContact(tommy, genericNotes);
     tempContactSet = conManImp.getContacts(empty);
@@ -140,7 +133,7 @@ public class ContactManagerImplTest {
   }
 
   @Test
-  public void testGetContactsFromIdsMulti() {
+  public void testGetContactsMultipleIds() {
     conManImp.addNewContact(tom, genericNotes);
     conManImp.addNewContact(tommy, genericNotes);
     tempContactSet = conManImp.getContacts("Tom");
@@ -165,18 +158,13 @@ public class ContactManagerImplTest {
   // AddFutureMeeting tests
 
   @Test
-  public void testAddFutureMeetingSingle() {
+  public void testAddFutureMeetings() {
     int id = conManImp.addFutureMeeting(fullContactSet, date);
     assertEquals(date, conManImp.getFutureMeeting(id).getDate());
     assertEquals(fullContactSet, conManImp.getFutureMeeting(id).getContacts());
-  }
-
-  @Test
-  public void testAddFutureMeetingMulti() {
-    int id = conManImp.addFutureMeeting(fullContactSet, date);
-    assertEquals(date, conManImp.getFutureMeeting(id).getDate());
     id = conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
     assertEquals(futureDateDistant, conManImp.getFutureMeeting(id).getDate());
+    assertEquals(fullContactSet, conManImp.getFutureMeeting(id).getContacts());
   }
 
   @Test (expected = IllegalArgumentException.class)
@@ -237,11 +225,6 @@ public class ContactManagerImplTest {
 
   // PastMeeting tests
   // addNewPastMeeting tests
-
-  @Test
-  public void testAddNewPastMeetingSingle() {
-    assertNotNull(conManImp.addNewPastMeeting(fullContactSet, pastDate, genericNotes));
-  }
 
   @Test (expected = IllegalArgumentException.class)
   public void testAddNewPastMeetingFutureDateError() {
@@ -337,7 +320,7 @@ public class ContactManagerImplTest {
 
   // getFutureMeetingList tests
   @Test
-  public void testGetFutureMeetingList() {
+  public void testGetFutureMeetingListWithMeetings() {
     conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
     conManImp.addFutureMeeting(partContactSet, date);
     assertEquals(1, conManImp.getFutureMeetingList(garfield).size());
