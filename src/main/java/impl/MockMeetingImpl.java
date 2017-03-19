@@ -20,8 +20,7 @@ public class MockMeetingImpl extends MeetingImpl implements Meeting, Serializabl
    * @throws IllegalArgumentException when ID is 0 or below.
    * @throws NullPointerException when passed empty Contact Set.
    */
-  public MockMeetingImpl(int id, Calendar date, Set<Contact> attendees)
-          throws IllegalArgumentException, NullPointerException {
+  public MockMeetingImpl(int id, Calendar date, Set<Contact> attendees) {
     super(id, date, attendees);
   }
 }

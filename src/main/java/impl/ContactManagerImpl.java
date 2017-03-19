@@ -63,8 +63,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public int addFutureMeeting(Set<Contact> contacts, Calendar date)
-          throws IllegalArgumentException, NullPointerException {
+  public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
     Objects.requireNonNull(contacts, "Contacts cannot be null");
     Objects.requireNonNull(date, "Date cannot be null");
     // Checks that future meeting is not in past
@@ -85,7 +84,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    *
    * @param contacts to be validated
    */
-  private void checkContactsExist(Set<Contact> contacts) throws IllegalArgumentException {
+  private void checkContactsExist(Set<Contact> contacts) {
     for (Contact contact : contacts) {
       if (!contactMap.containsValue(contact)) {
         throw new IllegalArgumentException("Invalid Contact entered.");
@@ -97,7 +96,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public PastMeeting getPastMeeting(int id) throws IllegalStateException {
+  public PastMeeting getPastMeeting(int id) {
     if (!meetingMap.containsKey(id)) {
       return null;
     }
@@ -108,6 +107,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     try {
       return (PastMeeting) meetingMap.get(id);
     } catch (ClassCastException exception) {
+        //todo - shouldn't be throwing an exception in a catch block!
       throw new IllegalStateException("Meeting is not a past meeting.");
     }
   }
@@ -116,7 +116,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public FutureMeeting getFutureMeeting(int id) throws IllegalStateException {
+  public FutureMeeting getFutureMeeting(int id) {
     if (!meetingMap.containsKey(id)) {
       return null;
     }
@@ -138,8 +138,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public List<Meeting> getFutureMeetingList(Contact contact) throws IllegalArgumentException,
-          NullPointerException {
+  public List<Meeting> getFutureMeetingList(Contact contact) {
     Objects.requireNonNull(contact, "Contact cannot be null");
     if (!contactMap.containsValue(contact)) {
       throw new IllegalArgumentException("Invalid Contact entered.");
@@ -162,7 +161,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public List<Meeting> getMeetingListOn(Calendar date) throws NullPointerException {
+  public List<Meeting> getMeetingListOn(Calendar date) {
     Objects.requireNonNull(date, "Date cannot be null");
     List<Meeting> resultList = new ArrayList<>();
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
@@ -182,8 +181,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public List<PastMeeting> getPastMeetingListFor(Contact contact) throws
-          NullPointerException, IllegalArgumentException {
+  public List<PastMeeting> getPastMeetingListFor(Contact contact) {
     Objects.requireNonNull(contact, "Contact cannot be null");
     if (!contactMap.containsValue(contact)) {
       throw new IllegalArgumentException("Invalid Contact entered.");
@@ -205,8 +203,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) throws
-          IllegalArgumentException, NullPointerException {
+  public int addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
     Objects.requireNonNull(contacts, "Contacts cannot be null");
     Objects.requireNonNull(date, "Date cannot be null");
     // Check that past meeting is in the past
@@ -226,8 +223,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public PastMeeting addMeetingNotes(int id, String text) throws
-          IllegalArgumentException, IllegalStateException, NullPointerException {
+  public PastMeeting addMeetingNotes(int id, String text) {
     Objects.requireNonNull(text, "Notes cannot be null");
     if (!meetingMap.containsKey(id)) {
       throw new IllegalArgumentException("Meeting does not exist");
@@ -247,8 +243,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public int addNewContact(String name, String notes)
-          throws IllegalArgumentException, NullPointerException {
+  public int addNewContact(String name, String notes) {
     Objects.requireNonNull(name, "Name cannot be null");
     Objects.requireNonNull(notes, "Notes cannot be null");
     if (name.equals("") || notes.equals("")) {
@@ -265,7 +260,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public Set<Contact> getContacts(String name) throws NullPointerException {
+  public Set<Contact> getContacts(String name) {
     Objects.requireNonNull(name, "Name cannot be null");
     Set<Contact> nameSet = new HashSet<>();
     // return full list if string is empty
@@ -285,7 +280,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
    * {@inheritDoc}.
    */
   @Override
-  public Set<Contact> getContacts(int... ids) throws IllegalArgumentException {
+  public Set<Contact> getContacts(int... ids) {
     if (ids.length == 0) {
       throw new IllegalArgumentException("No IDs have been entered");
     }
@@ -309,7 +304,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
       out.writeObject(contactMap);
       out.writeObject(meetingMap);
     } catch (IOException exception) {
-      System.out.println("Couldn't write contacts.ser");
+      System.out.println("Couldn't write contacts.txt");
       exception.printStackTrace();
     }
   }

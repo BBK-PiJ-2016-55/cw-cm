@@ -25,8 +25,7 @@ public abstract class MeetingImpl implements Meeting, Serializable {
    * @throws IllegalArgumentException when ID is 0 or below.
    * @throws NullPointerException when passed empty Contact Set.
    */
-  MeetingImpl(int id, Calendar date, Set<Contact> attendees)
-          throws IllegalArgumentException, NullPointerException {
+  MeetingImpl(int id, Calendar date, Set<Contact> attendees) {
     Objects.requireNonNull(date, "Date cannot be null");
     Objects.requireNonNull(attendees, "Contact set cannot be null");
     if (id <= 0) {

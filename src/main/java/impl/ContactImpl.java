@@ -20,7 +20,7 @@ public class ContactImpl implements Contact, Serializable {
    * @throws IllegalArgumentException if id is 0 or below.
    * @throws NullPointerException if name is null.
    */
-  public ContactImpl(int id, String name) throws IllegalArgumentException, NullPointerException {
+  public ContactImpl(int id, String name) {
         this(id, name, "");
   }
 
@@ -31,8 +31,7 @@ public class ContactImpl implements Contact, Serializable {
    * @throws IllegalArgumentException if ID is 0 or below.
    * @throws NullPointerException if name or notes are null.
    */
-  public ContactImpl(int id, String name, String notes)
-          throws IllegalArgumentException, NullPointerException {
+  public ContactImpl(int id, String name, String notes) {
     Objects.requireNonNull(name, "Name cannot be null");
     Objects.requireNonNull(notes, "Notes cannot be null");
     if (id <= 0) {

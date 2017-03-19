@@ -464,6 +464,17 @@ public class ContactManagerImplTest {
   }
 
   @Test
+  public void testFlushContactGetById() {
+    int id = conManImp.addNewContact("Salem", "Magical.");
+    conManImp.flush();
+    Set<Contact> returnedContactSet = new ContactManagerImpl().getContacts(id);
+    for (Contact contact : returnedContactSet) {
+      assertTrue(contact.getName().equals("Salem"));
+      assertTrue(contact.getNotes().equals("Magical."));
+    }
+  }
+
+  @Test
   public void testFlushContactListContiguousIds() {
     conManImp.flush();
     ContactManager reloadedConManImp = new ContactManagerImpl();
