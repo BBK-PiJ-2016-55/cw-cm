@@ -22,8 +22,9 @@ import spec.ContactManager;
 import spec.PastMeeting;
 
 /**
- * Created by svince04 on 18/02/2017.
- * PiJ Coursework 3
+ * PiJ Coursework 3.
+ * Unit tests for {@see ContactManagerImpl}.
+ * @author svince04
  */
 public class ContactManagerImplTest {
   private ContactManager conManImp;

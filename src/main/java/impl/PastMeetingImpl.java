@@ -7,8 +7,9 @@ import spec.Contact;
 import spec.PastMeeting;
 
 /**
- * Created by svince04 on 17/02/2017.
  * PiJ coursework 3.
+ * Implementation of {@see PastMeeting}.
+ * @author svince04
  */
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting, Serializable {
   private String notes;

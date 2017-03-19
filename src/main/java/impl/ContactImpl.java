@@ -5,8 +5,9 @@ import java.util.Objects;
 import spec.Contact;
 
 /**
- * Created by svince04 on 17/02/2017.
  * PiJ Coursework 3.
+ * Implementation of {@see Contact}.
+ * @author svince04
  */
 public class ContactImpl implements Contact, Serializable {
 

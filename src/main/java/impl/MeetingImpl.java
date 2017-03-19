@@ -10,8 +10,9 @@ import spec.Meeting;
 
 
 /**
- * Created by svince04 on 17/02/2017.
  * PiJ coursework 3.
+ * Implementation of {@see Meeting}.
+ * @author svince04
  */
 public abstract class MeetingImpl implements Meeting, Serializable {
   private int id;

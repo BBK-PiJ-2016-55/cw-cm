@@ -11,8 +11,9 @@ import org.junit.Test;
 import spec.Contact;
 
 /**
- * Created by svince04 on 04/03/2017.
- * PiJ Coursework 3
+ * PiJ Coursework 3.
+ * Unit tests for {@see FutureMeetingImpl}.
+ * @author svince04
  */
 public class FutureMeetingImplTest {
   private Calendar date = new GregorianCalendar(2017, 4, 5, 11, 30);

@@ -11,8 +11,9 @@ import org.junit.Test;
 import spec.Contact;
 
 /**
- * Created by svince04 on 04/03/2017.
  * PiJ Coursework 3.
+ * Unit tests for {@see PastMeetingImpl}.
+ * @author svince04
  */
 public class PastMeetingImplTest {
   private Calendar pastDate = new GregorianCalendar(2012, 4, 5, 11, 30);

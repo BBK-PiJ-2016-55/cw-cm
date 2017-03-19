@@ -15,8 +15,9 @@ import spec.Contact;
 import spec.Meeting;
 
 /**
- * Created by svince04 on 11/03/2017.
  * PiJ Coursework 3.
+ * Unit tests for {@see MeetingImpl}, using mock object {@see MockMeetingImpl}.
+ * @author svince04
  */
 public class MeetingImplTest {
   private Calendar date = new GregorianCalendar(2005, 4, 5, 11, 30);
