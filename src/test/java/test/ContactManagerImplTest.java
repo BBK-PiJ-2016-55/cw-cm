@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import impl.ContactImpl;
 import impl.ContactManagerImpl;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -479,6 +480,18 @@ public class ContactManagerImplTest {
     conManImp.addFutureMeeting(partContactSet, futureDateDistantEve);
     conManImp.flush();
     assertEquals(3, new ContactManagerImpl().getMeetingListOn(futureDateDistant).size());
+  }
+
+  @Test
+  public void testFlushWriteOnlyOnSerializationError() {
+    conManImp.addFutureMeeting(fullContactSet, futureDateDistant);
+    conManImp.flush();
+    File file = new File("contacts.ser");
+    long lastModified = file.lastModified();
+    // Sets file permissions to read only to induce exception-handling in flush()
+    assertTrue(file.setReadOnly());
+    conManImp.flush();
+    assertEquals(file.lastModified(), lastModified);
   }
 
   /**

@@ -301,7 +301,7 @@ public class ContactManagerImpl implements ContactManager, Serializable {
       out.writeObject(contactMap);
       out.writeObject(meetingMap);
     } catch (IOException exception) {
-      System.out.println("Couldn't write contacts.ser");
+      System.out.println("Flush failed: couldn't write contacts.ser");
       exception.printStackTrace();
     }
   }
