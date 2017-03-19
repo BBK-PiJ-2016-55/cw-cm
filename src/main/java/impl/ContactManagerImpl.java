@@ -274,12 +274,9 @@ public class ContactManagerImpl implements ContactManager, Serializable {
     Objects.requireNonNull(name, "Name cannot be null");
     Set<Contact> nameSet = new HashSet<>();
     // return full list if string is empty
-    // todo - can I just return the whole hashmap instead of iterating through?
     if (name.equals("")) {
-      for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {
-        nameSet.add(entry.getValue());
-      }
-      return nameSet;
+      Set<Contact> fullSet = new HashSet<>(contactMap.values());
+      return fullSet;
     }
     // otherwise just return matching contacts
     for (Map.Entry<Integer, Contact> entry : contactMap.entrySet()) {

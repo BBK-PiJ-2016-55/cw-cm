@@ -46,7 +46,6 @@ public abstract class MeetingImpl implements Meeting, Serializable {
 
   @Override
   public Calendar getDate() {
-    // todo - is clone ok to use?
     return (Calendar) date.clone();
   }
 
