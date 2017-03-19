@@ -19,7 +19,8 @@ public abstract class MeetingImpl implements Meeting, Serializable {
   private Set<Contact> attendees;
 
   /**
-   * Constructs a MeetingImpl with an id, date and set of Contacts.
+   * Is used by subclasses to construct either a Past or FutureMeetingImpl object
+   * instantiated with an id, date and set of Contacts.
    * @param id int - the unique id number of the meeting.
    * @param date Calendar object contain date and time of the meeting.
    * @param attendees Set of Contacts affiliated with the meeting.
