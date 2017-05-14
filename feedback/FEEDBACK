@@ -1,1 +1,17 @@
+Please look at the general comments to see if any apply.
 
+Okay set of tests.
+
+Add javadoc even for private fields and methods.
+
+If a method throws an exception explicitly then consider adding
+a "throws" clause even if the exception is unchecked. This is
+good documentation and a strong indication to the user of your
+api that an exception may occur.
+
+Some of the methods are very similar and strong candidates for
+refactoring. Some of the similarity could have been avoided by
+using Java 8 constructs which you should consider using going 
+forward.
+
+Good attempt. Distinction.
